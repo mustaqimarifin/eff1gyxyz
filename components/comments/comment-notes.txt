@@ -1,0 +1,119 @@
+/*  mutateComments(async (pages) => {
+          const optimisticReply = {
+            ...comment,
+            author: profile,
+            highlight: true,
+            createdAt: new Date().toISOString()
+          };
+          const newData = [optimisticReply, ...pages];
+          return newData;
+        }, false); */
+/*     const { data, error } = await supabase.from('comments').insert([comment]);
+        if (error) console.log('error', error);
+        else setComments([comment, ...comments]);
+        setActiveComment(null); */
+/*     mutateComments(async (staleReplies) => {
+          const newReply = {
+            ...data?.[0],
+            author: profile,
+            replies: []
+          };
+          const filteredReplies = staleReplies.filter(
+            (reply) => reply.slug !== newReply.slug
+          );
+          const newData = [[newReply], ...filteredReplies];
+          return newData;
+
+
+  /*   const onSubmit = (event) => {
+          event.preventDefault();
+          handleSubmit(text);
+          setText('');
+        }; */
+
+/* <div className="flex items-center mt-4">
+   {session?.user && (
+     <div className="flex items-center space-x-6">
+       <button className="py-2 px-4 rounded bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-700">
+         Send
+       </button>
+       <button
+         className="text-gray-500"
+         onClick={() => supabase.auth.signOut()}
+       >
+         Log out
+       </button>
+     </div>
+   )}
+   {!session?.user && (
+     <button
+       type="button"
+       className="py-2 px-4 rounded bg-indigo-500 text-white disabled:opacity-40 hover:bg-blue-700"
+       onClick={() => open('signInModal')}
+     >
+       Log In
+     </button>
+   )}
+ </div>; */
+
+/* <form onSubmit={onSubmit}>
+      <textarea
+        className="comment-form-textarea"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        disabled={!author}
+      />
+      <button className="comment-form-button" disabled={isTextareaDisabled}>
+        {submitLabel}
+      </button>
+      {hasCancelButton && (
+        <button
+          type="button"
+          className="comment-form-button comment-form-cancel-button"
+          onClick={handleCancel}
+        >
+          Cancel
+        </button>
+      )}
+    </form> */
+
+/* const CommentForm = ({
+  handleSubmit,
+  submitLabel,
+  hasCancelButton = false,
+  handleCancel,
+  initialText = "",
+}) => {
+  const [text, setText] = useState(initialText);
+  const author = supabase.auth.user();
+
+  const isTextareaDisabled = text.length === 0;
+  const onSubmit = (event) => {
+    event.preventDefault();
+    handleSubmit(text);
+    setText("");
+  };
+  return (
+    <form onSubmit={onSubmit}>
+      <textarea
+        className="comment-form-textarea"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        disabled={!author}
+      />
+      <button className="comment-form-button" disabled={isTextareaDisabled}>
+        {submitLabel}
+      </button>
+      {hasCancelButton && (
+        <button
+          type="button"
+          className="comment-form-button comment-form-cancel-button"
+          onClick={handleCancel}>
+          Cancel
+        </button>
+      )}
+    </form>
+  );
+};
+
+export default CommentForm;
