@@ -1,10 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-const TagItem = ({ tag }) => (
+const TagItem = (tag: string) => (
   <Link
     href={`/tag/${encodeURIComponent(tag)}`}
-    className="mr-1 rounded-full px-2 py-1 border leading-none text-sm dark:border-gray-600"
-  >
+    className="mr-1 rounded-full px-2 py-1 border leading-none text-sm dark:border-gray-600">
     {tag}
   </Link>
 );

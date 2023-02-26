@@ -4,13 +4,11 @@ generator client {
   //precountFeatures = "(array)"
 }
 
-generator zod {
-  provider = "zod-prisma-types"
-}
+
 
 datasource db {
   provider = "postgresql"
-  url      = env("SQL")
+  url      = env("WSL_SQL")
 }
 
 model Account {

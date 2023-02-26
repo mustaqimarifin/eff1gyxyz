@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -14,7 +14,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "strictNullChecks": false,
-    "typeRoots": ["./types", "./node_modules/@types"],
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
@@ -22,12 +21,6 @@
     },
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "types/*",
-    "node_modules/@types/prismjs/index.d.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types"],
   "exclude": ["node_modules"]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/react-in-jsx-scope */
 import { useSession } from "next-auth/react";
@@ -18,23 +19,24 @@ dayjs.tz.setDefault(dayjs.tz.guess());
 import type { Komment } from "types";
 import { CommentForm } from "./form";
 import Plus from "lib/utils/icons/Plus";
-import useComments from "./hooks/useComment";
-import type { Comment } from "prisma/generated/zod";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { usePost } from "./hooks/usePost";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const MAX_LINES = 10;
 const LINE_HEIGHT = 24; // in px
 const MAX_HEIGHT = MAX_LINES * LINE_HEIGHT;
 
-interface ReplyFormProps {
+/* interface ReplyFormProps {
   parentId?: string | null;
   comment?: Komment;
   handleResetCallback: () => void;
   placeholder?: string;
   handleSubmit?: any;
   submitLabel?: string;
-}
-const ReplyForm = ({
+} */
+/* const ReplyForm = ({
   placeholder,
   handleSubmit,
   submitLabel,
@@ -46,12 +48,11 @@ const ReplyForm = ({
   return (
     <div
       className={cn(
-        "my-1 transition duration-1000 ease-in-out transform -translate-x-1 -mr-1",
+        'my-1 transition duration-1000 ease-in-out transform -translate-x-1 -mr-1',
         {
           hidden,
         }
-      )}
-    >
+      )}>
       <CommentForm
         parentId={comment?.id}
         autofocus={true}
@@ -63,7 +64,7 @@ const ReplyForm = ({
       />
     </div>
   );
-};
+}; */
 
 interface Props {
   comment: Komment;
@@ -71,35 +72,95 @@ interface Props {
   pageIndex?: number;
   highlight?: boolean;
   parent?: Komment;
-  replies?: Komment[] | null;
   addComment: any;
-  parentId?: Komment;
-  userId: Comment["userId"];
+  parentId?: Komment["id"];
+  userId: Komment["userId"];
 }
 
 const Comment = ({
   parent,
   comment,
   addComment,
-  replies,
   parentId,
   pageIndex,
   highlight = false,
 }: Props): JSX.Element => {
-  const { onSubmit, onDelete, onReply } = useComments();
-
+  //const { onSubmit, onDelete, onReply } = useComments();
+  const { id, user, name, createdAt, likeCount, likedByMe } = comment;
+  const [text, setText] = useState("");
   const { data: session } = useSession();
   const isAuthor = session && session?.user?.id === comment.userId;
   const isAdmin = session && session.isAdmin;
   //const canDelete = userId === comment?.userId && replies?.length === 0;
   //const canReply = Boolean(userId);
-  const replyId = parentId ? parentId : comment?.id;
+  //const replyId = parentId ? parentId : id;
   const [hidden, setHidden] = useState(false);
   const [isOverflowExpanded, setIsOverflowExpanded] = useState(false);
   const [isOverflow, setIsOverflow] = useState(false);
   const [showReplyForm, setShowReplyForm] = useState(false);
   const textRef = useRef<HTMLTextAreaElement | null>(null);
 
+  const router = useRouter();
+  const slug = router.query.slug as string;
+
+  const { onDelete, getReplies } = usePost(slug);
+
+  const api = useQueryClient();
+
+  /*   const createComment = useMutation({
+    mutationFn: addComment,
+    onSuccess: () => {
+      api.invalidateQueries({ queryKey: ['comments'] });
+    },
+  });
+ */
+  type Body = {
+    text: string;
+    slug?: string;
+    parentId?: Komment["id"];
+  };
+
+  const createComment = () => {
+    return useMutation({
+      mutationFn: async () =>
+        await axios.post<Body>(`/api/posts/${slug}`, {
+          text,
+          slug,
+          parentId: null,
+        }),
+      onSuccess: () => {
+        // ✅ refetch the comments list for our blog post
+        api.invalidateQueries({ queryKey: ["comments"] });
+      },
+    });
+  };
+
+  const deleteComment = useMutation(["deleteComment"], {
+    async onSuccess() {
+      // Refetches posts after a comment is added
+      await api.invalidateQueries({ queryKey: ["comments"] });
+    },
+  });
+
+  //const [isEditing, setIsEditing] = useState(false);
+  const [areChildrenHidden, setAreChildrenHidden] = useState(false);
+
+  const replies = getReplies(slug);
+
+  /*   const handleReply = async (id) => {
+    return await createComment({
+      text,
+      parentId: id,
+      slug,
+    });
+  }; */
+
+  /*   const handleDelete = async () => {
+    return await deleteComment.mutateAsync({
+      commentId: id,
+    });
+  };
+ */
   /*   const createComment = useMutation(addTodo);
 
   try {
@@ -110,6 +171,17 @@ const Comment = ({
   } finally {
     console.log('done');
   }
+  
+    const createComment = useMutation(['addComment'], {
+    async onSuccess() {
+      await invalidateQueries(['post.getById', ({
+        id: postId
+      })]);
+    },
+  });
+  
+  
+
  */
   useEffect(() => {
     if (textRef && textRef.current) {
@@ -148,7 +220,7 @@ const Comment = ({
                     hidden
                   )}
                   onClick={() => setHidden(true)}
-                  aria-label={`Collapse comment by ${comment.user}`}
+                  aria-label={`Collapse comment by ${user}`}
                 >
                   <div
                     className={cn("w-px h-full", {
@@ -167,7 +239,7 @@ const Comment = ({
               className={
                 "row-start-1 col-start-1 grid place-items-center focus-ring w-7 h-7"
               }
-              aria-label={`Expand comment by ${comment.user}`}
+              aria-label={`Expand comment by ${user}`}
             >
               <Plus className="w-4 h-4 text-gray-500" />
             </button>
@@ -183,21 +255,21 @@ const Comment = ({
                   }
                 )}
               >
-                {!comment.isDeleted ? comment.name : <>[Deleted]</>}{" "}
+                {!comment.isDeleted ? name : <>[Deleted]</>}{" "}
               </span>
               <span
                 className=" font-semibold text-xs ml-auto text-pink-400 dark:text-pink-100 justify-self-auto "
                 suppressHydrationWarning
               >
-                {dayjs().diff(comment.createdAt, "seconds", true) < 60
+                {dayjs().diff(createdAt, "seconds", true) < 60
                   ? "just now"
-                  : dayjs(comment.createdAt).format("h:mm a - MMM d, YYYY")}
+                  : dayjs(createdAt).format("h:mm a - MMM d, YYYY")}
               </span>
               {isAdmin && (
                 <button
                   className="text-xs flex flex-row items-center text-gray-600 dark:text-gray-400 focus-ring border-none ml-5 leading-none"
                   onClick={handlePin}
-                  aria-label={`Pin comment by ${comment.user}`}
+                  aria-label={`Pin comment by ${user}`}
                 >
                   Pin comment
                 </button>
@@ -225,7 +297,7 @@ const Comment = ({
               <button
                 className="text-sm text-indigo-700 dark:text-indigo-400 hover:underline focus:underline focus-ring border border-transparent leading-none"
                 onClick={() => setIsOverflowExpanded(!isOverflowExpanded)}
-                aria-label={`Pin comment by ${comment.name}`}
+                aria-label={`Pin comment by ${name}`}
               >
                 {isOverflowExpanded ? (
                   <span>Show less</span>
@@ -242,7 +314,7 @@ const Comment = ({
                 aria-label={
                   showReplyForm
                     ? `Hide reply form`
-                    : `Reply to comment by ${comment.user}`
+                    : `Reply to comment by ${user}`
                 }
               >
                 {showReplyForm ? (
@@ -258,8 +330,8 @@ const Comment = ({
                 {(isAuthor || isAdmin) && (
                   <button
                     className="text-xs flex flex-row items-center text-gray-500 dark:text-gray-200 hover:text-yellow-300 border-none"
-                    onClick={async () => await onDelete(comment)}
-                    aria-label={`Delete comment by ${comment.name}`}
+                    onClick={() => onDelete}
+                    aria-label={`Delete comment by ${name}`}
                   >
                     &nbsp;Delete
                   </button>
@@ -278,11 +350,10 @@ const Comment = ({
           >
             {showReplyForm && (
               <div className="divide-pink-200 ">
-                <ReplyForm
-                  comment={comment}
+                <CommentForm
                   submitLabel="Reply"
-                  placeholder={`Reply to comment by ${comment.name}`}
-                  handleSubmit={(text: Komment) => addComment(text, replyId)}
+                  placeholder={`Reply to comment by ${name}`}
+                  // handleSubmit={() => handleReply}
                   handleResetCallback={() => setShowReplyForm(false)}
                 />
               </div>
@@ -295,7 +366,7 @@ const Comment = ({
                       comment={reply}
                       key={reply.id}
                       addComment={addComment}
-                      replies={[]}
+                      //replies={[]}
                       pageIndex={pageIndex}
                       highlight={comment.highlight}
                       userId={reply.userId}

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Transition } from "@headlessui/react";
+import React, { useState, useEffect } from 'react';
+import { Transition } from '@headlessui/react';
 
-import { useModal } from "hooks/use-modal";
-import { AUTHMF } from "components/AuthMF";
+import { AUTHMF } from 'components/AuthMF';
+import { useModal } from 'hooks/fufu/use-modal';
 
 const Bodal = () => {
-  const { isOpen: show, close } = useModal("bodal");
+  const { isOpen: show, close } = useModal('bodal');
 
   return (
     <Transition show={show}>
@@ -17,13 +17,11 @@ const Bodal = () => {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+            leaveTo="opacity-0">
             <div
               className="absolute inset-0 transition-opacity"
               aria-hidden="true"
-              onClick={() => close("bodal")}
-            >
+              onClick={() => close('bodal')}>
               <div className="absolute inset-0 bg-gray-500 opacity-50" />
             </div>
           </Transition.Child>
@@ -37,16 +35,14 @@ const Bodal = () => {
             className="w-full bg-white dark:bg-gray-800 inline-block rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="modal-headline"
-          >
+            aria-labelledby="modal-headline">
             <Transition.Child
               enter="ease-out duration-300"
               enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               enterTo="opacity-100 translate-y-0 sm:scale-100"
               leave="ease-in duration-200"
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
               <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 sm:mt-0 sm:text-left w-full">
@@ -60,10 +56,9 @@ const Bodal = () => {
                     </button> */}
                 <button
                   type="button"
-                  onClick={() => close("bodal")}
+                  onClick={() => close('bodal')}
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white dark:bg-gray-700 dark:text-white text-base font-medium text-gray-700 hover:bg-gray-50 focus-ring sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  aria-label="cancel"
-                >
+                  aria-label="cancel">
                   Cancel
                 </button>
               </div>

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { User } from "prisma/generated/zod";
+import { User } from "next-auth";
 
 export type PostType = "Post" | "Page" | "Project";
 
@@ -16,7 +16,7 @@ export type Post = {
   summary?: string;
   tags?: string[];
   date: {
-    start_date: string;
+    start_date?: string;
   };
   status?: [PostStatus];
   type: [PostType];

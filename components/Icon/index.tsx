@@ -561,7 +561,7 @@ export const SunIcon = () => {
   );
 };
 
-export function MapIcon({ className }) {
+export function MapIcon() {
   return (
     <svg className="h-4 w-4 text-pink-500" viewBox="0 0 24 24">
       <g
@@ -760,7 +760,9 @@ export const Music = (
   </svg>
 );
 
-export function Akhyla(props) {
+export function Akhyla(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -788,7 +790,9 @@ export function Akhyla(props) {
   );
 }
 
-export const Muse2 = (props) => {
+export const Muse2 = (
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

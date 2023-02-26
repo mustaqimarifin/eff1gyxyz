@@ -1,11 +1,7 @@
 import Image from "next/image";
 import Container from "components/Container";
 import TagItem from "components/TagItem";
-import {
-  defaultMapImageUrl,
-  MapImageUrlFn,
-  NotionRenderer,
-} from "react-notion-x";
+import { MapImageUrlFn, NotionRenderer } from "react-notion-x";
 import BLOG from "blog.config";
 import formatDate from "lib/formatDate";
 import { useRouter } from "next/router";
@@ -17,10 +13,9 @@ import { Post } from "types";
 import React, { Suspense } from "react";
 import clsx from "clsx";
 import ViewCounter from "components/ViewCounter";
-import { LoadingSpinner } from "components/LoadingSpinner";
+import FCKME from "components/Tits/Exit";
 
-import Comments from "components/Vaginaz";
-import { mapImageUrl } from "lib/notion";
+//import Comments from "components/Vaginaz";
 
 const enableCommentArea = BLOG.comment.provider !== "";
 
@@ -194,7 +189,7 @@ const Layout: React.FC<Props> = ({
           ↑ TOP
         </button>
       </div>
-      <Comments slug={post.slug} />
+      <FCKME slug={post?.slug} />
       {/*       <CommentsContextProvider commentId={commentId}>
         <Comments slug={post.slug} />
       </CommentsContextProvider> */}

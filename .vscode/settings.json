@@ -1,6 +1,34 @@
 {
   "editor.wordWrap": "wordWrapColumn",
-  "editor.fontFamily": "monospace",
+  "editor.fontFamily": "Cascadia Code",
   "editor.inlayHints.fontFamily": "Cascadia Code PL",
-  "editor.codeLensFontFamily": "Cascadia Code PL"
+  "editor.codeLensFontFamily": "Cascadia Code PL",
+  "editor.codeActionsOnSave": {},
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "database": "postgres",
+      "username": "postgres",
+      "password": "postgres",
+      "name": "postgres"
+    },
+    {
+      "name": "SQLite",
+      "driver": "SQLite",
+      "database": "./dev.db",
+      "connectionTimeout": 15
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "ASS",
+      "database": "postgres",
+      "username": "ass"
+    }
+  ]
 }

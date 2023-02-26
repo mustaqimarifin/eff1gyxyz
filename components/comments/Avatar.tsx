@@ -3,12 +3,13 @@ import cn from "clsx";
 //import { definitions } from 'types/supabase';
 import Image from "next/image";
 
-import { User, Comment } from "prisma/generated/zod/modelSchema";
 import { Komment } from "types";
+import { User } from "@supabase/auth-helpers-nextjs"
+import { DisplayUser } from "hooks/api"
 
 interface Props {
   comment?: Komment;
-  user?: User;
+  user?: DisplayUser
   className?: string | { [key: string]: any };
   isDeleted?: boolean;
   firstLetter?: string;
@@ -59,10 +60,10 @@ const Avatar = ({
     );
   }
 
-  if (user?.image) {
+  if (user?.avatar) {
     return (
       <Image
-        src={user.image}
+        src={user.avatar}
         className={cn(
           "rounded-full border border-white shadow-sm object-cover",
           className

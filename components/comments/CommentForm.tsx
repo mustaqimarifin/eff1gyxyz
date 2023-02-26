@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //import signInModal from './SignInModal';
-import User from "lib/utils/icons/User";
+import User from 'lib/utils/icons/User';
 //import supabase from 'lib/utils/supaPublic';
 //import punctuationRegex from 'threads/utils/regex/punctuationRegex';
-import cn from "clsx";
-import { autosize } from "lib/utils/index";
-import React, { useRef, useState, useEffect } from "react";
-import Avatar from "./Avatar";
+import cn from 'clsx';
+import { autosize } from 'lib/utils/index';
+import React, { useRef, useState, useEffect } from 'react';
+import Avatar from './Avatar';
 //import useSWR from 'swr';
 //import { yespls } from 'lib/utils';
 
@@ -18,16 +18,16 @@ import Avatar from "./Avatar";
 //import { useUser } from 'hooks/use-user';
 //import { useSession, useSessionContext } from '@supabase/auth-helpers-react';
 //import SignInModal from './SignInModal';
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from 'next-auth/react';
 //import Bodal from './Bodal';
-import { Database } from "types/asstypes";
-import { definitions } from "types/supabase";
+import { Database } from 'types/arsetypes';
+import { definitions } from 'types/supabase';
 
-export type Comments = Database["public"]["Tables"]["comments"]["Row"];
+export type Comments = Database['public']['Tables']['comments']['Row'];
 
 interface Props {
-  user?: definitions["users"];
-  parentId?: Comments["parentId"] | null;
+  user?: definitions['display_users'];
+  parentId?: Comments['parent_id'] | null;
   handleSubmit: any;
   placeholder?: string;
   submitLabel?: string;
@@ -45,7 +45,7 @@ return data
 
 export const CommentForm = ({
   handleSubmit,
-  submitLabel = "Post",
+  submitLabel = 'Post',
   handleResetCallback,
   hideEarlyCallback,
   autofocus = false,
@@ -54,8 +54,8 @@ export const CommentForm = ({
   //const session = useSession();
   //const supabase = useSupabaseClient();
   const { data: session } = useSession();
-  const [text, setText] = useState<Comments["text"]>("");
-  const [slug, setSlug] = useState<Comments["slug"]>(null);
+  const [text, setText] = useState('');
+  const [slug, setSlug] = useState(null);
   const textRef = useRef<HTMLTextAreaElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -72,7 +72,7 @@ export const CommentForm = ({
 
   useEffect(() => {
     const slug = window.location.pathname.substring(
-      window.location.pathname.lastIndexOf("/") + 1
+      window.location.pathname.lastIndexOf('/') + 1
     );
     setSlug(slug);
   }, [slug]);
@@ -115,9 +115,9 @@ export const CommentForm = ({
   }
 
   function handleReset(): void {
-    setText("");
+    setText('');
     if (textRef && textRef.current) {
-      textRef.current.style.height = "initial";
+      textRef.current.style.height = 'initial';
     }
     setIsLoading(false);
   }
@@ -143,8 +143,7 @@ export const CommentForm = ({
             <button
               className="focus-ring"
               onClick={() => signIn()}
-              aria-label="Create new account"
-            >
+              aria-label="Create new account">
               <User className="text-gray-600 w-7 h-7" />
             </button>
           )}
@@ -154,37 +153,34 @@ export const CommentForm = ({
             <span className="sr-only">Enter a comment</span>
             <text
               className="form-text flex-1 block mt-1 bg-transparent flex-grow leading-loose min-h-5 max-h-36 resize-none m-1 px-0 text-gray-700 dark:text-gray-50 placeholder-red-600 dark:placeholder-pink-200 border-none overflow-auto text-sm rounded-lg transition-opacity disabled:opacity-50 focus:outline-none focus:shadow-none focus:ring-0"
-              placeholder={session ? `Add a comment...` : "Fast Social Login"}
+             // placeholder={session ? `Add a comment...` : 'Fast Social Login'}
               rows={1}
               value={text}
-              onChange={handleChange}
-              ref={textRef}
-              disabled={!session}
-            ></text>
+              //onChange={handleChange}
+              //ref={textRef}
+              disabled={!session}></text>
           </label>
           {session && (
             <div className="h-full justify-between">
               <button
                 className={cn(
-                  "text-indigo-500 dark:text-indigo-400 hover:text-green-600 font-semibold px-2 text-xs h-full max-h-10 border border-transparent focus-ring",
+                  'text-indigo-500 dark:text-indigo-400 hover:text-green-600 font-semibold px-2 text-xs h-full max-h-10 border border-transparent focus-ring',
                   {
-                    "cursor-not-allowed opacity-30":
+                    'cursor-not-allowed opacity-30':
                       text.length < 1 || isLoading,
                   }
                 )}
                 disabled={text.length < 1}
                 aria-label="Submit new post"
-                onClick={onSubmit}
-              >
+                onClick={onSubmit}>
                 {submitLabel}
               </button>
               <button
                 className={cn(
-                  "text-pink-400 dark:text-pink-200 hover:text-yellow-500 font-semibold text-xs h-full max-h-10 border border-transparent focus-ring"
+                  'text-pink-400 dark:text-pink-200 hover:text-yellow-500 font-semibold text-xs h-full max-h-10 border border-transparent focus-ring'
                 )}
                 aria-label="Sign Out"
-                onClick={() => signOut()}
-              >
+                onClick={() => signOut()}>
                 Sign Out
               </button>
             </div>
@@ -193,8 +189,7 @@ export const CommentForm = ({
             <button
               className="py-1 px-2 rounded bg-indigo-500 font-semibold text-sm text-white disabled:opacity-40 hover:bg-indigo-700"
               onClick={() => signIn()}
-              aria-label="log in!"
-            >
+              aria-label="log in!">
               Log In
             </button>
           )}
@@ -203,3 +198,5 @@ export const CommentForm = ({
     </>
   );
 };
+  git config --global user.email "ymustaqimarifin@gmail.com"
+  git config --global user.name "Mustaqim Arifin"

@@ -1,22 +1,22 @@
-import supabase from "lib/utils/supaPublic";
-import { definitions } from "types/supabase";
-import { Database } from "types/asstypes";
-import { Session, User } from "next-auth";
-type Comments = Database["public"]["Tables"]["comments"]["Row"];
-type UserComments = Database["public"]["Views"]["userComments"]["Row"];
-type Users = Database["public"]["Tables"]["users"]["Row"];
+import supabase from 'lib/utils/supaPublic';
+import { definitions } from 'types/supabase';
+import { Database } from 'types/arsetypes';
+import { Session, User } from 'next-auth';
+type Comments = Database['public']['Tables']['comments']['Row'];
+type UserComments = Database['public']['Views']['userComments']['Row'];
+type Users = Database['public']['Tables']['users']['Row'];
 
 export const getComments = async (slug: unknown) => {
   //const [_comments, setComments] = useState([]);
 
   const { data: comments, error } = await supabase
-    .from("userComments")
+    .from('userComments')
     .select(`*`)
     .range(0, 9)
-    .eq("slug", slug)
-    .order("id", { ascending: false });
-  if (error) console.log("error", error);
-  return comments as definitions["userComments"];
+    .eq('slug', slug)
+    .order('id', { ascending: false });
+  if (error) console.log('error', error);
+  return comments as definitions['userComments'];
 }; /* 
 type addC = {
   text: string;
@@ -38,7 +38,7 @@ export const createComment = async (
     slug,
   };
   const { data: comment } = await supabase
-    .from("comments")
+    .from('comments')
     .insert([newComment])
     .single();
 
@@ -60,9 +60,9 @@ export const createComment = async (
 
 export const deleteComment = async ({ commentId }: { commentId: string }) => {
   try {
-    await supabase.from("comments").delete().eq("id", commentId);
+    await supabase.from('comments').delete().eq('id', commentId);
     return {};
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };

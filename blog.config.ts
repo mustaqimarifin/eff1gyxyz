@@ -44,14 +44,7 @@ const BLOG = {
     customConfig: {
       post: "post",
     },
-    gitalkConfig: {
-      repo: "", // The repository of store comments
-      owner: "",
-      admin: [],
-      clientID: "",
-      clientSecret: "",
-      distractionFreeMode: false,
-    },
+
     utterancesConfig: {
       repo: "",
     },

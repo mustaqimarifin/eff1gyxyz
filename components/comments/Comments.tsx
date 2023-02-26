@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { CommentForm } from "./CommentForm";
-import Comment from "./Comment";
+import React, { useState, useEffect } from 'react';
+import { CommentForm } from './CommentForm';
+import Comment from './Comment';
 import {
   getComments as getCommentsApi,
   createComment as createCommentApi,
   deleteComment as deleteCommentApi,
-} from "./kopee";
-import { CommentType } from "types/interface";
-import { Database } from "types/asstypes";
-import { useSession } from "next-auth/react";
-import type { Comments } from "./CommentForm";
-import { User } from "next-auth";
-type UserComments = Database["public"]["Views"]["userComments"]["Row"];
-type Users = Database["public"]["Tables"]["users"]["Row"];
+} from './kopee';
+import { CommentType } from 'types/interface';
+import { Database } from 'types/arsetypes';
+import { useSession } from 'next-auth/react';
+import type { Comments } from './CommentForm';
+import { User } from 'next-auth';
+type UserComments = Database['public']['Views']['userComments']['Row'];
+type Users = Database['public']['Tables']['users']['Row'];
 
 type Props = {
-  slug: UserComments["slug"];
+  slug: UserComments['slug'];
 };
 
 const Comments: React.FC<Props> = ({ slug }) => {
@@ -41,8 +41,8 @@ const Comments: React.FC<Props> = ({ slug }) => {
     });
   };
 
-  const deleteComment = (commentId: Comments["id"]) => {
-    if (window.confirm("Are you sure you want to remove comment?")) {
+  const deleteComment = (commentId: Comments['id']) => {
+    if (window.confirm('Are you sure you want to remove comment?')) {
       deleteCommentApi(commentId).then(() => {
         const updatedComment = comments.filter(
           (comment) => comment.id !== commentId

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import type { Komment } from "types";
+import { getComments } from "./query";
 
 export default function useComments() {
   const [text, setText] = useState("");
@@ -12,8 +13,8 @@ export default function useComments() {
   const [parentId, setParentId] = useState();
 
   const { data: comments } = useQuery<Komment[]>({
-    queryKey: ["comments"],
-    queryFn: () => axios.get(`/api/posts/${slug}`).then((res) => res.data),
+    queryKey: ["comments", slug],
+    queryFn: () => getComments(slug),
   });
 
   const rootComments: Komment["rootComments"] = comments?.filter(
@@ -32,9 +33,9 @@ export default function useComments() {
     return group;
   }, [comments]);
 
-  const getReplies = (parentId: string) =>
+  const getReplies = (commentId: string): Komment[] =>
     comments
-      ?.filter((comment) => comment?.id === parentId)
+      ?.filter((comment) => comment?.id === commentId)
       .sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
@@ -75,7 +76,7 @@ export default function useComments() {
     }
   };
  */
-  const onReply = async ({ id }: Comment) => {
+  /*  const onReply = async ({ id }: Comment) => {
     const body = { text, parentId: id };
     try {
       await axios.post<Body>(`/api/comments/${id}`, body);
@@ -85,16 +86,7 @@ export default function useComments() {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const onDelete = async ({ id }: Komment) => {
-    try {
-      await axios.delete(`/api/comments/${id}`);
-      await mutate();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  }; */
 
   return {
     text,
@@ -103,7 +95,7 @@ export default function useComments() {
     rootComments2,
     getReplies,
     onSubmit,
-    onReply,
-    onDelete,
+    /*    onReply,
+    onDelete, */
   };
 }

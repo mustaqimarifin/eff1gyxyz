@@ -12,54 +12,14 @@ export type paths = {
       };
     };
   };
-  "/userComments": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.userComments.id"];
-          parentId?: parameters["rowFilter.userComments.parentId"];
-          slug?: parameters["rowFilter.userComments.slug"];
-          name?: parameters["rowFilter.userComments.name"];
-          image?: parameters["rowFilter.userComments.image"];
-          createdAt?: parameters["rowFilter.userComments.createdAt"];
-          updatedAt?: parameters["rowFilter.userComments.updatedAt"];
-          text?: parameters["rowFilter.userComments.text"];
-          authorId?: parameters["rowFilter.userComments.authorId"];
-          author?: parameters["rowFilter.userComments.author"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["userComments"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-  };
   "/pages": {
     get: {
       parameters: {
         query: {
+          id?: parameters["rowFilter.pages.id"];
           slug?: parameters["rowFilter.pages.slug"];
           view_count?: parameters["rowFilter.pages.view_count"];
+          updated_at?: parameters["rowFilter.pages.updated_at"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -110,8 +70,10 @@ export type paths = {
     delete: {
       parameters: {
         query: {
+          id?: parameters["rowFilter.pages.id"];
           slug?: parameters["rowFilter.pages.slug"];
           view_count?: parameters["rowFilter.pages.view_count"];
+          updated_at?: parameters["rowFilter.pages.updated_at"];
         };
         header: {
           /** Preference */
@@ -126,8 +88,10 @@ export type paths = {
     patch: {
       parameters: {
         query: {
+          id?: parameters["rowFilter.pages.id"];
           slug?: parameters["rowFilter.pages.slug"];
           view_count?: parameters["rowFilter.pages.view_count"];
+          updated_at?: parameters["rowFilter.pages.updated_at"];
         };
         body: {
           /** pages */
@@ -149,12 +113,12 @@ export type paths = {
       parameters: {
         query: {
           id?: parameters["rowFilter.comments.id"];
-          slug?: parameters["rowFilter.comments.slug"];
-          authorId?: parameters["rowFilter.comments.authorId"];
-          parentId?: parameters["rowFilter.comments.parentId"];
-          createdAt?: parameters["rowFilter.comments.createdAt"];
-          updatedAt?: parameters["rowFilter.comments.updatedAt"];
-          text?: parameters["rowFilter.comments.text"];
+          created_at?: parameters["rowFilter.comments.created_at"];
+          topic?: parameters["rowFilter.comments.topic"];
+          comment?: parameters["rowFilter.comments.comment"];
+          user_id?: parameters["rowFilter.comments.user_id"];
+          parent_id?: parameters["rowFilter.comments.parent_id"];
+          mentioned_user_ids?: parameters["rowFilter.comments.mentioned_user_ids"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -206,12 +170,12 @@ export type paths = {
       parameters: {
         query: {
           id?: parameters["rowFilter.comments.id"];
-          slug?: parameters["rowFilter.comments.slug"];
-          authorId?: parameters["rowFilter.comments.authorId"];
-          parentId?: parameters["rowFilter.comments.parentId"];
-          createdAt?: parameters["rowFilter.comments.createdAt"];
-          updatedAt?: parameters["rowFilter.comments.updatedAt"];
-          text?: parameters["rowFilter.comments.text"];
+          created_at?: parameters["rowFilter.comments.created_at"];
+          topic?: parameters["rowFilter.comments.topic"];
+          comment?: parameters["rowFilter.comments.comment"];
+          user_id?: parameters["rowFilter.comments.user_id"];
+          parent_id?: parameters["rowFilter.comments.parent_id"];
+          mentioned_user_ids?: parameters["rowFilter.comments.mentioned_user_ids"];
         };
         header: {
           /** Preference */
@@ -227,12 +191,12 @@ export type paths = {
       parameters: {
         query: {
           id?: parameters["rowFilter.comments.id"];
-          slug?: parameters["rowFilter.comments.slug"];
-          authorId?: parameters["rowFilter.comments.authorId"];
-          parentId?: parameters["rowFilter.comments.parentId"];
-          createdAt?: parameters["rowFilter.comments.createdAt"];
-          updatedAt?: parameters["rowFilter.comments.updatedAt"];
-          text?: parameters["rowFilter.comments.text"];
+          created_at?: parameters["rowFilter.comments.created_at"];
+          topic?: parameters["rowFilter.comments.topic"];
+          comment?: parameters["rowFilter.comments.comment"];
+          user_id?: parameters["rowFilter.comments.user_id"];
+          parent_id?: parameters["rowFilter.comments.parent_id"];
+          mentioned_user_ids?: parameters["rowFilter.comments.mentioned_user_ids"];
         };
         body: {
           /** comments */
@@ -249,16 +213,18 @@ export type paths = {
       };
     };
   };
-  "/users": {
+  "/comments_with_metadata": {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.users.id"];
-          name?: parameters["rowFilter.users.name"];
-          email?: parameters["rowFilter.users.email"];
-          image?: parameters["rowFilter.users.image"];
-          role?: parameters["rowFilter.users.role"];
-          isAdmin?: parameters["rowFilter.users.isAdmin"];
+          id?: parameters["rowFilter.comments_with_metadata.id"];
+          created_at?: parameters["rowFilter.comments_with_metadata.created_at"];
+          topic?: parameters["rowFilter.comments_with_metadata.topic"];
+          comment?: parameters["rowFilter.comments_with_metadata.comment"];
+          user_id?: parameters["rowFilter.comments_with_metadata.user_id"];
+          parent_id?: parameters["rowFilter.comments_with_metadata.parent_id"];
+          mentioned_user_ids?: parameters["rowFilter.comments_with_metadata.mentioned_user_ids"];
+          replies_count?: parameters["rowFilter.comments_with_metadata.replies_count"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -280,7 +246,7 @@ export type paths = {
       responses: {
         /** OK */
         200: {
-          schema: definitions["users"][];
+          schema: definitions["comments_with_metadata"][];
         };
         /** Partial Content */
         206: unknown;
@@ -289,8 +255,8 @@ export type paths = {
     post: {
       parameters: {
         body: {
-          /** users */
-          users?: definitions["users"];
+          /** comments_with_metadata */
+          comments_with_metadata?: definitions["comments_with_metadata"];
         };
         query: {
           /** Filtering Columns */
@@ -309,12 +275,14 @@ export type paths = {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.users.id"];
-          name?: parameters["rowFilter.users.name"];
-          email?: parameters["rowFilter.users.email"];
-          image?: parameters["rowFilter.users.image"];
-          role?: parameters["rowFilter.users.role"];
-          isAdmin?: parameters["rowFilter.users.isAdmin"];
+          id?: parameters["rowFilter.comments_with_metadata.id"];
+          created_at?: parameters["rowFilter.comments_with_metadata.created_at"];
+          topic?: parameters["rowFilter.comments_with_metadata.topic"];
+          comment?: parameters["rowFilter.comments_with_metadata.comment"];
+          user_id?: parameters["rowFilter.comments_with_metadata.user_id"];
+          parent_id?: parameters["rowFilter.comments_with_metadata.parent_id"];
+          mentioned_user_ids?: parameters["rowFilter.comments_with_metadata.mentioned_user_ids"];
+          replies_count?: parameters["rowFilter.comments_with_metadata.replies_count"];
         };
         header: {
           /** Preference */
@@ -329,16 +297,348 @@ export type paths = {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.users.id"];
-          name?: parameters["rowFilter.users.name"];
-          email?: parameters["rowFilter.users.email"];
-          image?: parameters["rowFilter.users.image"];
-          role?: parameters["rowFilter.users.role"];
-          isAdmin?: parameters["rowFilter.users.isAdmin"];
+          id?: parameters["rowFilter.comments_with_metadata.id"];
+          created_at?: parameters["rowFilter.comments_with_metadata.created_at"];
+          topic?: parameters["rowFilter.comments_with_metadata.topic"];
+          comment?: parameters["rowFilter.comments_with_metadata.comment"];
+          user_id?: parameters["rowFilter.comments_with_metadata.user_id"];
+          parent_id?: parameters["rowFilter.comments_with_metadata.parent_id"];
+          mentioned_user_ids?: parameters["rowFilter.comments_with_metadata.mentioned_user_ids"];
+          replies_count?: parameters["rowFilter.comments_with_metadata.replies_count"];
         };
         body: {
-          /** users */
-          users?: definitions["users"];
+          /** comments_with_metadata */
+          comments_with_metadata?: definitions["comments_with_metadata"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/reactions": {
+    get: {
+      parameters: {
+        query: {
+          type?: parameters["rowFilter.reactions.type"];
+          created_at?: parameters["rowFilter.reactions.created_at"];
+          label?: parameters["rowFilter.reactions.label"];
+          url?: parameters["rowFilter.reactions.url"];
+          metadata?: parameters["rowFilter.reactions.metadata"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["reactions"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** reactions */
+          reactions?: definitions["reactions"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferPost"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          type?: parameters["rowFilter.reactions.type"];
+          created_at?: parameters["rowFilter.reactions.created_at"];
+          label?: parameters["rowFilter.reactions.label"];
+          url?: parameters["rowFilter.reactions.url"];
+          metadata?: parameters["rowFilter.reactions.metadata"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          type?: parameters["rowFilter.reactions.type"];
+          created_at?: parameters["rowFilter.reactions.created_at"];
+          label?: parameters["rowFilter.reactions.label"];
+          url?: parameters["rowFilter.reactions.url"];
+          metadata?: parameters["rowFilter.reactions.metadata"];
+        };
+        body: {
+          /** reactions */
+          reactions?: definitions["reactions"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/comment_reactions_metadata": {
+    get: {
+      parameters: {
+        query: {
+          comment_id?: parameters["rowFilter.comment_reactions_metadata.comment_id"];
+          reaction_type?: parameters["rowFilter.comment_reactions_metadata.reaction_type"];
+          reaction_count?: parameters["rowFilter.comment_reactions_metadata.reaction_count"];
+          active_for_user?: parameters["rowFilter.comment_reactions_metadata.active_for_user"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["comment_reactions_metadata"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+  };
+  "/comment_reactions": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.comment_reactions.id"];
+          created_at?: parameters["rowFilter.comment_reactions.created_at"];
+          comment_id?: parameters["rowFilter.comment_reactions.comment_id"];
+          user_id?: parameters["rowFilter.comment_reactions.user_id"];
+          reaction_type?: parameters["rowFilter.comment_reactions.reaction_type"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["comment_reactions"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** comment_reactions */
+          comment_reactions?: definitions["comment_reactions"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferPost"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.comment_reactions.id"];
+          created_at?: parameters["rowFilter.comment_reactions.created_at"];
+          comment_id?: parameters["rowFilter.comment_reactions.comment_id"];
+          user_id?: parameters["rowFilter.comment_reactions.user_id"];
+          reaction_type?: parameters["rowFilter.comment_reactions.reaction_type"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.comment_reactions.id"];
+          created_at?: parameters["rowFilter.comment_reactions.created_at"];
+          comment_id?: parameters["rowFilter.comment_reactions.comment_id"];
+          user_id?: parameters["rowFilter.comment_reactions.user_id"];
+          reaction_type?: parameters["rowFilter.comment_reactions.reaction_type"];
+        };
+        body: {
+          /** comment_reactions */
+          comment_reactions?: definitions["comment_reactions"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/display_users": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.display_users.id"];
+          name?: parameters["rowFilter.display_users.name"];
+          handle?: parameters["rowFilter.display_users.handle"];
+          avatar?: parameters["rowFilter.display_users.avatar"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["display_users"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** display_users */
+          display_users?: definitions["display_users"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferPost"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.display_users.id"];
+          name?: parameters["rowFilter.display_users.name"];
+          handle?: parameters["rowFilter.display_users.handle"];
+          avatar?: parameters["rowFilter.display_users.avatar"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.display_users.id"];
+          name?: parameters["rowFilter.display_users.name"];
+          handle?: parameters["rowFilter.display_users.handle"];
+          avatar?: parameters["rowFilter.display_users.avatar"];
+        };
+        body: {
+          /** display_users */
+          display_users?: definitions["display_users"];
         };
         header: {
           /** Preference */
@@ -411,45 +711,6 @@ export type paths = {
       };
     };
   };
-  "/rpc/uuid_v8": {
-    post: {
-      parameters: {
-        body: {
-          args: { [key: string]: unknown };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/nanoid": {
-    post: {
-      parameters: {
-        body: {
-          args: {
-            /** Format: text */
-            alphabet?: string;
-            /** Format: integer */
-            size?: number;
-          };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
   "/rpc/_xid_machine_id": {
     post: {
       parameters: {
@@ -495,23 +756,6 @@ export type paths = {
             /** Format: public.xid */
             _xid: string;
           };
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferParams"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: unknown;
-      };
-    };
-  };
-  "/rpc/uuid_v7": {
-    post: {
-      parameters: {
-        body: {
-          args: { [key: string]: unknown };
         };
         header: {
           /** Preference */
@@ -587,120 +831,170 @@ export type paths = {
 };
 
 export type definitions = {
-  userComments: {
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id?: string;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Foreign Key to `comments.id`.<fk table='comments' column='id'/>
-     */
-    parentId?: string;
-    /**
-     * Format: text
-     * @description Note:
-     * This is a Foreign Key to `pages.slug`.<fk table='pages' column='slug'/>
-     */
-    slug?: string;
-    /** Format: text */
-    name?: string;
-    /** Format: text */
-    image?: string;
-    /** Format: timestamp with time zone */
-    createdAt?: string;
-    /** Format: timestamp with time zone */
-    updatedAt?: string;
-    /** Format: text */
-    text?: string;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
-     */
-    authorId?: string;
-    /** Format: jsonb */
-    author?: unknown;
-  };
   pages: {
     /**
-     * Format: text
+     * Format: bigint
      * @description Note:
      * This is a Primary Key.<pk/>
      */
+    id: number;
+    /** Format: text */
     slug: string;
     /**
      * Format: bigint
      * @default 1
      */
     view_count: number;
+    /**
+     * Format: timestamp with time zone
+     * @default timezone('utc'::text, now())
+     */
+    updated_at: string;
   };
   comments: {
     /**
-     * Format: uuid
+     * Format: character
      * @description Note:
      * This is a Primary Key.<pk/>
-     * @default public.uuid_v7()
+     * @default public.xid()
      */
     id: string;
     /**
-     * Format: text
-     * @description Note:
-     * This is a Foreign Key to `pages.slug`.<fk table='pages' column='slug'/>
+     * Format: timestamp with time zone
+     * @default now()
      */
-    slug: string;
+    created_at?: string;
+    /** Format: text */
+    topic: string;
+    /** Format: text */
+    comment: string;
     /**
      * Format: uuid
      * @description Note:
-     * This is a Foreign Key to `users.id`.<fk table='users' column='id'/>
+     * This is a Foreign Key to `display_users.id`.<fk table='display_users' column='id'/>
      */
-    authorId: string;
+    user_id: string;
     /**
-     * Format: uuid
+     * Format: character
      * @description Note:
      * This is a Foreign Key to `comments.id`.<fk table='comments' column='id'/>
      */
-    parentId?: string;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    createdAt: string;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    updatedAt?: string;
-    /** Format: text */
-    text: string;
+    parent_id?: string;
+    /** Format: uuid[] */
+    mentioned_user_ids: string[];
   };
-  users: {
+  comments_with_metadata: {
+    /**
+     * Format: character
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id?: string;
+    /** Format: timestamp with time zone */
+    created_at?: string;
+    /** Format: text */
+    topic?: string;
+    /** Format: text */
+    comment?: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `display_users.id`.<fk table='display_users' column='id'/>
+     */
+    user_id?: string;
+    /**
+     * Format: character
+     * @description Note:
+     * This is a Foreign Key to `comments.id`.<fk table='comments' column='id'/>
+     */
+    parent_id?: string;
+    /** Format: uuid[] */
+    mentioned_user_ids?: string[];
+    /** Format: bigint */
+    replies_count?: number;
+  };
+  reactions: {
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    type: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /** Format: text */
+    label: string;
+    /** Format: text */
+    url: string;
+    /** Format: jsonb */
+    metadata?: unknown;
+  };
+  comment_reactions_metadata: {
+    /**
+     * Format: character
+     * @description Note:
+     * This is a Foreign Key to `comments.id`.<fk table='comments' column='id'/>
+     */
+    comment_id?: string;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Foreign Key to `reactions.type`.<fk table='reactions' column='type'/>
+     */
+    reaction_type?: string;
+    /** Format: bigint */
+    reaction_count?: number;
+    /** Format: boolean */
+    active_for_user?: boolean;
+  };
+  comment_reactions: {
+    /**
+     * Format: character
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * @default public.xid()
+     */
+    id: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: character
+     * @description Note:
+     * This is a Foreign Key to `comments.id`.<fk table='comments' column='id'/>
+     */
+    comment_id: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `display_users.id`.<fk table='display_users' column='id'/>
+     */
+    user_id: string;
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Foreign Key to `reactions.type`.<fk table='reactions' column='type'/>
+     */
+    reaction_type: string;
+  };
+  display_users: {
     /**
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
      */
-    id: string;
+    id?: string;
     /** Format: text */
     name?: string;
     /** Format: text */
-    email?: string;
+    handle?: string;
     /** Format: text */
-    image?: string;
-    /**
-     * Format: public.role
-     * @default USER
-     * @enum {string}
-     */
-    role: "BLOCKED" | "USER" | "ADMIN";
-    /**
-     * Format: boolean
-     * @default false
-     */
-    isAdmin: boolean;
+    avatar?: string;
   };
 };
 
@@ -747,64 +1041,94 @@ export type parameters = {
   offset: string;
   /** @description Limiting and Pagination */
   limit: string;
-  /** @description userComments */
-  "body.userComments": definitions["userComments"];
-  /** Format: uuid */
-  "rowFilter.userComments.id": string;
-  /** Format: uuid */
-  "rowFilter.userComments.parentId": string;
-  /** Format: text */
-  "rowFilter.userComments.slug": string;
-  /** Format: text */
-  "rowFilter.userComments.name": string;
-  /** Format: text */
-  "rowFilter.userComments.image": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.userComments.createdAt": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.userComments.updatedAt": string;
-  /** Format: text */
-  "rowFilter.userComments.text": string;
-  /** Format: uuid */
-  "rowFilter.userComments.authorId": string;
-  /** Format: jsonb */
-  "rowFilter.userComments.author": string;
   /** @description pages */
   "body.pages": definitions["pages"];
+  /** Format: bigint */
+  "rowFilter.pages.id": string;
   /** Format: text */
   "rowFilter.pages.slug": string;
   /** Format: bigint */
   "rowFilter.pages.view_count": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.pages.updated_at": string;
   /** @description comments */
   "body.comments": definitions["comments"];
-  /** Format: uuid */
+  /** Format: character */
   "rowFilter.comments.id": string;
-  /** Format: text */
-  "rowFilter.comments.slug": string;
-  /** Format: uuid */
-  "rowFilter.comments.authorId": string;
-  /** Format: uuid */
-  "rowFilter.comments.parentId": string;
   /** Format: timestamp with time zone */
-  "rowFilter.comments.createdAt": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.comments.updatedAt": string;
+  "rowFilter.comments.created_at": string;
   /** Format: text */
-  "rowFilter.comments.text": string;
-  /** @description users */
-  "body.users": definitions["users"];
+  "rowFilter.comments.topic": string;
+  /** Format: text */
+  "rowFilter.comments.comment": string;
   /** Format: uuid */
-  "rowFilter.users.id": string;
+  "rowFilter.comments.user_id": string;
+  /** Format: character */
+  "rowFilter.comments.parent_id": string;
+  /** Format: uuid[] */
+  "rowFilter.comments.mentioned_user_ids": string;
+  /** @description comments_with_metadata */
+  "body.comments_with_metadata": definitions["comments_with_metadata"];
+  /** Format: character */
+  "rowFilter.comments_with_metadata.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.comments_with_metadata.created_at": string;
   /** Format: text */
-  "rowFilter.users.name": string;
+  "rowFilter.comments_with_metadata.topic": string;
   /** Format: text */
-  "rowFilter.users.email": string;
+  "rowFilter.comments_with_metadata.comment": string;
+  /** Format: uuid */
+  "rowFilter.comments_with_metadata.user_id": string;
+  /** Format: character */
+  "rowFilter.comments_with_metadata.parent_id": string;
+  /** Format: uuid[] */
+  "rowFilter.comments_with_metadata.mentioned_user_ids": string;
+  /** Format: bigint */
+  "rowFilter.comments_with_metadata.replies_count": string;
+  /** @description reactions */
+  "body.reactions": definitions["reactions"];
+  /** Format: character varying */
+  "rowFilter.reactions.type": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.reactions.created_at": string;
   /** Format: text */
-  "rowFilter.users.image": string;
-  /** Format: public.role */
-  "rowFilter.users.role": string;
+  "rowFilter.reactions.label": string;
+  /** Format: text */
+  "rowFilter.reactions.url": string;
+  /** Format: jsonb */
+  "rowFilter.reactions.metadata": string;
+  /** @description comment_reactions_metadata */
+  "body.comment_reactions_metadata": definitions["comment_reactions_metadata"];
+  /** Format: character */
+  "rowFilter.comment_reactions_metadata.comment_id": string;
+  /** Format: character varying */
+  "rowFilter.comment_reactions_metadata.reaction_type": string;
+  /** Format: bigint */
+  "rowFilter.comment_reactions_metadata.reaction_count": string;
   /** Format: boolean */
-  "rowFilter.users.isAdmin": string;
+  "rowFilter.comment_reactions_metadata.active_for_user": string;
+  /** @description comment_reactions */
+  "body.comment_reactions": definitions["comment_reactions"];
+  /** Format: character */
+  "rowFilter.comment_reactions.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.comment_reactions.created_at": string;
+  /** Format: character */
+  "rowFilter.comment_reactions.comment_id": string;
+  /** Format: uuid */
+  "rowFilter.comment_reactions.user_id": string;
+  /** Format: character varying */
+  "rowFilter.comment_reactions.reaction_type": string;
+  /** @description display_users */
+  "body.display_users": definitions["display_users"];
+  /** Format: uuid */
+  "rowFilter.display_users.id": string;
+  /** Format: text */
+  "rowFilter.display_users.name": string;
+  /** Format: text */
+  "rowFilter.display_users.handle": string;
+  /** Format: text */
+  "rowFilter.display_users.avatar": string;
 };
 
 export type operations = {};

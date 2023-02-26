@@ -7,7 +7,6 @@ import User from "lib/utils/icons/User";
 import { signIn, signOut, useSession } from "next-auth/react";
 import useComments from "./hooks/useComment";
 import { useEffect, useRef, useState } from "react";
-import { Comment } from "prisma/generated/zod";
 import { Komment } from "types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -36,10 +35,6 @@ export const CommentForm = ({
   const [slug, setSlug] = useState<Komment["slug"]>();
   //const [parentId, setParentId] = useState();
 
-  const { data: comments } = useQuery<Komment[]>({
-    queryKey: ["comments"],
-    queryFn: () => axios.get(`/api/posts/${slug}`).then((res) => res.data),
-  });
   useEffect(() => {
     if (autoFocus) {
       if (textRef && textRef.current) {

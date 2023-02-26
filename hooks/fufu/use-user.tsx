@@ -6,13 +6,14 @@ import { definitions } from "types/supabase";
 import { CommentType } from "types/interface";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 //import { useLatestRef } from './useLatestRef';
-import { Database } from "types/asstypes";
+import { Database } from "types/arsetypes";
 import { Comments } from "components/comments/CommentForm";
-type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
+import { useMutation } from "@tanstack/react-query";
+type Users = Database["public"]["Tables"]["users"]["Row"];
 interface AuthSessionProps {
   user: User | null;
   session: Session | null;
-  profile?: definitions["profiles"] | null;
+  profile?: definitions["users"] | null;
   loading: boolean;
   refresh: any;
 }
@@ -38,19 +39,18 @@ export const UserContextProvider = (props: Props): JSX.Element => {
   const {
     data: profile,
     error,
-    isValidating,
     mutate,
-  } = useSWR<definitions["profiles"]>(
+  } = useMutation(
     user?.id ? ["user_data", user.id] : null,
-    async (_: any, authorId: Profiles["id"]) =>
+    async (_: any, userId: Users["id"]) =>
       supabase
-        .from("profiles")
+        .from("users")
         .select("*")
-        .eq("id", authorId)
+        .eq("id", userId)
         .single()
         .then(({ data, error }) => {
           if (error) throw error;
-          return data as definitions["profiles"];
+          return data;
         }),
     { revalidateOnFocus: false }
   );

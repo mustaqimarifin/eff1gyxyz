@@ -1,25 +1,25 @@
-import { useSession } from "next-auth/react";
-import Plus from "lib/utils/icons/Plus";
-import cn from "clsx";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import VoteButtons from "./VoteButtons";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
+import { useSession } from 'next-auth/react';
+import Plus from 'lib/utils/icons/Plus';
+import cn from 'clsx';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import VoteButtons from './VoteButtons';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 dayjs.extend(relativeTime, {
   rounding: Math.floor,
 });
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault(dayjs.tz.guess());
-import { ComponentState, Dispatch, useEffect, useRef, useState } from "react";
-import Avatar from "./Avatar";
-import { CommentForm, Comments } from "./CommentForm";
-import { CommentType } from "types/interface";
-import { Database } from "types/asstypes";
-import { deleteComment } from "./kopee";
+import { ComponentState, Dispatch, useEffect, useRef, useState } from 'react';
+import Avatar from './Avatar';
+import { CommentForm, Comments } from './CommentForm';
+import { CommentType } from 'types/interface';
+import { Database } from 'types/arsetypes';
+import { deleteComment } from './kopee';
 
-type UserComments = Database["public"]["Views"]["userComments"]["Row"];
+type UserComments = Database['public']['Views']['comments_with_metadata']['Row'];
 //type linearView= Database['public']['Views']['linearView']['Row'];
 
 const MAX_LINES = 10;
@@ -44,12 +44,11 @@ const ReplyForm = ({
   return (
     <div
       className={cn(
-        "my-1 transition duration-1000 ease-in-out transform -translate-x-1 -mr-1",
+        'my-1 transition duration-1000 ease-in-out transform -translate-x-1 -mr-1',
         {
           hidden,
         }
-      )}
-    >
+      )}>
       <CommentForm
         parentId={comment?.id}
         autofocus={true}
@@ -73,8 +72,8 @@ interface Props {
   // use lower-case primitives for consistency
   //deleteComment:(a: string) => void
   addComment: () => void;
-  parentId?: Comments["parentId"];
-  authorId: Comments["authorId"];
+  parentId?: Comments['parent_id'];
+  authorId: Comments['user_id'];
 }
 
 const Comment = ({
@@ -149,8 +148,7 @@ const Comment = ({
             <div className="col-start-2 flex items-center leading-none mb-1 transform translate-y-1">
               <button
                 className="text-xs text-gray-500 hover:underline focus-ring active:underline cursor-pointer focus:outline-none"
-                aria-label={`View comment by ${parent.name}`}
-              >
+                aria-label={`View comment by ${parent.name}`}>
                 @{parent.name}:
               </button>
               <div className="text-xs text-gray-800 ml-1 hover:text-gray-400 focus-ring active:text-gray-400 cursor-pointer focus:outline-none line-clamp-1">
@@ -160,10 +158,9 @@ const Comment = ({
           </div>
         )}
         <div
-          className={cn("grid gap-x-3 comment-grid", {
-            "gap-y-2": !hidden,
-          })}
-        >
+          className={cn('grid gap-x-3 comment-grid', {
+            'gap-y-2': !hidden,
+          })}>
           {highlight && (
             <>
               <div className="row-start-1 col-start-1 row-end-3 col-end-3 -m-1 opacity-5 bg-indigo-700 dark:bg-indigo-50 dark:border-gray-100 rounded pointer-events-none" />
@@ -177,17 +174,16 @@ const Comment = ({
               <div className="row-start-2 row-end-5 col-start-1 col-end-2 row-span-auto flex justify-center my-1 px-1">
                 <button
                   className={cn(
-                    "flex-grow flex justify-center border-none group focus-ring mb-1",
+                    'flex-grow flex justify-center border-none group focus-ring mb-1',
                     hidden
                   )}
                   onClick={() => setHidden(true)}
-                  aria-label={`Collapse comment by ${comment.author}`}
-                >
+                  aria-label={`Collapse comment by ${comment.author}`}>
                   <div
-                    className={cn("w-px h-full", {
-                      "bg-gray-200 group-hover:bg-gray-500 group-active:bg-gray-500 dark:bg-gray-600 dark:group-hover:bg-gray-400 dark:group-active:bg-gray-400":
+                    className={cn('w-px h-full', {
+                      'bg-gray-200 group-hover:bg-gray-500 group-active:bg-gray-500 dark:bg-gray-600 dark:group-hover:bg-gray-400 dark:group-active:bg-gray-400':
                         !highlight,
-                      "bg-gray-300 group-hover:bg-gray-600 group-active:bg-gray-600 dark:bg-gray-600 dark:group-hover:bg-gray-400 dark:group-active:bg-gray-400":
+                      'bg-gray-300 group-hover:bg-gray-600 group-active:bg-gray-600 dark:bg-gray-600 dark:group-hover:bg-gray-400 dark:group-active:bg-gray-400':
                         highlight,
                     })}
                   />
@@ -198,10 +194,9 @@ const Comment = ({
             <button
               onClick={() => setHidden(false)}
               className={
-                "row-start-1 col-start-1 grid place-items-center focus-ring w-7 h-7"
+                'row-start-1 col-start-1 grid place-items-center focus-ring w-7 h-7'
               }
-              aria-label={`Expand comment by ${comment.author}`}
-            >
+              aria-label={`Expand comment by ${comment.author}`}>
               <Plus className="w-4 h-4 text-gray-500" />
             </button>
           )}
@@ -209,46 +204,42 @@ const Comment = ({
             <div className="flex flex-grow justify-items-stretch">
               <span
                 className={cn(
-                  "text-zinc-600 dark:text-teal-200 font-semibold ",
+                  'text-zinc-600 dark:text-teal-200 font-semibold ',
                   {
-                    "text-xs ": !hidden,
-                    "text-xs": hidden,
+                    'text-xs ': !hidden,
+                    'text-xs': hidden,
                   }
-                )}
-              >
-                {!comment.isDeleted ? comment.name : <>[Deleted]</>}{" "}
+                )}>
+                {!comment.isDeleted ? comment.name : <>[Deleted]</>}{' '}
               </span>
               <span
                 className=" font-semibold text-xs ml-auto text-pink-400 dark:text-pink-100 justify-self-auto "
-                suppressHydrationWarning
-              >
-                {dayjs().diff(comment.createdAt, "seconds", true) < 30
-                  ? "just now"
+                suppressHydrationWarning>
+                {dayjs().diff(comment.createdAt, 'seconds', true) < 30
+                  ? 'just now'
                   : dayjs(comment.createdAt).fromNow()}
               </span>
               {isAdmin && (
                 <button
                   className="text-xs flex flex-row items-center text-gray-600 dark:text-gray-400 focus-ring border-none ml-5 leading-none"
                   onClick={handlePin}
-                  aria-label={`Pin comment by ${comment.author}`}
-                >
+                  aria-label={`Pin comment by ${comment.author}`}>
                   Pin comment
                 </button>
               )}
             </div>
           </div>
 
-          <div className={cn("row-start-2 col-start-2", { hidden })}>
+          <div className={cn('row-start-2 col-start-2', { hidden })}>
             <section
               className={cn(
-                "text-gray-700 dark:text-gray-50 leading-6 text-sm font-light pb-2",
+                'text-gray-700 dark:text-gray-50 leading-6 text-sm font-light pb-2',
                 {
-                  "line-clamp-10": !isOverflowExpanded,
+                  'line-clamp-10': !isOverflowExpanded,
                   hidden,
                 }
               )}
-              ref={textRef}
-            >
+              ref={textRef}>
               <div className="w-full text-zinc-600 leading-loose dark:text-gray-100 tracking-wide">
                 {comment.text}
               </div>
@@ -258,8 +249,7 @@ const Comment = ({
               <button
                 className="text-sm text-indigo-700 dark:text-indigo-400 hover:underline focus:underline focus-ring border border-transparent leading-none"
                 onClick={() => setIsOverflowExpanded(!isOverflowExpanded)}
-                aria-label={`Pin comment by ${comment.name}`}
-              >
+                aria-label={`Pin comment by ${comment.name}`}>
                 {isOverflowExpanded ? (
                   <span>Show less</span>
                 ) : (
@@ -279,8 +269,7 @@ const Comment = ({
                     showReplyForm
                       ? `Hide reply form`
                       : `Reply to comment by ${comment.author}`
-                  }
-                >
+                  }>
                   {showReplyForm ? (
                     <button className="text-gray-500 dark:text-gray-200 hover:text-red-300">
                       Cancel&nbsp;&nbsp;
@@ -295,8 +284,7 @@ const Comment = ({
                     <button
                       className="text-xs flex flex-row items-center text-gray-500 dark:text-gray-200 hover:text-yellow-300 border-none"
                       onClick={async () => await deleteComment({ commentId })}
-                      aria-label={`Delete comment by ${comment.name}`}
-                    >
+                      aria-label={`Delete comment by ${comment.name}`}>
                       &nbsp;Delete
                     </button>
                   )}
@@ -318,12 +306,11 @@ const Comment = ({
 
           <div
             className={cn(
-              "row-start-3 row-span-2 rounded-md transform -translate-x-2 -mr-2",
+              'row-start-3 row-span-2 rounded-md transform -translate-x-2 -mr-2',
               {
                 hidden,
               }
-            )}
-          >
+            )}>
             {showReplyForm && (
               <div className="divide-pink-200 ">
                 <ReplyForm
@@ -336,7 +323,7 @@ const Comment = ({
               </div>
             )}
             {replies && replies?.length > 0 && (
-              <div className={cn("rounded-md ")}>
+              <div className={cn('rounded-md ')}>
                 {replies.map((reply) => (
                   <Comment
                     comment={reply}
@@ -348,7 +335,7 @@ const Comment = ({
                     replies={[]}
                     pageIndex={pageIndex}
                     highlight={comment.highlight}
-                    authorId={""}
+                    authorId={''}
                   />
                 ))}
               </div>

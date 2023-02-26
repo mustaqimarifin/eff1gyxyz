@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useState } from "react";
 
 import { Komment } from "types";
@@ -15,7 +16,7 @@ import { IconButton } from "../IconButton";
 import useComments from "./hooks/useComment";
 import { CommentForm } from "./form";
 import CommentList from "./list";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 const dateFormatter = new Intl.DateTimeFormat("en", {

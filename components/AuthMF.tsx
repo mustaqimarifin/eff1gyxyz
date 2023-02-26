@@ -5,7 +5,7 @@ export const AUTHMF = () => (
   <Auth
     supabaseClient={supabase}
     appearance={{ theme: ThemeSupa }}
-    providers={["google", "facebook", "github"]}
+    providers={["google", "github"]}
     theme="dark"
   />
 );
