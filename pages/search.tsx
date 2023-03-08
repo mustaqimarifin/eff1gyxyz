@@ -1,5 +1,5 @@
 import { getAllPosts, getAllTags } from "lib/notion";
-import SearchLayout from "layouts/search";
+import SearchLayout from "components/layouts/search";
 
 export default function search({ tags, posts }) {
   return <SearchLayout tags={tags} posts={posts} currentTag={undefined} />;

@@ -6,13 +6,13 @@ export interface IconButtonProps {
   Icon: HeroIcon;
   children?: React.ReactNode;
   color: string;
-  hoverBg?: string;
+  hoverbg?: string;
   isActive?: boolean;
   onClick: () => void;
 }
 
 export const IconButton = (props: IconButtonProps) => {
-  const { Icon, isActive, color, children, hoverBg } = props;
+  const { Icon, isActive, color, children, hoverbg } = props;
   const { data: session } = useSession();
 
   return (
@@ -20,7 +20,7 @@ export const IconButton = (props: IconButtonProps) => {
       className={clsx(
         "flex items-center rounded bg-none p-1 focus:outline-purple-400",
         color,
-        hoverBg,
+        hoverbg,
         isActive && "bg-slate-200",
         session ? "cursor-pointer hover:bg-purple-50" : "cursor-default"
       )}

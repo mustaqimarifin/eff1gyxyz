@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import { TagObj } from 'types';
 
-const Tags = (tags: { [x: string]: any }, currentTag: string) => {
+const Tags = ({ tags, currentTag }: { tags: TagObj; currentTag: any }) => {
   if (!tags) return null;
   return (
     <div className="tag-container">

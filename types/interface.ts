@@ -1,25 +1,26 @@
-import { definitions } from './supabase';
-import { Database } from 'types/arsetypes';
-type Users = Database['public']['Tables']['users']['Row'];
+import { definitions } from "./supabase";
+import { Database } from "types/arsetypes";
+type Users = Database["public"]["Views"]["display_users"]["Row"];
 
-type UserComments = Database['public']['Views']['userComments']['Row'];
+type UserComments =
+  Database["public"]["Views"]["comments_with_metadata"]["Row"];
 export type CommentType = {
-  id: UserComments['id'];
+  id: UserComments["id"];
   cn_id?: number;
-  name: UserComments['name'];
-  image: UserComments['image'];
+  name: Users["name"];
+  image: Users["avatar"];
   cnp_id?: number;
   combId?: number;
-  commentId?: UserComments['id'];
-  slug: UserComments['slug'];
-  text: UserComments['text'];
-  authorId?: UserComments['authorId'];
-  parentId?: UserComments['parentId'];
-  createdAt: UserComments['createdAt'];
+  commentId?: UserComments["id"];
+  slug: UserComments["topic"];
+  text: UserComments["comment"];
+  authorId?: UserComments["user_id"];
+  parentId?: UserComments["parent_id"];
+  createdAt: UserComments["created_at"];
   rootComment: CommentType;
   rootComments?: CommentType[];
-  updatedAt?: UserComments['updatedAt'];
-  author: definitions['users'];
+  updatedAt?: string;
+  author?: definitions["display_users"];
   repliesCount: number;
   replies?: CommentType[];
   comment: CommentType;

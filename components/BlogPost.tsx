@@ -7,7 +7,7 @@ import useSWR from "swr";
 import { Post } from "types";
 
 const BlogPost = ({ post }: { post: Post }) => {
-  const { data } = useSWR<Views>(`/api/page/${post.slug}`, fetcher);
+  const { data } = useSWR<Views>(`/api/views/${post.slug}`, fetcher);
   const views = data?.total;
   return (
     <Link href={`${BLOG.path}/${post.slug}`}>

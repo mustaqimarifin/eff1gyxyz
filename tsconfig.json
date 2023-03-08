@@ -19,8 +19,20 @@
     "paths": {
       "*": ["./*"]
     },
-    "incremental": true
+    "incremental": true,
+    "noUncheckedIndexedAccess": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

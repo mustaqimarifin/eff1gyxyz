@@ -1,4 +1,4 @@
-import { useEffect, useEffect } from "react";
+import { useEffect } from "react";
 
 export const timeout = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));

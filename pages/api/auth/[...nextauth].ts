@@ -27,19 +27,7 @@ export const authOptions = {
     strategy: 'jwt'
   }, */
   callbacks: {
-    /*     async signIn({ account, profile, user }) {
-      if (account.provider === 'twitter') {
-        profile.sub = user.id
-      }
-      return true // Do different verification for other providers that don't have `email_verified`
-    }, */
-    /*     async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id;
-      }
-
-      return token;
-    }, */
+    //@ts-ignore
     async session({ session, user }) {
       if (user) {
         session.user.id = user.id;

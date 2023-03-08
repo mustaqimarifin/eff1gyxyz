@@ -4,9 +4,11 @@ import ReactDOMServer from "react-dom/server";
 import { getPostBlocks } from "lib/notion";
 import { NotionRenderer } from "react-notion-x";
 import dynamic from "next/dynamic";
-import { textDecorationsToString } from "layouts/layout";
+import { textDecorationsToString } from "components/layouts/layout";
+import { Post } from "types";
 
-const mapPageUrl = (id) => "https://www.notion.so/" + id.replace(/-/g, "");
+const mapPageUrl = (id: string) =>
+  "https://www.notion.so/" + id.replace(/-/g, "");
 const CodeBlock = dynamic(() =>
   import("components/CodeBlock").then(async (m) => m.CodeBlock)
 );
@@ -15,7 +17,7 @@ const Collection = dynamic(() =>
     (m) => m.Collection
   )
 );
-const createFeedContent = async (post) => {
+const createFeedContent = async (post: { id: any }) => {
   const content = ReactDOMServer.renderToString(
     <NotionRenderer
       recordMap={await getPostBlocks(post.id)}
@@ -30,7 +32,7 @@ const createFeedContent = async (post) => {
   return content.replace(regexExp, "");
 };
 
-export async function generateRss(posts) {
+export async function generateRss(posts: Post[]) {
   const year = new Date().getFullYear();
   const feed = new Feed({
     title: BLOG.title,

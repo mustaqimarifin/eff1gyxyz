@@ -1,14 +1,12 @@
 generator client {
-  provider     = "prisma-client-js"
-  relationMode = "foreignKeys"
-  //precountFeatures = "(array)"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
-
-
 
 datasource db {
   provider = "postgresql"
-  url      = env("WSL_SQL")
+  url      = env("SQL")
+  //directURL = env("DIRECT_SQL")
 }
 
 model Account {
@@ -76,8 +74,8 @@ model Guestbook {
 }
 
 model Post {
-  // id       String    @id @default(dbgenerated("concat('posª', nanoid())")) @db.Char(16)
-  slug     String    @id @unique
+  id       String    @id @default(uuid())
+  slug     String?   @unique
   count    BigInt    @default(1)
   comments Comment[]
 }
@@ -87,7 +85,7 @@ model Comment {
   id        String    @id @default(uuid())
   text      String
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime? @updatedAt
   userId    String?
   parentId  String?
   slug      String?

@@ -2,7 +2,6 @@ import BLOG from "blog.config";
 import Vercel from "components/Vercel";
 import clsx from "clsx";
 import { Akhyla } from "./Icon";
-import { AUTHMF } from "./AuthMF";
 type Props = {
   fullWidth?: boolean;
 };
@@ -27,7 +26,7 @@ const Footer: React.FC<Props> = (fullWidth) => {
           <p>
             © {BLOG.author} {from === y || !from ? y : `${from} - ${y}`}
           </p>
-          <Vercel />
+          <Akhyla className="w-4 h-4" />
         </div>
       </div>
     </div>

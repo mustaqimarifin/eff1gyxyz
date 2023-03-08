@@ -3,9 +3,10 @@ import BlogPost from "components/BlogPost";
 import Container from "components/Container";
 import Pagination from "components/Pagination";
 import { getAllPosts } from "lib/notion";
+import { INDEX } from "pages/posts";
 import React from "react";
 
-const Page = ({ postsToShow, page, showNext }) => {
+const Page = ({ postsToShow, page, showNext }: INDEX) => {
   return (
     <Container>
       {postsToShow &&
@@ -15,7 +16,7 @@ const Page = ({ postsToShow, page, showNext }) => {
   );
 };
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: { params: { page: any } }) {
   const { page } = context.params; // Get Current Page No.
   const posts = await getAllPosts({ includedPages: false });
   const postsToShow = posts.slice(

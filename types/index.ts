@@ -24,6 +24,26 @@ export type Post = {
   //repo_url: string;
   //thumbnail_url: string;
 };
+
+export type Comment = {
+  id: string;
+  text: string;
+  slug: string;
+  createdAt: Date;
+  parentId: string | null;
+  user: {
+    id: string;
+    name: string;
+    image: string;
+  };
+  likeCount: number;
+  likedByMe: boolean;
+  commentId?: string;
+  highlight?: boolean;
+  isDeleted?: boolean;
+  replies?: Comment[];
+};
+
 export type Komment = {
   user: User;
   id: string;

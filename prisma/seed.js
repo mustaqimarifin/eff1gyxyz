@@ -2,38 +2,53 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function seed() {
-  await Promise.all([
-    await prisma.post.create({
-      data: {
-        slug: "what-make-vs-code",
-      },
-    }),
-    await prisma.post.create({
-      data: {
-        slug: "react-notion-is-better",
-      },
-    }),
-    await prisma.post.create({
-      data: {
-        slug: "adding-http-response-headers-to-a-netlify-static-website",
-      },
-    }),
-    await prisma.post.create({
-      data: {
-        slug: "applying-the-active-class-for-the-current-page-in-jekyll",
-      },
-    }),
-    await prisma.post.create({
-      data: {
-        slug: "creating-navigation-menu-in-jekyll",
-      },
-    }),
-    await prisma.post.create({
-      data: {
-        slug: "css-hacks-you-may-not-know",
-      },
-    }),
-  ]);
+  await prisma.post.deleteMany();
+  await prisma.user.deleteMany();
+  const kyle = await prisma.user.create({ data: { name: "Kyle" } });
+  const sally = await prisma.user.create({ data: { name: "Sally" } });
+
+  const post1 = await prisma.post.create({
+    data: {
+      slug: "what-make-vs-code",
+    },
+  });
+  const post2 = await prisma.post.create({
+    data: {
+      slug: "react-notion-is-better",
+    },
+  });
+
+  const comment1 = await prisma.comment.create({
+    data: {
+      text: "I am a root comment",
+      userId: kyle.id,
+      slug: post2.slug,
+    },
+  });
+
+  const comment2 = await prisma.comment.create({
+    data: {
+      parentId: comment1.id,
+      text: "I am a nested comment",
+      userId: sally.id,
+      slug: post1.slug,
+    },
+  });
+
+  const comment3 = await prisma.comment.create({
+    data: {
+      text: "I am another root comment",
+      userId: sally.id,
+      slug: post1.slug,
+    },
+  });
+
+  const like1 = await prisma.like.create({
+    data: {
+      commentId: comment1.id,
+      userId: sally.id,
+    },
+  });
 }
 
 seed();
@@ -62,7 +77,7 @@ seed();
 
 /*  const comment3 = await prisma.comment.create({
     data: {
-      message: 'I am another root comment in a vagina',
+      text: 'I am another root comment in a vagina',
       userslug: sally.slug,
       slug: post4.slug
     }

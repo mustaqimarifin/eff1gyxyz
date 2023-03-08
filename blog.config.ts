@@ -2,12 +2,12 @@ const BLOG = {
   title: "EFF1GY",
   author: "Mustaqim Arifin",
   email: "i@craigary.net",
-  link: "https://nobelium.vercel.app",
+  link: "https://eff1gy.xyz",
   description: "This gonna be an awesome website.",
   previewImagesEnabled: true,
   redisUrl: process.env.REDIS_URL,
   lang: "en-US", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
-  appearance: "auto", // ['light', 'dark', 'auto'],
+  appearance: "class", // ['light', 'dark', 'auto'],
   font: "sans-serif", // ['sans-serif', 'serif']
   lightBackground: "#ffffff", // use hex value, don't forget '#' e.g #fffefc
   darkBackground: "#18181B", // use hex value, don't forget '#'
@@ -15,7 +15,7 @@ const BLOG = {
   login: "/auth", // leave this empty unless you want to deploy Nobelium in a folder
   since: 2021, // If leave this empty, current year will be used.
   postsPerPage: 7,
-  sortByDate: false,
+  sortByDate: true,
   showAbout: true,
   showArchive: true,
   autoCollapsedNavBar: false, // The automatically collapsed navigation bar

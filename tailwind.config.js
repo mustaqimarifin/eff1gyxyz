@@ -58,7 +58,8 @@ module.exports = {
         10: 10,
       },
       fontFamily: {
-        sans: ['"IBM Plex Sans"', ...fontFamily.sans],
+        mono: ["JetBrains", ...fontFamily.mono],
+        sans: ["Franklin", ...fontFamily.sans],
         serif: ['"Source Serif"', ...fontFamily.serif],
         noEmoji: [
           '"IBM Plex Sans"',
@@ -135,9 +136,9 @@ module.exports = {
       }),
     },
   },
-  /*   variants: {
-    typography: ['dark']
-  }, */
+  variants: {
+    typography: ["dark"],
+  },
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/line-clamp"),
