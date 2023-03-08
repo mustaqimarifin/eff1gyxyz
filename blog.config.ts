@@ -1,8 +1,8 @@
 const BLOG = {
   title: "EFF1GY",
   author: "Mustaqim Arifin",
-  email: "i@craigary.net",
-  link: "https://eff1gy.xyz",
+  email: "mustaqim.arifin@gmail.com",
+  link: "https://eff1gy.vercel.app",
   description: "This gonna be an awesome website.",
   previewImagesEnabled: true,
   redisUrl: process.env.REDIS_URL,
