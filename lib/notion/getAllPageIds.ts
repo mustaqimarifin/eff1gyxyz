@@ -1,8 +1,8 @@
+import { ExtendedRecordMap } from "notion-types";
 import { idToUuid } from "notion-utils";
-import { GetAllPostsParams } from "./getAllPosts";
 
 export const getAllPageIds = (
-  collectionQuery: GetAllPostsParams["collectionQuery"],
+  collectionQuery: ExtendedRecordMap["collection_query"],
   viewId?: string
 ): string[] => {
   const views = Object.values(collectionQuery)?.[0];

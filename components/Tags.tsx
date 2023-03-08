@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { TagObj } from 'types';
+import Link from "next/link";
+import { TagObj } from "types";
 
 const Tags = ({ tags, currentTag }: { tags: TagObj; currentTag: any }) => {
   if (!tags) return null;
@@ -13,13 +13,15 @@ const Tags = ({ tags, currentTag }: { tags: TagObj; currentTag: any }) => {
               key={key}
               className={`mr-3 font-medium border whitespace-nowrap dark:text-gray-300 ${
                 selected
-                  ? 'text-white bg-black border-black dark:bg-gray-600 dark:border-gray-600'
-                  : 'bg-gray-100 border-gray-100 text-gray-400 dark:bg-night dark:border-gray-800'
-              }`}>
+                  ? "text-white bg-black border-black dark:bg-gray-600 dark:border-gray-600"
+                  : "bg-gray-100 border-gray-100 text-gray-400 dark:bg-night dark:border-gray-800"
+              }`}
+            >
               <Link
                 key={key}
                 className="px-4 py-2 block"
-                href={selected ? '/search' : `/tag/${encodeURIComponent(key)}`}>
+                href={selected ? "/search" : `/tag/${encodeURIComponent(key)}`}
+              >
                 {`${key} (${tags[key]})`}
               </Link>
             </li>

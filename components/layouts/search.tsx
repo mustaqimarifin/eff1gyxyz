@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import BlogPost from 'components/BlogPost';
-import Container from 'components/Container';
-import Tags from 'components/Tags';
-import { SearchTags } from 'pages/tag/[tag]';
-import { Post } from 'types';
+import { useState } from "react";
+import BlogPost from "components/BlogPost";
+import Container from "components/Container";
+import Tags from "components/Tags";
+import { SearchTags } from "pages/tag/[tag]";
+import { Post } from "types";
 
 const SearchLayout = ({ tags, posts, currentTag }: SearchTags) => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   let filteredBlogPosts: Post[] = [];
   if (posts) {
     filteredBlogPosts = posts.filter((post) => {
-      const tagContent = post.tags ? post.tags.join(' ') : '';
+      const tagContent = post.tags ? post.tags.join(" ") : "";
       const searchContent = post.title + post.summary + tagContent;
       return searchContent.toLowerCase().includes(searchValue.toLowerCase());
     });
@@ -22,7 +22,7 @@ const SearchLayout = ({ tags, posts, currentTag }: SearchTags) => {
         <input
           type="text"
           placeholder={
-            currentTag ? `Search in #${currentTag}` : 'Search Articles'
+            currentTag ? `Search in #${currentTag}` : "Search Articles"
           }
           className="block w-full border px-4 py-2 border-black bg-white text-black dark:bg-night dark:border-white dark:text-white"
           onChange={(e) => setSearchValue(e.target.value)}
@@ -32,15 +32,17 @@ const SearchLayout = ({ tags, posts, currentTag }: SearchTags) => {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke="currentColor">
+          stroke="currentColor"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
         </svg>
       </div>
-    
+
       <Tags tags={tags} currentTag={currentTag} />
       <div className="article-container my-8">
         {!filteredBlogPosts.length && (

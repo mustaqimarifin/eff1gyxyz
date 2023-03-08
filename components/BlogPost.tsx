@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import BLOG from 'blog.config';
-import formatDate from 'lib/formatDate';
-import { Views } from './ViewCounter';
-import { yespls } from 'lib/utils';
-import useSWR from 'swr';
-import { Post } from 'types';
+import Link from "next/link";
+import BLOG from "blog.config";
+import formatDate from "lib/formatDate";
+import { Views } from "./ViewCounter";
+import { yespls } from "lib/utils";
+import useSWR from "swr";
+import { Post } from "types";
 
 const BlogPost = ({ post }: { post: Post }) => {
   const { data } = useSWR<Views>(`/api/views/${post.slug}`, yespls);
@@ -20,7 +20,7 @@ const BlogPost = ({ post }: { post: Post }) => {
             {formatDate(post?.date?.start_date || post.createdTime, BLOG.lang)}
           </time>
           <p className="w-32 mb-4 text-left text-gray-500 md:text-right md:mb-0">
-            {`${views ? new Number(views).toLocaleString() : '–––'} views`}
+            {`${views ? new Number(views).toLocaleString() : "–––"} views`}
           </p>
         </header>
         <main>

@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 
 export const authOptions = {
-  debug: process.env.NEXTAUTH_DEBUG === "true",
+  //debug: process.env.NEXTAUTH_DEBUG === "true",
   adapter: PrismaAdapter(prisma),
   providers: [
     TwitterProvider({
