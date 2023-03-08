@@ -78,7 +78,7 @@ export async function getStaticProps(
     .digest('hex')
     .trim()
     .toLowerCase();
-    //@ts-ignore
+  //@ts-ignore
   const data = await ssg.fetchQuery('post.getBySlug', { slug });
 
   if (!data) {

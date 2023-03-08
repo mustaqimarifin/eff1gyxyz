@@ -2,7 +2,7 @@ import Link from "next/link";
 import BLOG from "blog.config";
 import formatDate from "lib/formatDate";
 import { Views } from "./ViewCounter";
-import { yespls } from "lib/utils";
+import { yespls } from "lib/yutils";
 import useSWR from "swr";
 import { Post } from "types";
 
