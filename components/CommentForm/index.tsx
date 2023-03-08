@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import type { Comment } from "@prisma/client";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import User from "lib/utils/icons/User";
-import cn from "clsx";
-import { autosize } from "lib/utils/index";
+import { useEffect, useRef, useState } from 'react';
+import type { Comment } from '@prisma/client';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import User from 'lib/utils/User';
+import cn from 'clsx';
+import { autosize } from 'lib/utils/index';
 interface CommentFormProps {
   autoFocus?: boolean;
   buttonText?: string;
@@ -21,11 +21,11 @@ interface CommentFormProps {
 
 export const CommentForm = ({
   autoFocus = false,
-  submitLabel = "Post",
+  submitLabel = 'Post',
   hideEarlyCallback,
   handleResetCallback,
   error,
-  initialValue = "",
+  initialValue = '',
 
   onSubmit,
 }: CommentFormProps) => {
@@ -51,16 +51,16 @@ export const CommentForm = ({
   }
 
   function handleReset(): void {
-    setText("");
+    setText('');
     if (textRef && textRef.current) {
-      textRef.current.style.height = "initial";
+      textRef.current.style.height = 'initial';
     }
     setIsLoading(false);
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     onSubmit(text).then(() => {
-      setText("");
+      setText('');
       setIsLoading(true);
       hideEarlyCallback?.();
       handleReset();
@@ -76,8 +76,7 @@ export const CommentForm = ({
             <button
               className="focus-ring"
               onClick={() => signIn()}
-              aria-label="Create new account"
-            >
+              aria-label="Create new account">
               <User className="text-gray-600 w-7 h-7" />
             </button>
           )}
@@ -86,37 +85,34 @@ export const CommentForm = ({
             <span className="sr-only">Enter a comment</span>
             <textarea
               className="form-text flex-1 block mt-1 bg-transparent flex-grow leading-loose min-h-5 max-h-36 resize-none m-1 px-0 text-gray-700 dark:text-gray-50 placeholder-red-600 dark:placeholder-pink-200 border-none overflow-auto text-sm rounded-lg transition-opacity disabled:opacity-50 focus:outline-none focus:shadow-none focus:ring-0"
-              placeholder={session ? `Add a comment...` : "Fast Social Login"}
+              placeholder={session ? `Add a comment...` : 'Fast Social Login'}
               rows={1}
               value={text}
               onChange={handleChange}
               ref={textRef}
-              disabled={!session}
-            ></textarea>
+              disabled={!session}></textarea>
           </label>
           {session && (
             <div className="h-full justify-between">
               <button
                 className={cn(
-                  "text-indigo-500 dark:text-indigo-400 hover:text-green-600 font-semibold px-2 text-xs h-full max-h-10 border border-transparent focus-ring",
+                  'text-indigo-500 dark:text-indigo-400 hover:text-green-600 font-semibold px-2 text-xs h-full max-h-10 border border-transparent focus-ring',
                   {
-                    "cursor-not-allowed opacity-30":
+                    'cursor-not-allowed opacity-30':
                       text.length < 1 || isLoading,
                   }
                 )}
                 disabled={text.length < 1}
                 onClick={handleSubmit}
-                aria-label="Submit new post"
-              >
+                aria-label="Submit new post">
                 {submitLabel}
               </button>
               <button
                 className={cn(
-                  "text-pink-400 dark:text-pink-200 hover:text-yellow-500 font-semibold text-xs h-full max-h-10 border border-transparent focus-ring"
+                  'text-pink-400 dark:text-pink-200 hover:text-yellow-500 font-semibold text-xs h-full max-h-10 border border-transparent focus-ring'
                 )}
                 aria-label="Sign Out"
-                onClick={() => signOut()}
-              >
+                onClick={() => signOut()}>
                 Sign Out
               </button>
             </div>
@@ -125,8 +121,7 @@ export const CommentForm = ({
             <button
               className="py-1 px-2 rounded bg-indigo-500 font-semibold text-sm text-white disabled:opacity-40 hover:bg-indigo-700"
               onClick={() => signIn()}
-              aria-label="log in!"
-            >
+              aria-label="log in!">
               Log In
             </button>
           )}
