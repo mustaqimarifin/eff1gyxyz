@@ -1,4 +1,4 @@
-export const getAllTags = (posts) => {
+export const getAllTags = (posts: any[]) => {
   const taggedPosts = posts.filter((post) => post?.tags);
   const tags = [...taggedPosts.map((p) => p.tags).flat()];
   const tagObj = {};

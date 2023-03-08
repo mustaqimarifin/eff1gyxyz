@@ -2,7 +2,7 @@ import BLOG from "blog.config";
 import { NotionAPI } from "notion-client";
 import { getPreviewImageMap } from "./previewImages";
 
-export const getPostBlocks = async (id) => {
+export const getPostBlocks = async (id: string) => {
   const authToken = BLOG.notionAccessToken;
   const api = new NotionAPI({ authToken });
   const recordMap = await api.getPage(id);

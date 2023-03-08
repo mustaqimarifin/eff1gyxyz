@@ -3,12 +3,13 @@ import { NotionAPI } from "notion-client";
 import { Post } from "types";
 
 import BLOG from "blog.config";
+import { BlockMap, CollectionPropertySchemaMap } from "notion-types";
 const excludeProperties = ["date", "select", "multi_select", "person"];
 
 export const getPageProperties = async (
   id: string,
-  block,
-  schema
+  block: BlockMap,
+  schema: CollectionPropertySchemaMap
 ): Promise<Post> => {
   const authToken = BLOG.notionAccessToken;
   const api = new NotionAPI({ authToken });
