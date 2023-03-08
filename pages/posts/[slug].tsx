@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
-import BLOG from "blog.config";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import superjson from "superjson";
+import BLOG from 'blog.config';
+import { createSSGHelpers } from '@trpc/react/ssg';
+import superjson from 'superjson';
 
-import Layout from "components/layouts/layout";
-import { getAllPosts, getPostBlocks } from "lib/notion";
-import { createHash } from "crypto";
+import Layout from 'layouts/layout';
+import { getAllPosts, getPostBlocks } from 'lib/notion';
+import { createHash } from 'crypto';
 
-import { GetStaticPropsContext } from "next";
-import { Post } from "types";
-import { ExtendedRecordMap } from "notion-types";
-import prisma from "lib/prisma";
-import { appRouter } from "server/router";
-import { useRouter } from "next/router";
+import { GetStaticPropsContext } from 'next';
+import { Post } from 'types';
+import { ExtendedRecordMap } from 'notion-types';
+import prisma from 'lib/prisma';
+import { appRouter } from 'server/router';
+import { useRouter } from 'next/router';
 
 type BlogPostProps = {
   previewImagesEnabled: boolean;
@@ -40,7 +40,7 @@ const BlogPost = ({
         post={post}
         emailHash={emailHash}
         fullWidth={post.fullWidth}
-        slug={typeof slug === "string" ? slug : null}
+        slug={slug}
         {...props}
       />
     </>
@@ -68,17 +68,18 @@ export async function getStaticProps(
     },
     transformer: superjson,
   });
-  const posts: Post[] = await getAllPosts({ includedPages: true });
-  const slug: string = context.params?.slug;
+  const posts = await getAllPosts({ includedPages: true });
+  const slug = context.params?.slug;
+
   const post = posts.find((t) => t.slug === slug);
-  const blockMap = await getPostBlocks(post?.id);
-  const emailHash = createHash("md5")
+  const blockMap: ExtendedRecordMap = await getPostBlocks(post?.id);
+  const emailHash = createHash('md5')
     .update(BLOG.email)
-    .digest("hex")
+    .digest('hex')
     .trim()
     .toLowerCase();
-  //@ts-ignore
-  const data = await ssg.fetchQuery("post.getBySlug", { slug });
+    //@ts-ignore
+  const data = await ssg.fetchQuery('post.getBySlug', { slug });
 
   if (!data) {
     return {
@@ -88,9 +89,11 @@ export async function getStaticProps(
 
   return {
     props: { post, blockMap, emailHash, trpcState: ssg.dehydrate(), slug },
-    revalidate: 60,
+    revalidate: 1,
   };
 }
+
+export default BlogPost;
 
 /* export async function getServerSideProps(
   context: GetServerSidePropsContext<{ slug: string }>
@@ -135,5 +138,3 @@ export async function getStaticProps(
     revalidate: 60,
   };
 } */
-
-export default BlogPost;

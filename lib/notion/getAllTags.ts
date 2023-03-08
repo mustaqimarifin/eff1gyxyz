@@ -1,3 +1,4 @@
+//@ts-nocheck
 export const getAllTags = (posts: any[]) => {
   const taggedPosts = posts.filter((post) => post?.tags);
   const tags = [...taggedPosts.map((p) => p.tags).flat()];

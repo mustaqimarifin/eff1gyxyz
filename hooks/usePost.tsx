@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import type { Comment as Komment } from "types/index";
-import { trpc } from "utils/trpc";
-import { useMemo } from "react";
+import type { Comment as Komment } from 'types/index';
+import { trpc } from 'utils/trpc';
+import { useMemo } from 'react';
 
 export const usePost = (slug: string) => {
   //@ts-ignore
-  const post = trpc.useQuery(["post.getBySlug", { slug }]);
+  const post = trpc.useQuery(['post.getBySlug', { slug }]);
 
   const commentsByParentId = useMemo(() => {
     if (post?.data?.comments === null) return null;
@@ -26,7 +26,7 @@ export const usePost = (slug: string) => {
 
   return {
     post,
-    rootComments: commentsByParentId?.["null"] || [],
+    rootComments: commentsByParentId?.['null'] || [],
     getReplies,
   };
 };

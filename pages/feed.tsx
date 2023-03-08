@@ -1,6 +1,8 @@
 import { getAllPosts } from "lib/notion";
 import { generateRss } from "lib/rss";
-export async function getServerSideProps({ res }) {
+import { NextApiResponse } from "next";
+import { NextResponse } from "next/server";
+export async function getServerSideProps({ res }: { res: NextApiResponse }) {
   res.setHeader("Content-Type", "text/xml");
   const posts = await getAllPosts({ includedPages: false });
   const latestPosts = posts.slice(0, 10);
@@ -11,5 +13,5 @@ export async function getServerSideProps({ res }) {
     props: {},
   };
 }
-const feed = () => null;
+const feed = (): any => null;
 export default feed;
