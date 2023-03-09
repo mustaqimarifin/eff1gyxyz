@@ -1,4 +1,4 @@
-import BLOG from "blog.config";
+import { BLOG } from "blog.config";
 import Vercel from "components/Vercel";
 import clsx from "clsx";
 import { Akhyla } from "./Icon";

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
-import BLOG from "blog.config";
+import { BLOG } from "blog.config";
 import clsx from "clsx";
 const NavBar = () => {
   const links = [

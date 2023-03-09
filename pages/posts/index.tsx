@@ -3,10 +3,9 @@ import BlogPost from "components/BlogPost";
 import Pagination from "components/Pagination";
 import { getAllPosts } from "lib/notion";
 import BLOG from "blog.config";
-import { Post } from "types";
 
 export async function getStaticProps() {
-  const posts: Post[] = await getAllPosts({ includedPages: false });
+  const posts = await getAllPosts({ includedPages: false });
   const postsToShow = posts.slice(0, BLOG.postsPerPage);
   const totalPosts = posts.length;
   const showNext = totalPosts > BLOG.postsPerPage;
@@ -16,20 +15,14 @@ export async function getStaticProps() {
       postsToShow,
       showNext,
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }
 
-export type INDEX = {
-  postsToShow: Post[];
-  page: number;
-  showNext: boolean;
-};
-
-const blog = ({ postsToShow, page, showNext }: INDEX) => {
+const blog = ({ postsToShow, page, showNext }) => {
   return (
     <Container title={BLOG.title} description={BLOG.description}>
-      {postsToShow?.map((post: Post) => (
+      {postsToShow.map((post) => (
         <BlogPost key={post.id} post={post} />
       ))}
       {showNext && <Pagination page={page} showNext={showNext} />}

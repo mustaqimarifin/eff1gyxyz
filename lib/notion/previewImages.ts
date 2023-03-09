@@ -46,7 +46,7 @@ async function createPreviewImage(
       }
     } catch (err) {
       // ignore redis errors
-      console.warn(`redis error get "${cacheKey}"`);
+      console.warn(`redis error get "${cacheKey}"`, err.message);
     }
 
     const { body } = await got(url, { responseType: "buffer" });
@@ -63,12 +63,12 @@ async function createPreviewImage(
       await db.set(cacheKey, previewImage);
     } catch (err) {
       // ignore redis errors
-      console.warn(`redis error set "${cacheKey}"`);
+      console.warn(`redis error set "${cacheKey}"`, err.message);
     }
 
     return previewImage;
   } catch (err) {
-    console.warn("failed to create preview image", url);
+    console.warn("failed to create preview image", url, err.message);
     return null;
   }
 }

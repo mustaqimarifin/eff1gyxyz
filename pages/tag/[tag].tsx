@@ -1,7 +1,7 @@
-import SearchLayout from 'layouts/search';
-import { getAllPosts, getAllTags } from 'lib/notion';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-import { Post, TagObj } from 'types';
+import SearchLayout from "layouts/search";
+import { getAllPosts, getAllTags } from "lib/notion";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { Post, TagObj } from "types";
 
 export type SearchTags = {
   tags: TagObj;

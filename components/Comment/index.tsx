@@ -42,7 +42,7 @@ export const Comment = ({ comment }: CommentProps) => {
   const slug = router.query.slug as string;
   const { data: session } = useSession();
 
-  const { getReplies } = usePost(slug);
+  const { getReplies } = usePost({ slug });
 
   const { invalidateQueries } = trpc.useContext();
   const createComment = trpc.useMutation(["protectedPost.addComment"], {

@@ -5,7 +5,7 @@ import { CommentList } from "components/CommentList";
 import { trpc } from "utils/trpc";
 import { usePost } from "hooks/usePost";
 
-const CommentComponent = ({ slug }: { slug: string }) => {
+const CommentComponent = (slug: { slug: string }) => {
   const [error, setError] = useState("");
   //@ts-ignore
   const { rootComments } = usePost(slug);

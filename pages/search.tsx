@@ -1,17 +1,8 @@
-import { getAllPosts, getAllTags } from 'lib/notion';
-import SearchLayout from 'layouts/search';
-import { Post, TagObj } from 'types';
+import { getAllPosts, getAllTags } from "lib/notion";
+import SearchLayout from "layouts/search";
 
-export default function search({
-  tags,
-  posts,
-  currentTag,
-}: {
-  tags: TagObj;
-  posts: Post[];
-  currentTag: number;
-}) {
-  return <SearchLayout tags={tags} posts={posts} currentTag={currentTag} />;
+export default function search({ tags, posts }) {
+  return <SearchLayout tags={tags} posts={posts} currentTag={undefined} />;
 }
 export async function getStaticProps() {
   const posts = await getAllPosts({ includedPages: false });

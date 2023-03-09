@@ -1,8 +1,8 @@
-import BLOG from 'blog.config';
-import { NotionAPI } from 'notion-client';
-import { getPreviewImageMap } from './previewImages';
+import BLOG from "blog.config";
+import { NotionAPI } from "notion-client";
+import { getPreviewImageMap } from "./previewImages";
 
-export const getPostBlocks = async (id: any) => {
+export const getPostBlocks = async (id) => {
   const authToken = BLOG.notionAccessToken;
   const api = new NotionAPI({ authToken });
   const recordMap = await api.getPage(id);

@@ -1,4 +1,4 @@
-export default function formatDate(date: string, local: string) {
+export default function formatDate(date: string, local?: string) {
   const d = new Date(date);
   const res = d.toLocaleDateString(local, {
     year: "numeric",

@@ -7,7 +7,7 @@ import { Post } from "types";
 
 const SearchLayout = ({ tags, posts, currentTag }: SearchTags) => {
   const [searchValue, setSearchValue] = useState("");
-  let filteredBlogPosts: Post[] = [];
+  let filteredBlogPosts: any[] = [];
   if (posts) {
     filteredBlogPosts = posts.filter((post) => {
       const tagContent = post.tags ? post.tags.join(" ") : "";

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useSWR from "swr";
 
-import { yespls } from "lib/yutils";
+import { yespls } from "lib/utils";
 export type Views = {
   total: number;
 };

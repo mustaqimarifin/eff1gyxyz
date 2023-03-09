@@ -3,16 +3,8 @@ import { Post } from "types";
 import { NotionAPI } from "notion-client";
 import { idToUuid } from "notion-utils";
 import { filterPublishedPosts, getAllPageIds, getPageProperties } from ".";
-import { BasePageBlock, Collection, ExtendedRecordMap } from "notion-types";
+//import { BasePageBlock, Collection, ExtendedRecordMap } from 'notion-types';
 
-export type GetAllPostsParams = {
-  id: string;
-  includedPages: boolean;
-  rawMetadata: BasePageBlock;
-  collectionQuery: ExtendedRecordMap["collection_query"];
-  block: ExtendedRecordMap["block"];
-  schema: Collection["schema"];
-};
 export const getAllPosts = async ({
   includedPages = false,
 }: {
@@ -21,7 +13,7 @@ export const getAllPosts = async ({
   let id = BLOG.notionPageId;
   const authToken = BLOG.notionAccessToken || null;
   const api = new NotionAPI({ authToken });
-  const response: ExtendedRecordMap = await api.getPage(id);
+  const response = await api.getPage(id);
 
   id = idToUuid(id);
   const collection = Object.values(response.collection)[0]?.value;
