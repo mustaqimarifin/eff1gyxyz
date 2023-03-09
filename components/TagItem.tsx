@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { TagObj } from "types";
 
 const TagItem = (tag: any) => (
   <Link
