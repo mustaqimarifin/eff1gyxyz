@@ -1,38 +1,38 @@
-import { useState } from "react";
-import { CommentForm } from "components/CommentForm";
-import { CommentList } from "components/CommentList";
-import { Comment as IComment } from "types";
-import { trpc } from "utils/trpc";
+import { useState } from 'react';
+import { CommentForm } from 'components/CommentForm';
+import { CommentList } from 'components/CommentList';
+import type { Komment } from 'types';
+import { trpc } from 'utils/trpc';
 import {
   HeartIcon,
   PencilAltIcon,
   ReplyIcon,
   TrashIcon,
-} from "@heroicons/react/outline";
-import { HeartIcon as HeartSolidIcon } from "@heroicons/react/solid";
-import clsx from "clsx";
-import { usePost } from "hooks/usePost";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { IconButton } from "../IconButton";
-import Avatar from "./Avatar";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
+} from '@heroicons/react/outline';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/solid';
+import clsx from 'clsx';
+import { usePost } from 'hooks/usePost';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { IconButton } from '../IconButton';
+import Avatar from './Avatar';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 dayjs.extend(relativeTime, {
   rounding: Math.floor,
 });
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault(dayjs.tz.guess());
-const dateFormatter = new Intl.DateTimeFormat("en", {
-  dateStyle: "medium",
-  timeStyle: "short",
+const dateFormatter = new Intl.DateTimeFormat('en', {
+  dateStyle: 'medium',
+  timeStyle: 'short',
 });
 
 interface CommentProps {
-  comment: IComment;
+  comment: Komment;
 }
 
 export const Comment = ({ comment }: CommentProps) => {
@@ -45,11 +45,11 @@ export const Comment = ({ comment }: CommentProps) => {
   const { getReplies } = usePost({ slug });
 
   const { invalidateQueries } = trpc.useContext();
-  const createComment = trpc.useMutation(["protectedPost.addComment"], {
+  const createComment = trpc.useMutation(['protectedPost.addComment'], {
     async onSuccess() {
       //@ts-ignore
       await invalidateQueries([
-        "post.getBySlug",
+        'post.getBySlug',
         {
           slug: slug,
         },
@@ -57,11 +57,11 @@ export const Comment = ({ comment }: CommentProps) => {
     },
   });
 
-  const updateComment = trpc.useMutation(["protectedPost.updateComment"], {
+  const updateComment = trpc.useMutation(['protectedPost.updateComment'], {
     async onSuccess() {
       //@ts-ignore
       await invalidateQueries([
-        "post.getBySlug",
+        'post.getBySlug',
         {
           slug: slug,
         },
@@ -69,12 +69,12 @@ export const Comment = ({ comment }: CommentProps) => {
     },
   });
 
-  const deleteComment = trpc.useMutation(["protectedPost.deleteComment"], {
+  const deleteComment = trpc.useMutation(['protectedPost.deleteComment'], {
     async onSuccess() {
       // Refetches posts after a comment is added
       //@ts-ignore
       await invalidateQueries([
-        "post.getBySlug",
+        'post.getBySlug',
         {
           slug: slug,
         },
@@ -82,12 +82,12 @@ export const Comment = ({ comment }: CommentProps) => {
     },
   });
 
-  const toggleCommentLike = trpc.useMutation(["protectedPost.toggleLike"], {
+  const toggleCommentLike = trpc.useMutation(['protectedPost.toggleLike'], {
     async onSuccess() {
       // Refetches posts after a comment is added
       //@ts-ignore
       await invalidateQueries([
-        "post.getBySlug",
+        'post.getBySlug',
         {
           slug: slug,
         },
@@ -99,7 +99,7 @@ export const Comment = ({ comment }: CommentProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [areChildrenHidden, setAreChildrenHidden] = useState(false);
 
-  const replies: IComment[] = getReplies(id);
+  const replies: Komment[] = getReplies(id);
 
   const handleReply = async (text: string) => {
     return await createComment
@@ -148,8 +148,7 @@ export const Comment = ({ comment }: CommentProps) => {
     <>
       <div
         key={id}
-        className=" tweet my-4 flex w-full transform flex-col rounded-lg border border-gray-200 bg-white px-6 py-4 transition duration-500 ease-in-out dark:border-gray-800 dark:bg-gray-900 "
-      >
+        className=" tweet my-4 flex w-full transform flex-col rounded-lg border border-gray-200 bg-white px-6 py-4 transition duration-500 ease-in-out dark:border-gray-800 dark:bg-gray-900 ">
         <div className="mb-1 flex text-xs justify-between items-center px-2">
           <div className="inline-flex items-center mr-3 pr-4 text-gray-900 dark:text-white">
             <Avatar src={user.image} isLoading={false} className="mr-3" />
@@ -171,9 +170,8 @@ export const Comment = ({ comment }: CommentProps) => {
           <IconButton
             onClick={handleToggleCommentLike}
             Icon={likedByMe ? HeartSolidIcon : HeartIcon}
-            aria-label={likedByMe ? "Unlike" : "Like"}
-            color="text-purple-700"
-          >
+            aria-label={likedByMe ? 'Unlike' : 'Like'}
+            color="text-purple-700">
             {likeCount}
           </IconButton>
           {session && (
@@ -212,7 +210,7 @@ export const Comment = ({ comment }: CommentProps) => {
       )}
       {replies?.length > 0 && (
         <>
-          <div className={clsx("flex", areChildrenHidden && "hidden")}>
+          <div className={clsx('flex', areChildrenHidden && 'hidden')}>
             <button
               className="relative mt-2 w-[15px] -translate-x-1/2 cursor-pointer border-none bg-none p-0 outline-none before:absolute before:top-0 before:bottom-0 before:left-1/2 before:w-px before:bg-purple-200 before:transition-all before:duration-200 before:ease-in-out before:content-[''] hover:before:bg-purple-400 focus-visible:before:bg-purple-400"
               aria-label="Hide Replies"
@@ -226,11 +224,10 @@ export const Comment = ({ comment }: CommentProps) => {
           </div>
           <button
             className={clsx(
-              "relative mt-2 rounded bg-purple-600 py-2 px-4 text-sm text-white ease-in-out hover:bg-purple-400 hover:transition-colors hover:duration-100",
-              !areChildrenHidden && "hidden"
+              'relative mt-2 rounded bg-purple-600 py-2 px-4 text-sm text-white ease-in-out hover:bg-purple-400 hover:transition-colors hover:duration-100',
+              !areChildrenHidden && 'hidden'
             )}
-            onClick={() => setAreChildrenHidden(false)}
-          >
+            onClick={() => setAreChildrenHidden(false)}>
             Show Replies
           </button>
         </>

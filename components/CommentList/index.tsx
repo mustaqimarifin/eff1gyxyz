@@ -1,8 +1,8 @@
-import type { Comment as IComment } from "types";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { Comment } from "../Comment";
+import type { Komment } from 'types';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Comment } from '../Comment';
 interface CommentListProps {
-  comments: IComment[];
+  comments: Komment[];
 }
 
 export const CommentList = ({ comments }: CommentListProps) => {
@@ -10,7 +10,7 @@ export const CommentList = ({ comments }: CommentListProps) => {
 
   return (
     <div ref={parent}>
-      {comments?.map((comment: IComment) => (
+      {comments?.map((comment: Komment) => (
         <div key={comment.id} className="my-2 last:mb-0">
           <Comment comment={comment} />
         </div>
