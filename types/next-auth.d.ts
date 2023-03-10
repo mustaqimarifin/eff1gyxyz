@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import type { User as PrismaUser, UserRole } from "@prisma/client";
 import type { DefaultSession } from "next-auth";
 

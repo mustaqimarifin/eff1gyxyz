@@ -1,6 +1,6 @@
 const defineNextConfig = {
   swcMinify: true,
-  reactStrictMode: false,
+  reactStrictMode: true,
   images: {
     domains: [
       "i.scdn.co", // Spotify Album Art

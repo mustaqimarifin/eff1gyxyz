@@ -1,6 +1,6 @@
-import type { Komment } from 'types';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { Comment } from '../Comment';
+import type { Komment } from "types";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Comment } from "../Comment";
 interface CommentListProps {
   comments: Komment[];
 }

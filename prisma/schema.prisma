@@ -29,7 +29,6 @@ model Account {
 
 model Session {
   id           String   @id @default(dbgenerated("concat('sss', xid())")) @db.Char(23)
-  //id           String   @id @default(dbgenerated("concat('ssnª', nanoid())")) @db.Char(16)
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -63,7 +62,6 @@ model VerificationToken {
 
 model Guestbook {
   id        BigInt   @id @default(autoincrement())
-  //id        String   @id @default(dbgenerated("concat('gstª', nanoid())")) @db.Char(16)
   user      User?    @relation(fields: [userId], references: [id])
   userId    String?
   body      String
@@ -79,8 +77,7 @@ model Post {
 }
 
 model Comment {
-  id String @id @default(dbgenerated("concat('com', xid())")) @db.Char(23)
-
+  id        String    @id @default(dbgenerated("concat('com', xid())")) @db.Char(23)
   text      String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt

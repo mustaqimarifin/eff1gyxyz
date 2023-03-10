@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
-import BLOG from "blog.config";
+import BLOG from 'blog.config';
 
-import Layout from "layouts/layout";
-import { getAllPosts, getPostBlocks } from "lib/notion";
-import { createHash } from "crypto";
+import Layout from 'layouts/layout';
+import { getAllPosts, getPostBlocks } from 'lib/notion';
+import { createHash } from 'crypto';
 
-import { GetStaticPropsContext } from "next";
-import { Post } from "types";
-import { ExtendedRecordMap } from "notion-types";
+import { GetStaticPropsContext } from 'next';
+import { Post } from 'types';
+import { ExtendedRecordMap } from 'notion-types';
+import { useRouter } from 'next/router'
 
 type BlogPostProps = {
   previewImagesEnabled: boolean;
@@ -23,6 +24,7 @@ const BlogPost = ({
   emailHash,
   ...props
 }: BlogPostProps) => {
+  const slug = useRouter().query.slug as string;
   if (!post) return null;
 
   return (
@@ -34,7 +36,7 @@ const BlogPost = ({
         post={post}
         emailHash={emailHash}
         fullWidth={post.fullWidth}
-        //slug={typeof slug === 'string' ? slug : null}
+        slug={typeof slug === 'string' ? slug : null}
         {...props}
       />
     </>
@@ -56,9 +58,9 @@ export async function getStaticProps(
   const slug = context.params?.slug;
   const post = posts.find((t) => t.slug === slug);
   const blockMap = await getPostBlocks(post?.id);
-  const emailHash = createHash("md5")
+  const emailHash = createHash('md5')
     .update(BLOG.email)
-    .digest("hex")
+    .digest('hex')
     .trim()
     .toLowerCase();
 

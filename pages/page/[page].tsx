@@ -1,9 +1,9 @@
-import { BLOG } from 'blog.config';
-import BlogPost from 'components/BlogPost';
-import Container from 'components/Container';
-import Pagination from 'components/Pagination';
-import { getAllPosts } from 'lib/notion';
-import React from 'react';
+import { BLOG } from "blog.config";
+import BlogPost from "components/BlogPost";
+import Container from "components/Container";
+import Pagination from "components/Pagination";
+import { getAllPosts } from "lib/notion";
+import React from "react";
 
 const Page = ({ postsToShow, page, showNext }) => {
   return (
@@ -41,7 +41,7 @@ export async function getStaticPaths() {
   return {
     // remove first page, we 're not gonna handle that.
     paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
-      params: { page: '' + (i + 2) },
+      params: { page: "" + (i + 2) },
     })),
     fallback: true,
   };

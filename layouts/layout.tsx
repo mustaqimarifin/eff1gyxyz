@@ -74,10 +74,11 @@ type Props = {
   mapImageUrl?: MapImageUrlFn | null;
   //onlyContents?: boolean,
   //tweet?: typeof Tweet,
-  //slug: string;
+  slug: string;
 };
 
 const Layout: React.FC<Props> = ({
+  slug,
   blockMap,
   rootPageId,
   rootDomain,
@@ -85,9 +86,9 @@ const Layout: React.FC<Props> = ({
   emailHash,
   fullWidth = false,
   previewImagesEnabled,
-}) => {
+}: Props) => {
   const router = useRouter();
-  const slug = useRouter().query.slug as string;
+
   const components = React.useMemo(
     () => ({
       nextImage: Image,
