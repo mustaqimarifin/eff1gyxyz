@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
 import BLOG from 'blog.config';
-
+import { createSSGHelpers } from '@trpc/react/ssg';
+import prisma from 'lib/prisma';
 import Layout from 'layouts/layout';
 import { getAllPosts, getPostBlocks } from 'lib/notion';
 import { createHash } from 'crypto';
-
+import superjson from 'superjson';
 import { GetStaticPropsContext } from 'next';
 import { Post } from 'types';
 import { ExtendedRecordMap } from 'notion-types';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import { appRouter } from 'server/router';
 
 type BlogPostProps = {
   previewImagesEnabled: boolean;
@@ -64,8 +66,28 @@ export async function getStaticProps(
     .trim()
     .toLowerCase();
 
+  const ssg = createSSGHelpers({
+    router: appRouter,
+    ctx: {
+      req: undefined,
+      res: undefined,
+      prisma,
+      session: undefined,
+    },
+    transformer: superjson,
+  });
+
+  //@ts-ignore
+  const data = await ssg.fetchQuery('post.getBySlug', { slug });
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
-    props: { post, blockMap, emailHash },
+    props: { post, blockMap, emailHash, trpcState: ssg.dehydrate(), slug },
     revalidate: 60,
   };
 }
