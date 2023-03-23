@@ -11,8 +11,9 @@ import pMap from "p-map";
 import pMemoize from "p-memoize";
 
 //import { defaultPageCover, defaultPageIcon } from './config'
-import { db } from "./db";
+//import { db } from "./db";
 import { mapImageUrl } from "./mapImageUrl";
+import { redis } from "./redis";
 
 export async function getPreviewImageMap(
   recordMap: ExtendedRecordMap
@@ -45,7 +46,7 @@ async function createPreviewImage(
 ): Promise<PreviewImage | null> {
   try {
     try {
-      const cachedPreviewImage = await db.get(cacheKey);
+      const cachedPreviewImage: any = await redis.get(cacheKey);
       if (cachedPreviewImage) {
         return cachedPreviewImage;
       }
@@ -58,14 +59,14 @@ async function createPreviewImage(
     const result = await lqip(body);
     console.log("lqip", { ...result.metadata, url, cacheKey });
 
-    const previewImage = {
+    const previewImage: PreviewImage = {
       originalWidth: result.metadata.originalWidth,
       originalHeight: result.metadata.originalHeight,
       dataURIBase64: result.metadata.dataURIBase64,
     };
 
     try {
-      await db.set(cacheKey, previewImage);
+      await redis.set(cacheKey, previewImage);
     } catch (err) {
       // ignore redis errors
       console.warn(`redis error set "${cacheKey}"`, err.message);
