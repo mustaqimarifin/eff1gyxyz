@@ -1,4 +1,4 @@
-import BLOG from "blog.config.js";
+import BLOG from "blog.config.mjs";
 import BlogPost from "components/BlogPost";
 import Container from "components/Container";
 import Pagination from "components/Pagination";

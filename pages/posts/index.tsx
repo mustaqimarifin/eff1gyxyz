@@ -2,7 +2,7 @@ import Container from "components/Container";
 import BlogPost from "components/BlogPost";
 import Pagination from "components/Pagination";
 import { getAllPosts } from "lib/notion";
-import BLOG from "blog.config.js";
+import BLOG from "blog.config.mjs";
 import { type Post } from "types";
 
 export async function getStaticProps() {

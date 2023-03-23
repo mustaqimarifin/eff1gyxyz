@@ -1,4 +1,3 @@
-
 const BLOG = {
   title: "EFF1GY",
   author: "Mustaqim Arifin",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BLOG from "blog.config.js";
+import BLOG from "blog.config.mjs";
 import formatDate from "lib/formatDate";
 import { type Views } from "./ViewCounter";
 import { yespls } from "lib/utils";

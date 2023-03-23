@@ -1,4 +1,4 @@
-import BLOG from "blog.config.js";
+import BLOG from "blog.config.mjs";
 import clsx from "clsx";
 import { Akhyla } from "./Icon";
 type Props = {

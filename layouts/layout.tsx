@@ -3,7 +3,7 @@ import Image from "next/image";
 import Container from "components/Container";
 //import TagItem from "components/TagItem";
 import { type MapImageUrlFn, NotionRenderer } from "react-notion-x";
-import BLOG from "blog.config.js";
+import BLOG from "blog.config.mjs";
 import formatDate from "lib/formatDate";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";

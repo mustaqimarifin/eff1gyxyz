@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BLOG from "blog.config.js";
+import BLOG from "blog.config.mjs";
 type Props = {
   page: number;
   showNext: boolean;
