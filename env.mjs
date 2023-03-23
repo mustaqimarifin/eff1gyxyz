@@ -25,6 +25,7 @@ const server = z.object({
   TWITTER_SECRET: z.string(),
   GITHUB_ID: z.string(),
   GITHUB_SECRET: z.string(),
+  REDIS_URL: z.string(),
 });
 
 /**
@@ -43,6 +44,7 @@ const client = z.object({
  */
 const processEnv = {
   SQL: process.env.SQL,
+  REDIS_URL: process.env.REDIS_URL,
   NODE_ENV: process.env.NODE_ENV,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,

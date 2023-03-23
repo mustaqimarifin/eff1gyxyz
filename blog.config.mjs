@@ -1,11 +1,13 @@
-export const BLOG = {
+import { env } from "env.mjs";
+
+const BLOG = {
   title: "EFF1GY",
   author: "Mustaqim Arifin",
   email: "mustaqim.arifin@gmail.com",
   link: "https://eff1gy.vercel.app",
   description: "This gonna be an awesome website.",
   previewImagesEnabled: true,
-  redisUrl: process.env.REDIS_URL,
+  redisUrl: env.REDIS_URL,
   lang: "en-US", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   appearance: "class", // ['light', 'dark', 'auto'],
   font: "sans-serif", // ['sans-serif', 'serif']
@@ -24,8 +26,8 @@ export const BLOG = {
     keywords: ["Blog", "Website", "Notion"],
     googleSiteVerification: "", // Remove the value or replace it with your own google site verification code
   },
-  notionPageId: process.env.NOTION_PAGE_ID as string,
-  notionAccessToken: process.env.NOTION_ACCESS_TOKEN as string,
+  notionPageId: process.env.NOTION_PAGE_ID,
+  notionAccessToken: process.env.NOTION_ACCESS_TOKEN,
   analytics: {
     provider: "", // Currently we support Google Analytics and Ackee, please fill with 'ga' or 'ackee', leave it empty to disable it.
     ackeeConfig: {
