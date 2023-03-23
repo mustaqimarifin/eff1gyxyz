@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "lib/prisma";
+import { prisma } from "server10/db";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const slug = req.query.slug.toString();
+    const slug = req?.query?.slug?.toString();
 
     if (req.method === "POST") {
       const newOrUpdatedViews = await prisma.post.upsert({
@@ -33,7 +33,7 @@ export default async function handler(
         },
       });
 
-      return res.status(200).json({ total: views.count.toString() });
+      return res.status(200).json({ total: views?.count.toString() || null });
     }
   } catch (e) {
     return res.status(500).json({ message: e });

@@ -1,5 +1,5 @@
 import BLOG from "blog.config";
-import { Post } from "types";
+import { type Post } from "types";
 import { NotionAPI } from "notion-client";
 import { idToUuid } from "notion-utils";
 import { filterPublishedPosts, getAllPageIds, getPageProperties } from ".";
@@ -12,7 +12,7 @@ export const getAllPosts = async ({
 }): Promise<Post[]> => {
   let id = BLOG.notionPageId;
   const authToken = BLOG.notionAccessToken || null;
-  const api = new NotionAPI({ authToken });
+  const api = new NotionAPI({ authToken } || null);
   const response = await api.getPage(id);
 
   id = idToUuid(id);
@@ -21,7 +21,7 @@ export const getAllPosts = async ({
   const block = response.block;
   const schema = collection?.schema;
 
-  const rawMetadata = block[id].value;
+  const rawMetadata = block[id]?.value;
 
   // Check Type
   if (

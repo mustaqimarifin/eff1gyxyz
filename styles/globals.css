@@ -116,7 +116,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .sticky-nav-full {
-  @apply border-b border-opacity-50 border-gray-200 dark:border-gray-600 dark:border-opacity-50;
+  @apply border-b border-gray-200 border-opacity-50 dark:border-gray-600 dark:border-opacity-50;
 }
 
 .header-name {
@@ -154,7 +154,7 @@ nav {
 
 @media (min-width: 768px) {
   .sticky-nav-full {
-    @apply max-w-full border-b border-opacity-50 border-gray-200 dark:border-gray-600 dark:border-opacity-50;
+    @apply max-w-full border-b border-gray-200 border-opacity-50 dark:border-gray-600 dark:border-opacity-50;
   }
   .header-name {
     display: block;
@@ -163,7 +163,7 @@ nav {
   }
   .sticky-nav-full .header-name {
     opacity: 1;
-    @apply dark:text-gray-300 text-gray-600;
+    @apply text-gray-600 dark:text-gray-300;
   }
 }
 
@@ -214,19 +214,19 @@ min-height helps mitigate that layout shift */
   }
 
   .focus-ring-input {
-    @apply focus:outline-none focus:ring-indigo-500 focus:border-indigo-500;
+    @apply focus:border-indigo-500 focus:outline-none focus:ring-indigo-500;
   }
 
   .btn {
-    @apply focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-green-200;
+    @apply focus:outline-none focus:ring-1 focus:ring-green-200 focus:ring-offset-2;
   }
 
   .focus-ring {
-    @apply focus:border-transparent focus:outline-none focus:ring-red-400 focus:ring-1 focus:ring-opacity-75 focus:ring-offset-1 transition duration-300 ease-in-out rounded-sm;
+    @apply rounded-sm transition duration-300 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-red-400 focus:ring-opacity-75 focus:ring-offset-1;
   }
 
   .focus-within-ring {
-    @apply focus-within:outline-none focus-within:ring-red-200 focus-within:ring-1 focus-within:ring-opacity-75 focus-within:ring-offset-2 transition duration-300 ease-in-out rounded-sm;
+    @apply rounded-sm transition duration-300 ease-in-out focus-within:outline-none focus-within:ring-1 focus-within:ring-red-200 focus-within:ring-opacity-75 focus-within:ring-offset-2;
   }
 }
 

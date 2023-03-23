@@ -1,6 +1,7 @@
 const colors = require("tailwindcss/colors");
 const { spacing, fontFamily } = require("tailwindcss/defaultTheme");
-module.exports = {
+
+const config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -52,7 +53,7 @@ module.exports = {
         2.5: "2.5",
       },
       zIndex: {
-        "-1": -1,
+        "-1": "-1",
       },
       lineClamp: {
         10: 10,
@@ -70,7 +71,7 @@ module.exports = {
           "sans-serif",
         ],
       },
-      typography: (theme) => ({
+      typography: (/** @type {(arg0: string) => any} */ theme) => ({
         DEFAULT: {
           css: {
             color: theme("colors.gray.700"),
@@ -145,3 +146,5 @@ module.exports = {
     require("@tailwindcss/typography"),
   ],
 };
+
+module.exports = config;

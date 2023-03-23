@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import type { Komment, Post } from 'types/index';
-import { trpc } from 'utils/trpc';
-import { useMemo } from 'react';
+import type { Komment, Post } from "types/index";
+import { useMemo } from "react";
+import { api } from "utils/api";
 export interface PostProps {
-  slug: Post['slug'];
+  slug: Post["slug"];
 }
 
 export const usePost = (slug: PostProps) => {
   //@ts-ignore
-  const post = trpc.useQuery(['post.getBySlug', { slug }]);
+  const post = api.post.getBySlug.useQuery({ slug });
 
   const commentsByParentId = useMemo(() => {
     if (post?.data?.comments === null) return null;
@@ -29,7 +29,7 @@ export const usePost = (slug: PostProps) => {
 
   return {
     post,
-    rootComments: commentsByParentId?.['null'] || [],
+    rootComments: commentsByParentId?.["null"] || [],
     getReplies,
   };
 };

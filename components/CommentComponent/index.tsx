@@ -1,42 +1,41 @@
-import { useState } from 'react';
-import { CommentForm } from 'components/CommentForm';
-import { CommentList } from 'components/CommentList';
+import { useState } from "react";
+import { CommentForm } from "components/CommentForm";
+import { CommentList } from "components/CommentList";
 
-import { trpc } from 'utils/trpc';
-import { usePost } from 'hooks/usePost';
+import { usePost } from "hooks/usePost";
+import { api } from "utils/api";
 
 const CommentComponent = ({ slug }: { slug: string }) => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   //@ts-ignore
   const { rootComments } = usePost(slug);
 
-  const { invalidateQueries } = trpc.useContext();
-  const createComment = trpc.useMutation(['protectedPost.addComment'], {
-    async onSuccess() {
-      // Refetches posts after a comment is added
-      await invalidateQueries(['post.getBySlug']);
+  const utils = api.useContext();
+  const createComment = api.post.addComment.useMutation({
+    onSuccess(input) {
+      utils.post.getBySlug.invalidate({ slug: input.slug as string });
     },
   });
 
   const handleCommentCreate = async (text: string) => {
     if (text.trim().length === 0) {
-      setError('You need to specify a text!');
+      setError("You need to specify a text!");
       return;
     }
 
     if (text.trim().length < 4) {
-      setError('text is too short!');
+      setError("text is too short!");
       return;
     }
     //@ts-ignore
     return await createComment.mutateAsync({ slug, text }).then(() => {
-      setError('');
+      setError("");
     });
   };
 
   return (
     <>
-      <h2 className="text-xl font-bold text-center p-4 text-gray-800">
+      <h2 className="p-4 text-center text-xl font-bold text-gray-800">
         Comments
       </h2>
 

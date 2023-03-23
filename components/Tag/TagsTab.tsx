@@ -1,4 +1,4 @@
-import { TagObj } from "types";
+import { type TagObj } from "types";
 import { TagTabItem } from "./TagTabItem";
 
 type Props = {
@@ -14,8 +14,8 @@ export const Tags: React.FC<Props> = ({
 }: Props) => {
   if (!tags) return null;
   return (
-    <div className="flex items-center tag-container">
-      <ul className="flex overflow-x-auto py-2 max-w-full">
+    <div className="tag-container flex items-center">
+      <ul className="flex max-w-full overflow-x-auto py-2">
         <TagTabItem
           tagKey="all"
           selected={!currentTag}

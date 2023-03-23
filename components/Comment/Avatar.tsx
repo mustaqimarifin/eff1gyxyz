@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { type FC } from "react";
 
 export interface AvatarProps
   extends Omit<React.HTMLProps<HTMLDivElement>, "size"> {
-  src?: string;
+  src: string;
   size?: "sm" | "lg";
   isLoading?: boolean;
   error?: any;

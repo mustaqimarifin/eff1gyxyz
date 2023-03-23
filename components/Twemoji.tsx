@@ -13,7 +13,7 @@ export const Twemoji: React.FC<Props> = ({ emoji, size = 24 }) => {
   if (!emojiString) return null;
   return (
     <Image
-      className="flex items-center min-w-max"
+      className="flex min-w-max items-center"
       src={`${TWEMOJI_CDN_BASE_URL}/${emojiString}.svg`}
       height={size}
       width={size}

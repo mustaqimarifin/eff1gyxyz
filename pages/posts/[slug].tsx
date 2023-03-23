@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
-import BLOG from 'blog.config';
-import { createSSGHelpers } from '@trpc/react/ssg';
-import prisma from 'lib/prisma';
-import Layout from 'layouts/layout';
-import { getAllPosts, getPostBlocks } from 'lib/notion';
-import { createHash } from 'crypto';
-import superjson from 'superjson';
-import { GetStaticPropsContext } from 'next';
-import { Post } from 'types';
-import { ExtendedRecordMap } from 'notion-types';
-import { useRouter } from 'next/router';
-import { appRouter } from 'server/router';
+import BLOG from "blog.config";
+//import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import Layout from "layouts/layout";
+import { getAllPosts, getPostBlocks } from "lib/notion";
+import { createHash } from "crypto";
+//import superjson from "superjson";
+import { type GetStaticPropsContext } from "next";
+import { type Post } from "types";
+import { type ExtendedRecordMap } from "notion-types";
+import { useRouter } from "next/router";
+//import { prisma } from "server10/db";
+//import { appRouter } from "server10/api/root";
 
 type BlogPostProps = {
   previewImagesEnabled: boolean;
@@ -38,7 +38,7 @@ const BlogPost = ({
         post={post}
         emailHash={emailHash}
         fullWidth={post.fullWidth}
-        slug={typeof slug === 'string' ? slug : null}
+        slug={typeof slug === "string" ? slug : null}
         {...props}
       />
     </>
@@ -60,13 +60,13 @@ export async function getStaticProps(
   const slug = context.params?.slug;
   const post = posts.find((t) => t.slug === slug);
   const blockMap = await getPostBlocks(post?.id);
-  const emailHash = createHash('md5')
+  const emailHash = createHash("md5")
     .update(BLOG.email)
-    .digest('hex')
+    .digest("hex")
     .trim()
     .toLowerCase();
 
-  const ssg = createSSGHelpers({
+  /*   const ssg = createProxySSGHelpers({
     router: appRouter,
     ctx: {
       req: undefined,
@@ -75,19 +75,19 @@ export async function getStaticProps(
       session: undefined,
     },
     transformer: superjson,
-  });
+  }); */
 
   //@ts-ignore
-  const data = await ssg.fetchQuery('post.getBySlug', { slug });
+  /*   const data = await ssg.fetchQuery('post.getBySlug', { slug });
 
   if (!data) {
     return {
       notFound: true,
     };
   }
-
+ */
   return {
-    props: { post, blockMap, emailHash, trpcState: ssg.dehydrate(), slug },
+    props: { post, blockMap, emailHash },
     revalidate: 60,
   };
 }

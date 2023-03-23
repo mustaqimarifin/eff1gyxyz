@@ -1,42 +1,44 @@
-import Image from 'next/image';
-import Container from 'components/Container';
-import TagItem from 'components/TagItem';
-import { MapImageUrlFn, NotionRenderer } from 'react-notion-x';
-import BLOG from 'blog.config';
-import formatDate from 'lib/formatDate';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { Decoration, ExtendedRecordMap } from 'notion-types';
-import { Post } from 'types';
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+import Image from "next/image";
+import Container from "components/Container";
+//import TagItem from "components/TagItem";
+import { type MapImageUrlFn, NotionRenderer } from "react-notion-x";
+import BLOG from "blog.config";
+import formatDate from "lib/formatDate";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import ME from "../public/pw.png";
+import Link from "next/link";
+import { type Decoration, type ExtendedRecordMap } from "notion-types";
+import { type Post } from "types";
 //import { Komments } from "components/Komment";
-import React, { Suspense } from 'react';
-import clsx from 'clsx';
-import ViewCounter from 'components/ViewCounter';
-import CommentComponent from 'components/CommentComponent';
+import React from "react";
+import clsx from "clsx";
+import ViewCounter from "components/ViewCounter";
+import CommentComponent from "components/CommentComponent";
 
-const enableCommentArea = BLOG.comment.provider !== '';
+const enableCommentArea = BLOG.comment.provider !== "";
 
 export function textDecorationsToString(decorations: Decoration[]): string {
-  return decorations.map((decoration) => decoration[0]).join('');
+  return decorations.map((decoration) => decoration[0]).join("");
 }
 
 const mapPageUrl = (id: string) => {
-  return 'https://www.notion.so/' + id.replace(/-/g, '');
+  return "https://www.notion.so/" + id.replace(/-/g, "");
 };
 const Code = dynamic(() =>
-  import('react-notion-x/build/third-party/code').then(async (m) => {
+  import("react-notion-x/build/third-party/code").then(async (m) => {
     // add / remove any prism syntaxes here
     await Promise.all([
-      import('prismjs/components/prism-markup-templating.js'),
-      import('prismjs/components/prism-markup.js'),
-      import('prismjs/components/prism-bash.js'),
-      import('prismjs/components/prism-git.js'),
-      import('prismjs/components/prism-go.js'),
-      import('prismjs/components/prism-graphql.js'),
-      import('prismjs/components/prism-markdown.js'),
-      import('prismjs/components/prism-rust.js'),
-      import('prismjs/components/prism-sql.js'),
+      import("prismjs/components/prism-markup-templating.js"),
+      import("prismjs/components/prism-markup.js"),
+      import("prismjs/components/prism-bash.js"),
+      import("prismjs/components/prism-git.js"),
+      import("prismjs/components/prism-go.js"),
+      import("prismjs/components/prism-graphql.js"),
+      import("prismjs/components/prism-markdown.js"),
+      import("prismjs/components/prism-rust.js"),
+      import("prismjs/components/prism-sql.js"),
     ]);
     return m.Code;
   })
@@ -45,19 +47,19 @@ const Code = dynamic(() =>
   import('components/CodeBlock').then(async (m) => m.CodeBlock)
 ); */
 const Collection = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then(
+  import("react-notion-x/build/third-party/collection").then(
     (m) => m.Collection
   )
 );
 const Pdf = dynamic(
-  () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
+  () => import("react-notion-x/build/third-party/pdf").then((m) => m.Pdf),
   {
     ssr: false,
   }
 );
 
 const Modal = dynamic(
-  () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+  () => import("react-notion-x/build/third-party/modal").then((m) => m.Modal),
   {
     ssr: false,
   }
@@ -83,7 +85,6 @@ const Layout: React.FC<Props> = ({
   rootPageId,
   rootDomain,
   post,
-  emailHash,
   fullWidth = false,
   previewImagesEnabled,
 }: Props) => {
@@ -118,20 +119,21 @@ const Layout: React.FC<Props> = ({
       description={post.summary}
       // date={new Date(post.publishedAt).toISOString()}
       type="article"
-      fullWidth={fullWidth}>
+      fullWidth={fullWidth}
+    >
       <article>
-        <h1 className="font-bold text-3xl text-black dark:text-white">
+        <h1 className="text-3xl font-bold text-black dark:text-white">
           {post.title}
         </h1>
-        {post?.type[0] !== 'Page' && (
-          <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400">
-            <div className="flex mb-4">
-              <a href={BLOG.socialLink || '#'} className="flex">
+        {post?.type[0] !== "Page" && (
+          <nav className="mt-7 flex items-start text-gray-500 dark:text-gray-400">
+            <div className="mb-4 flex">
+              <a href={BLOG.socialLink || "#"} className="flex">
                 <Image
                   alt={BLOG.author}
                   width={24}
                   height={24}
-                  src={`https://gravatar.com/avatar/${emailHash}`}
+                  src={ME}
                   className="rounded-full"
                 />
                 <p className="ml-2 md:block">{BLOG.author}</p>
@@ -161,19 +163,22 @@ const Layout: React.FC<Props> = ({
       </article>
       <div
         className={clsx(
-          'flex justify-between font-medium text-gray-500 dark:text-gray-400',
+          "flex justify-between font-medium text-gray-500 dark:text-gray-400",
           {
-            'mb-4': enableCommentArea,
+            "mb-4": enableCommentArea,
           }
-        )}>
+        )}
+      >
         <button
-          onClick={() => router.push(BLOG.path || '/')}
-          className="mt-2 hover:text-black dark:hover:text-gray-100 cursor-pointer">
+          onClick={() => void router.push(BLOG.path || "/")}
+          className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
+        >
           ← BACK
         </button>
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="mt-2 hover:text-black dark:hover:text-gray-100 cursor-pointer">
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="mt-2 cursor-pointer hover:text-black dark:hover:text-gray-100"
+        >
           ↑ TOP
         </button>
       </div>

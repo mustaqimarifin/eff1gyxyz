@@ -1,8 +1,7 @@
 //import ms from 'ms'
 import axios from "axios";
-import { NextApiRequest } from "next";
 
-export const getSlug = (url: any): any => {
+export const getSlug = (url: URL): string => {
   const { pathname } = new URL(url);
   const path = pathname.substring(7);
   return path;
@@ -21,7 +20,7 @@ export const getURL = (url: string) => {
 }
  */
 //^-- Fetcher | Axios *undecided*
-export const yespls = (url: string) => axios.get(url).then((res) => res.data);
+export const yespls = (url: string) => axios.get(url).then((res) => res?.data);
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,

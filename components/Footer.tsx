@@ -12,7 +12,7 @@ const Footer: React.FC<Props> = (fullWidth) => {
   return (
     <div
       className={clsx(
-        "mt-6 flex-shrink-0 m-auto w-full text-gray-500 dark:text-gray-400 transition-all",
+        "m-auto mt-6 w-full flex-shrink-0 text-gray-500 transition-all dark:text-gray-400",
         {
           "px-4 md:px-24": fullWidth,
           "max-w-2xl px-4": !fullWidth,
@@ -21,11 +21,11 @@ const Footer: React.FC<Props> = (fullWidth) => {
     >
       <hr className="border-gray-200 dark:border-gray-600" />
       <div className="my-4 text-sm leading-6">
-        <div className="flex align-baseline justify-between flex-wrap">
+        <div className="flex flex-wrap justify-between align-baseline">
           <p>
             © {BLOG.author} {from === y || !from ? y : `${from} - ${y}`}
           </p>
-          <Akhyla className="w-4 h-4" />
+          <Akhyla className="h-4 w-4" />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Twemoji } from "components/Twemoji";
-import { getTagDataBySlug, TagSlug } from "lib/tags";
+import { getTagDataBySlug, type TagSlug } from "lib/tags";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -46,11 +46,11 @@ export const TagTabItem: React.FC<Props> = ({
   return (
     <li
       className={clsx(
-        "mr-3 font-bold whitespace-nowrap rounded-lg min-w-max block",
+        "mr-3 block min-w-max whitespace-nowrap rounded-lg font-bold",
         {
-          "text-gray-400 border-gray-100 dark:text-gray-300 dark:border-gray-700":
+          "border-gray-100 text-gray-400 dark:border-gray-700 dark:text-gray-300":
             !selected,
-          "bg-gray-200 text-gray-700 dark:text-night": selected,
+          "dark:text-night bg-gray-200 text-gray-700": selected,
         }
       )}
     >

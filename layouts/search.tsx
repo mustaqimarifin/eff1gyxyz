@@ -2,7 +2,7 @@ import { useState } from "react";
 import BlogPost from "components/BlogPost";
 import Container from "components/Container";
 import Tags from "components/Tags";
-import { SearchTags } from "pages/tag/[tag]";
+import { type SearchTags } from "pages/tag/[tag]";
 import { Post } from "types";
 
 const SearchLayout = ({ tags, posts, currentTag }: SearchTags) => {
@@ -24,7 +24,7 @@ const SearchLayout = ({ tags, posts, currentTag }: SearchTags) => {
           placeholder={
             currentTag ? `Search in #${currentTag}` : "Search Articles"
           }
-          className="block w-full border px-4 py-2 border-black bg-white text-black dark:bg-night dark:border-white dark:text-white"
+          className="dark:bg-night block w-full border border-black bg-white px-4 py-2 text-black dark:border-white dark:text-white"
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <svg

@@ -1,4 +1,4 @@
-import { Post } from "types";
+import { type Post } from "types";
 
 const current = new Date();
 const tomorrow = new Date(current);

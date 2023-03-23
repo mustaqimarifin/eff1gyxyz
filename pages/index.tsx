@@ -1,49 +1,52 @@
 // import Image from 'next/image';
-import Link from 'next/link';
+import Link from "next/link";
 
-import Container from '../components/Container';
+import Container from "../components/Container";
 export default function Home() {
   return (
     <Container>
-      <div className="flex flex-col justify-center items-start max-w-5xl border-gray-200 dark:border-gray-700 mx-auto pb-16">
-        <div className="flex flex-col-reverse sm:flex-row items-center">
+      <div className="mx-auto flex max-w-5xl flex-col items-start justify-center border-gray-200 pb-16 dark:border-gray-700">
+        <div className="flex flex-col-reverse items-center sm:flex-row">
           <div>
-            <div className="prose text-primary">
-
+            <div className="text-primary prose">
               <p>
-                Hey, I&apos;m Mus. I&apos;m a{' '}
+                Hey, I&apos;m Mus. I&apos;m a{" "}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://designdetails.fm">
+                  href="https://designdetails.fm"
+                >
                   music producer
                 </a>
-                ,{' '}
+                ,{" "}
                 <Link href="/writing" passHref>
                   audio engineer
                 </Link>
-                , and{' '}
+                , and{" "}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://github.com/brianlovin">
+                  href="https://github.com/brianlovin"
+                >
                   sorta terrible at code :D
                 </a>
-                . I&apos;m currently the marketing manager & creative lead at{' '}
+                . I&apos;m currently the marketing manager & creative lead at{" "}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://github.com/mobile">
+                  href="https://github.com/mobile"
+                >
                   musegroupasia
                 </a>
                 .
               </p>
               <p>
-                Before musegroupasia, I co-founded{' '}
+                Before musegroupasia, I co-founded{" "}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://spectrum.chat">
+                  href="https://spectrum.chat"
+                >
                   Akhyla
                 </a>
                 , a platform to electronic musicians to learn, collaborate and
@@ -52,11 +55,12 @@ export default function Home() {
               <p>
                 During those years I was also Music Director at Infinity Games
                 where I worked alongside some amazing talent helping shape the
-                sound and music of{' '}
+                sound and music of{" "}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://buffer.com">
+                  href="https://buffer.com"
+                >
                   Heroes of War
                 </a>
                 .
@@ -64,7 +68,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
+        <h3 className="mb-6 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
           Featured Posts
         </h3>
 
@@ -87,13 +91,15 @@ export default function Home() {
         </div> */}
         <Link
           href="/posts"
-          className="flex mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
+          className="mt-8 flex h-6 rounded-lg leading-7 text-gray-600 transition-all hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+        >
           Read all posts
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            className="h-6 w-6 ml-1">
+            className="ml-1 h-6 w-6"
+          >
             <path
               stroke="currentColor"
               strokeLinecap="round"
@@ -103,10 +109,10 @@ export default function Home() {
             />
           </svg>
         </Link>
-        <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+        <h3 className="mb-4 mt-16 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
           Learn WTV
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="mb-4 text-gray-600 dark:text-gray-400">
           Build and deploy a modern SaaS application using the most popular
           open-source software. This course is 12 hours long and is completely
           live streamed.

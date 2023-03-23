@@ -1,12 +1,11 @@
 /* eslint-disable camelcase */
 
-import { User } from 'next-auth';
-export type HeroIcon = (props: React.ComponentProps<'svg'>) => JSX.Element;
+import { type User } from "next-auth";
+export type HeroIcon = (props: React.ComponentProps<"svg">) => JSX.Element;
 
+export type PostType = "Post" | "Page" | "Project";
 
-export type PostType = 'Post' | 'Page' | 'Project';
-
-export type PostStatus = 'Idea' | 'Published' | 'Revise' | 'Published';
+export type PostStatus = "Idea" | "Published" | "Revise" | "Published";
 
 export type Post = {
   id: string;
@@ -83,9 +82,9 @@ export type BlogConfig = {
   email: string;
   link: string;
   description: string;
-  lang: 'en-US' | 'zh-CN' | 'zh-HK' | 'zh-TW' | 'ja-JP' | 'es-ES';
-  appearance: 'class' | 'dark' | 'light';
-  font: 'sans-serif' | 'serif';
+  lang: "en-US" | "zh-CN" | "zh-HK" | "zh-TW" | "ja-JP" | "es-ES";
+  appearance: "class" | "dark" | "light";
+  font: "sans-serif" | "serif";
   lightBackground: `#${string}`;
   darkBackground: `#${string}`;
   path: string;
@@ -104,7 +103,7 @@ export type BlogConfig = {
   notionPageId: string;
   notionAccessToken: string;
   analytics: {
-    provider: 'ga' | 'ackee';
+    provider: "ga" | "ackee";
     ackeeConfig: {
       tracker: string;
       dataAckeeServer: string;
@@ -115,10 +114,10 @@ export type BlogConfig = {
     };
   };
   comment: {
-    provider: 'cusdis' | '';
+    provider: "cusdis" | "";
     utterancesConfig: {
       repo: string;
     };
   };
-  isProd: 'development' | 'preview' | 'production';
+  isProd: "development" | "preview" | "production";
 };

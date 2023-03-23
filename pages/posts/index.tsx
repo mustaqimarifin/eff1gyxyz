@@ -3,9 +3,10 @@ import BlogPost from "components/BlogPost";
 import Pagination from "components/Pagination";
 import { getAllPosts } from "lib/notion";
 import BLOG from "blog.config";
+import { type Post } from "types";
 
 export async function getStaticProps() {
-  const posts = await getAllPosts({ includedPages: false });
+  const posts: Post[] = await getAllPosts({ includedPages: false });
   const postsToShow = posts.slice(0, BLOG.postsPerPage);
   const totalPosts = posts.length;
   const showNext = totalPosts > BLOG.postsPerPage;

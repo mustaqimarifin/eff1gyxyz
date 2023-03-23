@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
-import { HeroIcon } from "types"
+import { type HeroIcon } from "types";
 
 export interface IconButtonProps {
   Icon: HeroIcon;

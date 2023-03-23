@@ -92,7 +92,7 @@ export const Container: React.FC<Props> = ({
           fullWidth={fullWidth}
         />
         <main
-          className={clsx("m-auto flex-grow w-full transition-all", {
+          className={clsx("m-auto w-full flex-grow transition-all", {
             "px-4 md:px-24": fullWidth,
             "max-w-2xl px-4": !fullWidth,
           })}

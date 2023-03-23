@@ -30,7 +30,7 @@ export function CodeBlock({
   [key: string]: any;
 }) {
   return (
-    <div className="prose text-sm border border-black rounded-md p-4 -mx-2 md:-mx-4 my-6">
+    <div className="prose -mx-2 my-6 rounded-md border border-black p-4 text-sm md:-mx-4">
       <PrismAsyncLight
         showLineNumbers={false}
         useInlineStyles={false}

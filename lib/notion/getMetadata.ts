@@ -1,4 +1,4 @@
-import { BasePageBlock } from "notion-types";
+import { type BasePageBlock } from "notion-types";
 
 export const getMetadata = (rawMetadata: BasePageBlock) => {
   const metadata = {

@@ -70,7 +70,7 @@ export const CommentForm = ({
 
   return (
     <>
-      <div className="flex flex-grow flex-col justify-between w-full min-h-10 rounded space-y-4 ">
+      <div className="min-h-10 flex w-full flex-grow flex-col justify-between space-y-4 rounded ">
         <div className=" flex items-center space-x-2 ">
           {!session && (
             <button
@@ -78,14 +78,14 @@ export const CommentForm = ({
               onClick={() => signIn()}
               aria-label="Create new account"
             >
-              <User className="text-gray-600 w-7 h-7" />
+              <User className="h-7 w-7 text-gray-600" />
             </button>
           )}
 
-          <label className="flex-grow flex items-center cursor-text select-none focus-within-ring min-h-10">
+          <label className="focus-within-ring min-h-10 flex flex-grow cursor-text select-none items-center">
             <span className="sr-only">Enter a comment</span>
             <textarea
-              className="form-text flex-1 block mt-1 bg-transparent flex-grow leading-loose min-h-5 max-h-36 resize-none m-1 px-0 text-gray-700 dark:text-gray-50 placeholder-red-600 dark:placeholder-pink-200 border-none overflow-auto text-sm rounded-lg transition-opacity disabled:opacity-50 focus:outline-none focus:shadow-none focus:ring-0"
+              className="form-text min-h-5 m-1 mt-1 block max-h-36 flex-1 flex-grow resize-none overflow-auto rounded-lg border-none bg-transparent px-0 text-sm leading-loose text-gray-700 placeholder-red-600 transition-opacity focus:shadow-none focus:outline-none focus:ring-0 disabled:opacity-50 dark:text-gray-50 dark:placeholder-pink-200"
               placeholder={session ? `Add a comment...` : "Fast Social Login"}
               rows={1}
               value={text}
@@ -98,7 +98,7 @@ export const CommentForm = ({
             <div className="h-full justify-between">
               <button
                 className={cn(
-                  "text-indigo-500 dark:text-indigo-400 hover:text-green-600 font-semibold px-2 text-xs h-full max-h-10 border border-transparent focus-ring",
+                  "focus-ring h-full max-h-10 border border-transparent px-2 text-xs font-semibold text-indigo-500 hover:text-green-600 dark:text-indigo-400",
                   {
                     "cursor-not-allowed opacity-30":
                       text.length < 1 || isLoading,
@@ -112,7 +112,7 @@ export const CommentForm = ({
               </button>
               <button
                 className={cn(
-                  "text-pink-400 dark:text-pink-200 hover:text-yellow-500 font-semibold text-xs h-full max-h-10 border border-transparent focus-ring"
+                  "focus-ring h-full max-h-10 border border-transparent text-xs font-semibold text-pink-400 hover:text-yellow-500 dark:text-pink-200"
                 )}
                 aria-label="Sign Out"
                 onClick={() => signOut()}
@@ -123,7 +123,7 @@ export const CommentForm = ({
           )}
           {!session && (
             <button
-              className="py-1 px-2 rounded bg-indigo-500 font-semibold text-sm text-white disabled:opacity-40 hover:bg-indigo-700"
+              className="rounded bg-indigo-500 py-1 px-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-40"
               onClick={() => signIn()}
               aria-label="log in!"
             >

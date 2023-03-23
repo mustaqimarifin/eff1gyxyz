@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable no-control-regex */
 export const autosize = (target: HTMLTextAreaElement): void => {
   target.style.height = "initial";

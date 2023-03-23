@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Twemoji } from "components/Twemoji";
-import { TagSlug, getTagDataBySlug } from "lib/tags";
+import { type TagSlug, getTagDataBySlug } from "lib/tags";
 import Link from "next/link";
 
 type Props = {
@@ -13,7 +13,7 @@ export const TagItem: React.FC<Props> = ({ tag }) => {
   return (
     <Link href={`/tag/${encodeURIComponent(tag)}`}>
       <a>
-        <div className="flex items-center py-1 px-2 mr-1 text-sm leading-none rounded-full border dark:border-gray-600">
+        <div className="mr-1 flex items-center rounded-full border py-1 px-2 text-sm leading-none dark:border-gray-600">
           {tagData?.emoji && <Twemoji emoji={tagData.emoji} size={16} />}
           <p
             className={clsx({

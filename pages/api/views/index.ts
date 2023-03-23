@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "lib/prisma";
+import { prisma } from "server10/db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +12,9 @@ export default async function handler(
       },
     });
 
-    return res.status(200).json({ total: totalpost._sum.count.toString() });
+    return res
+      .status(200)
+      .json({ total: totalpost?._sum.count.toString() || null });
   } catch (e) {
     return res.status(500).json({ message: e });
   }
