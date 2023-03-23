@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@formkit/auto-animate': 1.0.0-beta.6
   '@headlessui/react': ^1.7.13
-  '@heroicons/react': ^2.0.16
+  '@heroicons/react': 1.0.6
   '@keyv/redis': ^2.5.6
   '@next-auth/prisma-adapter': ^1.0.5
   '@prisma/client': ^4.11.0
@@ -73,7 +73,7 @@ specifiers:
 dependencies:
   '@formkit/auto-animate': 1.0.0-beta.6
   '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
-  '@heroicons/react': 2.0.16_react@18.2.0
+  '@heroicons/react': 1.0.6_react@18.2.0
   '@keyv/redis': 2.5.6
   '@next-auth/prisma-adapter': 1.0.5_knaw3qxw4zwoiwojd3fn43zthi
   '@prisma/client': 4.11.0_prisma@4.11.0
@@ -426,8 +426,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@heroicons/react/2.0.16_react@18.2.0:
-    resolution: {integrity: sha512-x89rFxH3SRdYaA+JCXwfe+RkE1SFTo9GcOkZettHer71Y3T7V+ogKmfw5CjTazgS3d0ClJ7p1NA+SP7VQLQcLw==}
+  /@heroicons/react/1.0.6_react@18.2.0:
+    resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
     peerDependencies:
       react: '>= 16'
     dependencies:
