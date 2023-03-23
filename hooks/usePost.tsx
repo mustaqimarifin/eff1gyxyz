@@ -6,7 +6,7 @@ export interface PostProps {
   slug: string;
 }
 
-export const usePost = (slug: PostProps) => {
+export const usePost = (slug: string) => {
   //@ts-ignore
   const post = api.post.getBySlug.useQuery({ slug });
 

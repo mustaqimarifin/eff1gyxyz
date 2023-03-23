@@ -7,7 +7,7 @@ import { api } from "utils/api";
 
 const CommentComponent = ({ slug }: { slug: string }) => {
   const [error, setError] = useState("");
-  const { rootComments } = usePost({ slug });
+  const { rootComments } = usePost( slug );
 
   const utils = api.useContext();
   const createComment = api.post.addComment.useMutation({
