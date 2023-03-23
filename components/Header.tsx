@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config.js";
 import clsx from "clsx";
 import Image from "next/image";
 const NavBar = () => {

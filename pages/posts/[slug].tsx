@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config.js";
 //import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import Layout from "layouts/layout";
 import { getAllPosts, getPostBlocks } from "lib/notion";

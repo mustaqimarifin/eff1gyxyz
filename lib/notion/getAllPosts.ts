@@ -1,4 +1,4 @@
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config.js";
 import { type Post } from "types";
 import { NotionAPI } from "notion-client";
 import { idToUuid } from "notion-utils";

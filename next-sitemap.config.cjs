@@ -1,5 +1,5 @@
 const config = {
-  siteUrl: "https://effigy.vercel.app",
+  siteUrl: "https://eff1gy.vercel.app",
   generateRobotsTxt: true,
   sitemapSize: 7000,
   // ...other options

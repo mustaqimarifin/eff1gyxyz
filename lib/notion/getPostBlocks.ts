@@ -1,4 +1,4 @@
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config.js";
 import { NotionAPI } from "notion-client";
 import { getPreviewImageMap } from "./previewImages";
 
