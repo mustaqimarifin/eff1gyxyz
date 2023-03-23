@@ -10,5 +10,6 @@ export * from "./getPostBlocks";
 export * from "./mapImageUrl";
 export * from "./previewImages";
 export * from "./db";
+export * from "./redis";
 
 //export * from './getProfilePost';

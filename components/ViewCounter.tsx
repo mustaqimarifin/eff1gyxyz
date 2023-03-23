@@ -7,7 +7,7 @@ export type Views = {
 };
 export default function ViewCounter({ slug }: { slug: string }) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, yespls);
-  const views = new Number(data?.total);
+  const views = data?.total;
 
   useEffect(() => {
     const registerView = () =>

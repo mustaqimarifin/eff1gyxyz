@@ -3,7 +3,7 @@ import Image from "next/image";
 import Container from "components/Container";
 //import TagItem from "components/TagItem";
 import { type MapImageUrlFn, NotionRenderer } from "react-notion-x";
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config";
 import formatDate from "lib/formatDate";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -159,7 +159,7 @@ const Layout: React.FC<Props> = ({
               rootDomain={rootDomain}
               rootPageId={rootPageId}
               previewImages={!!blockMap.preview_images}
-              mapImageUrl={mapImageUrl}
+              //mapImageUrl={mapImageUrl}
               components={components}
               mapPageUrl={mapPageUrl}
             />

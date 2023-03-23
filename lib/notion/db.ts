@@ -1,6 +1,6 @@
 import Keyv from "keyv";
 import KeyvRedis from "@keyv/redis";
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config";
 
 let db: Keyv;
 if (BLOG.previewImagesEnabled) {

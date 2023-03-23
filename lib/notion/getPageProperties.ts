@@ -2,7 +2,7 @@ import { getTextContent, getDateValue } from "notion-utils";
 import { NotionAPI } from "notion-client";
 import { type Post } from "types";
 
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config";
 import { type BlockMap, type CollectionPropertySchemaMap } from "notion-types";
 const excludeProperties = ["date", "select", "multi_select", "person"];
 

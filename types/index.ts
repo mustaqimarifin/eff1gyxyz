@@ -21,7 +21,7 @@ export type Post = {
   };
   status?: [PostStatus];
   type: [PostType];
-  comments?: Komment[];
+  comments?: Comment[];
   //repo_url: string;
   //thumbnail_url: string;
 };

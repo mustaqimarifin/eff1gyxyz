@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import type { Komment, Post } from "types/index";
+import type { Comment, Post } from "types/index";
 import { useMemo } from "react";
 import { api } from "utils/api";
 export interface PostProps {
-  slug: Post["slug"];
+  slug: string;
 }
 
 export const usePost = (slug: PostProps) => {
@@ -13,9 +13,9 @@ export const usePost = (slug: PostProps) => {
   const commentsByParentId = useMemo(() => {
     if (post?.data?.comments === null) return null;
 
-    const group: { [key: string]: Komment[] } = {};
+    const group: { [key: string]: Comment[] } = {};
 
-    post.data?.comments?.forEach((comment: Komment) => {
+    post.data?.comments?.forEach((comment: Comment) => {
       group[comment.parentId!] ||= [];
       group[comment?.parentId!]?.push(comment);
     });
@@ -23,7 +23,7 @@ export const usePost = (slug: PostProps) => {
     return group;
   }, [post?.data?.comments]);
 
-  const getReplies = (parentId: string): Komment[] => {
+  const getReplies = (parentId: string): Comment[] => {
     return commentsByParentId?.[parentId] || [];
   };
 

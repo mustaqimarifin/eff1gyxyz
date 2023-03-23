@@ -38,7 +38,7 @@ export const postRouter = createTRPCRouter({
             },
           },
         })
-        .then(async (post: any) => {
+        .then(async (post) => {
           const likes = await ctx.prisma.like.findMany({
             where: {
               userId: ctx.session?.user?.id,

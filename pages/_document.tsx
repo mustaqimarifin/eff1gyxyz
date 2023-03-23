@@ -1,4 +1,4 @@
-import BLOG from "blog.config.mjs";
+import BLOG from "blog.config";
 import Document, {
   Html,
   Head,

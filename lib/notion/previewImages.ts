@@ -46,7 +46,7 @@ async function createPreviewImage(
 ): Promise<PreviewImage | null> {
   try {
     try {
-      const cachedPreviewImage: any = await redis.get(cacheKey);
+      const cachedPreviewImage: PreviewImage = await redis.get(cacheKey);
       if (cachedPreviewImage) {
         return cachedPreviewImage;
       }
@@ -59,7 +59,7 @@ async function createPreviewImage(
     const result = await lqip(body);
     console.log("lqip", { ...result.metadata, url, cacheKey });
 
-    const previewImage: PreviewImage = {
+    const previewImage = {
       originalWidth: result.metadata.originalWidth,
       originalHeight: result.metadata.originalHeight,
       dataURIBase64: result.metadata.dataURIBase64,

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { CommentForm } from "components/CommentForm";
 import { CommentList } from "components/CommentList";
-import type { Komment } from "types";
+import type { Comment } from "types";
 import {
   HeartIcon,
   PencilAltIcon,
@@ -33,10 +33,10 @@ const dateFormatter = new Intl.DateTimeFormat("en", {
 });
 
 interface CommentProps {
-  comment: Komment;
+  comment: Comment;
 }
 
-export const Comment = ({ comment }: CommentProps) => {
+export const CommentSolo = ({ comment }: CommentProps) => {
   const { id, text, user, createdAt, likeCount, likedByMe } = comment;
 
   const router = useRouter();
@@ -74,7 +74,7 @@ export const Comment = ({ comment }: CommentProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [areChildrenHidden, setAreChildrenHidden] = useState(false);
 
-  const replies: Komment[] = getReplies(id);
+  const replies: Comment[] = getReplies(id);
 
   const handleReply = async (text: string) => {
     return await createComment
