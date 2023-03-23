@@ -7,13 +7,12 @@ import { api } from "utils/api";
 
 const CommentComponent = ({ slug }: { slug: string }) => {
   const [error, setError] = useState("");
-  //@ts-ignore
-  const { rootComments } = usePost(slug);
+  const { rootComments } = usePost({ slug });
 
   const utils = api.useContext();
   const createComment = api.post.addComment.useMutation({
-    onSuccess(input) {
-      utils.post.getBySlug.invalidate({ slug: input.slug as string });
+    async onSuccess(input) {
+      await utils.post.getBySlug.invalidate({ slug: input.slug as string });
     },
   });
 

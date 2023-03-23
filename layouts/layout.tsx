@@ -16,6 +16,7 @@ import React from "react";
 import clsx from "clsx";
 import ViewCounter from "components/ViewCounter";
 import CommentComponent from "components/CommentComponent";
+import { mapImageUrl } from "lib/notion";
 
 const enableCommentArea = BLOG.comment.provider !== "";
 
@@ -59,7 +60,11 @@ const Pdf = dynamic(
 );
 
 const Modal = dynamic(
-  () => import("react-notion-x/build/third-party/modal").then((m) => m.Modal),
+  () =>
+    import("react-notion-x/build/third-party/modal").then((m) => {
+      m.Modal.setAppElement(".notion-viewport");
+      return m.Modal;
+    }),
   {
     ssr: false,
   }
@@ -86,7 +91,6 @@ const Layout: React.FC<Props> = ({
   rootDomain,
   post,
   fullWidth = false,
-  previewImagesEnabled,
 }: Props) => {
   const router = useRouter();
 
@@ -154,7 +158,8 @@ const Layout: React.FC<Props> = ({
               recordMap={blockMap}
               rootDomain={rootDomain}
               rootPageId={rootPageId}
-              previewImages={previewImagesEnabled}
+              previewImages={!!blockMap.preview_images}
+              mapImageUrl={mapImageUrl}
               components={components}
               mapPageUrl={mapPageUrl}
             />

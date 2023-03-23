@@ -32,7 +32,7 @@ const BlogPost = ({
   return (
     <>
       <Layout
-        previewImagesEnabled={previewImagesEnabled}
+        previewImagesEnabled={BLOG.previewImagesEnabled}
         blockMap={blockMap}
         rootPageId={BLOG.notionPageId}
         post={post}
