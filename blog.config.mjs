@@ -1,4 +1,3 @@
-import { env } from "env.mjs";
 
 const BLOG = {
   title: "EFF1GY",
@@ -7,7 +6,7 @@ const BLOG = {
   link: "https://eff1gy.vercel.app",
   description: "This gonna be an awesome website.",
   previewImagesEnabled: true,
-  redisUrl: env.REDIS_URL,
+  redisUrl: process.env.REDIS_URL,
   lang: "en-US", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   appearance: "class", // ['light', 'dark', 'auto'],
   font: "sans-serif", // ['sans-serif', 'serif']
