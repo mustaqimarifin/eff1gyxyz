@@ -76,9 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
           <SunMoon />
           <div className="flex items-center">
             <Link href="/" aria-label={BLOG.title}>
-              <div className="min-w-max">
-                <Image src="/pw.png" alt="pw" width={16} height={16} />
-              </div>
+
             </Link>
             {navBarTitle ? (
               <p className="text-day dark:text-night header-name ml-2 font-medium">
