@@ -3,13 +3,7 @@ import { useState } from "react";
 import { CommentForm } from "components/CommentForm";
 import { CommentList } from "components/CommentList";
 import type { Comment } from "types";
-import {
-  HeartIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import { HeartIcon as HeartSolidIcon } from "@heroicons/react/solid";
+
 import clsx from "clsx";
 import { usePost } from "hooks/usePost";
 import { useSession } from "next-auth/react";
@@ -21,6 +15,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { api } from "utils/api";
+import { Heart, Heartless, Pencil, Reply, Trash } from "lib/icons"
 dayjs.extend(relativeTime, {
   rounding: Math.floor,
 });
@@ -141,7 +136,7 @@ export const CommentSolo = ({ comment }: CommentProps) => {
         <div className="mt-2 flex gap-2">
           <IconButton
             onClick={handleToggleCommentLike}
-            Icon={likedByMe ? HeartSolidIcon : HeartIcon}
+            Icon={likedByMe ? Heart : Heartless}
             aria-label={likedByMe ? "Unlike" : "Like"}
             color="text-purple-700"
           >
@@ -150,7 +145,7 @@ export const CommentSolo = ({ comment }: CommentProps) => {
           {session && (
             <IconButton
               onClick={() => setIsReplying((prev) => !prev)}
-              Icon={ReplyIcon}
+              Icon={Reply}
               aria-label="Reply"
               isActive={isReplying}
               color="text-purple-700"
@@ -160,14 +155,14 @@ export const CommentSolo = ({ comment }: CommentProps) => {
             <>
               <IconButton
                 onClick={() => setIsEditing((prev) => !prev)}
-                Icon={PencilAltIcon}
+                Icon={Pencil}
                 aria-label="Edit"
                 isActive={isEditing}
                 color="text-purple-700"
               />
               <IconButton
                 onClick={handleCommentDelete}
-                Icon={TrashIcon}
+                Icon={Trash}
                 aria-label="Delete"
                 color="text-red-700"
                 hoverbg="hover:bg-red-50"
