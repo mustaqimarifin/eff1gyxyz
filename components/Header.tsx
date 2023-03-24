@@ -3,6 +3,7 @@ import Link from "next/link";
 import BLOG from "blog.config";
 import clsx from "clsx";
 import Image from "next/image";
+import Theme from "./Theme"
 const NavBar = () => {
   const links = [
     { id: 0, name: "Posts", to: BLOG.path || "/posts", show: true },
@@ -71,6 +72,8 @@ export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
         id="sticky-nav"
         ref={navRef}
       >
+               <div className="flex items-center align-middle">
+          <Theme />
         <div className="flex items-center">
           <Link href="/" aria-label={BLOG.title}>
             <div className="min-w-max">
@@ -87,6 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
               <span className="font-normal">{BLOG.description}</span>
             </p>
           )}
+        </div>
         </div>
         <NavBar />
       </div>
