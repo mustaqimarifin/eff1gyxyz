@@ -3,7 +3,7 @@ import Link from "next/link";
 import BLOG from "blog.config";
 import clsx from "clsx";
 import Image from "next/image";
-import Theme from "./Theme"
+import SunMoon from "./Theme";
 const NavBar = () => {
   const links = [
     { id: 0, name: "Posts", to: BLOG.path || "/posts", show: true },
@@ -72,25 +72,25 @@ export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
         id="sticky-nav"
         ref={navRef}
       >
-               <div className="flex items-center align-middle">
-          <Theme />
-        <div className="flex items-center">
-          <Link href="/" aria-label={BLOG.title}>
-            <div className="min-w-max">
-              <Image src="/pw.png" alt="pw" width={16} height={16} />
-            </div>
-          </Link>
-          {navBarTitle ? (
-            <p className="text-day dark:text-night header-name ml-2 font-medium">
-              {navBarTitle}
-            </p>
-          ) : (
-            <p className="text-day dark:text-night header-name ml-2 font-medium">
-              {BLOG.title} -
-              <span className="font-normal">{BLOG.description}</span>
-            </p>
-          )}
-        </div>
+        <div className="flex items-center align-middle">
+          <SunMoon />
+          <div className="flex items-center">
+            <Link href="/" aria-label={BLOG.title}>
+              <div className="min-w-max">
+                <Image src="/pw.png" alt="pw" width={16} height={16} />
+              </div>
+            </Link>
+            {navBarTitle ? (
+              <p className="text-day dark:text-night header-name ml-2 font-medium">
+                {navBarTitle}
+              </p>
+            ) : (
+              <p className="text-day dark:text-night header-name ml-2 font-medium">
+                {BLOG.title} -
+                <span className="font-normal">{BLOG.description}</span>
+              </p>
+            )}
+          </div>
         </div>
         <NavBar />
       </div>
