@@ -1,75 +1,75 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { useState } from "react";
-import { CommentForm } from "components/CommentForm";
-import { CommentList } from "components/CommentList";
-import type { Comment } from "types";
+import clsx from 'clsx'
+import { CommentForm } from 'components/CommentForm'
+import { CommentList } from 'components/CommentList'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
+import { usePost } from 'hooks/usePost'
+import { Heart, Heartless, Pencil, Reply, Trash } from 'lib/icons'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+import { useState } from 'react'
+import type { Comment } from 'types'
+import { api } from 'utils/api'
 
-import clsx from "clsx";
-import { usePost } from "hooks/usePost";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { IconButton } from "../IconButton";
-import Avatar from "./Avatar";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-import { api } from "utils/api";
-import { Heart, Heartless, Pencil, Reply, Trash } from "lib/icons"
+import { IconButton } from '../IconButton'
+import Avatar from './Avatar'
 dayjs.extend(relativeTime, {
   rounding: Math.floor,
-});
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.tz.setDefault(dayjs.tz.guess());
-const dateFormatter = new Intl.DateTimeFormat("en", {
-  dateStyle: "medium",
-  timeStyle: "short",
-});
+})
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault(dayjs.tz.guess())
+const dateFormatter = new Intl.DateTimeFormat('en', {
+  dateStyle: 'medium',
+  timeStyle: 'short',
+})
 
 interface CommentProps {
-  comment: Comment;
+  comment: Comment
 }
 
 export const CommentSolo = ({ comment }: CommentProps) => {
-  const { id, text, user, createdAt, likeCount, likedByMe } = comment;
+  const { id, text, user, createdAt, likeCount, likedByMe } = comment
 
-  const router = useRouter();
-  const slug = router.query.slug as string;
-  const { data: session } = useSession();
+  const router = useRouter()
+  const slug = router.query.slug as string
+  const { data: session } = useSession()
   //@ts-ignore
-  const { getReplies } = usePost(slug);
+  const { getReplies } = usePost(slug)
 
-  const utils = api.useContext();
+  const utils = api.useContext()
   const createComment = api.post.addComment.useMutation({
     async onSuccess(input) {
-      await utils.post.getBySlug.invalidate({ slug: input.slug as string });
+      await utils.post.getBySlug.invalidate({ slug: input.slug as string })
     },
-  });
+  })
 
   const updateComment = api.post.updateComment.useMutation({
     async onSuccess(input) {
-      await utils.post.getBySlug.invalidate({ slug: input.slug as string });
+      await utils.post.getBySlug.invalidate({ slug: input.slug as string })
     },
-  });
+  })
 
   const deleteComment = api.post.deleteComment.useMutation({
     async onSuccess(input) {
-      await utils.post.getBySlug.invalidate({ slug: input.slug as string });
+      await utils.post.getBySlug.invalidate({ slug: input.slug as string })
     },
-  });
+  })
 
   const toggleCommentLike = api.post.toggleLike.useMutation({
     async onSuccess() {
-      await utils.post.getBySlug.invalidate();
+      await utils.post.getBySlug.invalidate()
     },
-  });
+  })
 
-  const [isReplying, setIsReplying] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [areChildrenHidden, setAreChildrenHidden] = useState(false);
+  const [isReplying, setIsReplying] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [areChildrenHidden, setAreChildrenHidden] = useState(false)
 
-  const replies: Comment[] = getReplies(id);
+  const replies: Comment[] = getReplies(id)
 
   const handleReply = async (text: string) => {
     return await createComment
@@ -79,9 +79,9 @@ export const CommentSolo = ({ comment }: CommentProps) => {
         slug,
       })
       .then(() => {
-        setIsReplying(false);
-      });
-  };
+        setIsReplying(false)
+      })
+  }
 
   const handleCommentEdit = async (text: string) => {
     return await updateComment
@@ -91,24 +91,24 @@ export const CommentSolo = ({ comment }: CommentProps) => {
         slug,
       })
       .then(() => {
-        setIsEditing(false);
-      });
-  };
+        setIsEditing(false)
+      })
+  }
 
   const handleCommentDelete = async () => {
     return await deleteComment.mutateAsync({
       commentId: id,
       slug,
-    });
-  };
+    })
+  }
 
   const handleToggleCommentLike = async () => {
-    if (!session) return;
+    if (!session) return
     return await toggleCommentLike.mutateAsync({
       commentId: id,
       slug,
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -137,7 +137,7 @@ export const CommentSolo = ({ comment }: CommentProps) => {
           <IconButton
             onClick={handleToggleCommentLike}
             Icon={likedByMe ? Heart : Heartless}
-            aria-label={likedByMe ? "Unlike" : "Like"}
+            aria-label={likedByMe ? 'Unlike' : 'Like'}
             color="text-purple-700"
           >
             {likeCount}
@@ -172,15 +172,15 @@ export const CommentSolo = ({ comment }: CommentProps) => {
         </div>
       </div>
       {isReplying && (
-        <div className="mt-1 ml-3">
+        <div className="ml-3 mt-1">
           <CommentForm autoFocus submitLabel="Reply" onSubmit={handleReply} />
         </div>
       )}
       {replies?.length > 0 && (
         <>
-          <div className={clsx("flex", areChildrenHidden && "hidden")}>
+          <div className={clsx('flex', areChildrenHidden && 'hidden')}>
             <button
-              className="relative mt-2 w-[15px] -translate-x-1/2 cursor-pointer border-none bg-none p-0 outline-none before:absolute before:top-0 before:bottom-0 before:left-1/2 before:w-px before:bg-purple-200 before:transition-all before:duration-200 before:ease-in-out before:content-[''] hover:before:bg-purple-400 focus-visible:before:bg-purple-400"
+              className="relative mt-2 w-[15px] -translate-x-1/2 cursor-pointer border-none bg-none p-0 outline-none before:absolute before:bottom-0 before:left-1/2 before:top-0 before:w-px before:bg-purple-200 before:transition-all before:duration-200 before:ease-in-out before:content-[''] hover:before:bg-purple-400 focus-visible:before:bg-purple-400"
               aria-label="Hide Replies"
               onClick={() => setAreChildrenHidden(true)}
             />
@@ -192,8 +192,8 @@ export const CommentSolo = ({ comment }: CommentProps) => {
           </div>
           <button
             className={clsx(
-              "relative mt-2 rounded bg-purple-600 py-2 px-4 text-sm text-white ease-in-out hover:bg-purple-400 hover:transition-colors hover:duration-100",
-              !areChildrenHidden && "hidden"
+              'relative mt-2 rounded bg-purple-600 px-4 py-2 text-sm text-white ease-in-out hover:bg-purple-400 hover:transition-colors hover:duration-100',
+              !areChildrenHidden && 'hidden'
             )}
             onClick={() => setAreChildrenHidden(false)}
           >
@@ -202,5 +202,5 @@ export const CommentSolo = ({ comment }: CommentProps) => {
         </>
       )}
     </>
-  );
-};
+  )
+}

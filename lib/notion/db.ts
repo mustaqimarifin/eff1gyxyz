@@ -1,13 +1,13 @@
-import Keyv from "keyv";
-import KeyvRedis from "@keyv/redis";
-import BLOG from "blog.config";
+import KeyvRedis from '@keyv/redis'
+import BLOG from 'blog.config'
+import Keyv from 'keyv'
 
-let db: Keyv;
+let db: Keyv
 if (BLOG.previewImagesEnabled) {
-  const keyvRedis = new KeyvRedis(BLOG.redisUrl);
-  db = new Keyv({ store: keyvRedis, namespace: "tinyimg" || undefined });
+  const keyvRedis = new KeyvRedis(BLOG.redisUrl)
+  db = new Keyv({ store: keyvRedis, namespace: 'tinyimg' || undefined })
 } else {
-  db = new Keyv();
+  db = new Keyv()
 }
 
-export { db };
+export { db }

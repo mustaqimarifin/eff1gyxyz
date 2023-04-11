@@ -1,72 +1,72 @@
-import { useEffect, useRef, useState } from "react";
-import type { Comment } from "@prisma/client";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import User from "lib/utils/User";
-import cn from "clsx";
-import { autosize } from "lib/utils/index";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import type { Comment } from '@prisma/client'
+import cn from 'clsx'
+import { autosize } from 'lib/utils/index'
+import User from 'lib/utils/User'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useEffect, useRef, useState } from 'react'
 interface CommentFormProps {
-  autoFocus?: boolean;
-  buttonText?: string;
-  initialValue?: string;
+  autoFocus?: boolean
+  buttonText?: string
+  initialValue?: string
 
-  error?: string;
-  onSubmit: (text: string) => Promise<Comment | void>;
-  parentId?: Comment | null;
-  placeholder?: string;
-  submitLabel?: string;
-  handleResetCallback?: () => void;
-  hideEarlyCallback?: () => void;
+  error?: string
+  onSubmit: (text: string) => Promise<Comment | void>
+  parentId?: Comment | null
+  placeholder?: string
+  submitLabel?: string
+  handleResetCallback?: () => void
+  hideEarlyCallback?: () => void
 }
 
 export const CommentForm = ({
   autoFocus = false,
-  submitLabel = "Post",
+  submitLabel = 'Post',
   hideEarlyCallback,
   handleResetCallback,
   error,
-  initialValue = "",
+  initialValue = '',
 
   onSubmit,
 }: CommentFormProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [text, setText] = useState(initialValue);
-  const { data: session } = useSession();
-  const [parent] = useAutoAnimate<HTMLDivElement>();
-  const textRef = useRef<HTMLTextAreaElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [text, setText] = useState(initialValue)
+  const { data: session } = useSession()
+  const [parent] = useAutoAnimate<HTMLDivElement>()
+  const textRef = useRef<HTMLTextAreaElement | null>(null)
 
   useEffect(() => {
     if (autoFocus) {
       if (textRef && textRef.current) {
-        textRef.current.focus();
+        textRef.current.focus()
       }
     }
-  }, [autoFocus]);
+  }, [autoFocus])
 
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-    setText(e.target.value);
+    setText(e.target.value)
     if (textRef?.current) {
-      autosize(textRef.current);
+      autosize(textRef.current)
     }
   }
 
   function handleReset(): void {
-    setText("");
+    setText('')
     if (textRef && textRef.current) {
-      textRef.current.style.height = "initial";
+      textRef.current.style.height = 'initial'
     }
-    setIsLoading(false);
+    setIsLoading(false)
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     onSubmit(text).then(() => {
-      setText("");
-      setIsLoading(true);
-      hideEarlyCallback?.();
-      handleReset();
-      handleResetCallback?.();
-    });
-  };
+      setText('')
+      setIsLoading(true)
+      hideEarlyCallback?.()
+      handleReset()
+      handleResetCallback?.()
+    })
+  }
 
   return (
     <>
@@ -86,7 +86,7 @@ export const CommentForm = ({
             <span className="sr-only">Enter a comment</span>
             <textarea
               className="form-text min-h-5 m-1 mt-1 block max-h-36 flex-1 flex-grow resize-none overflow-auto rounded-lg border-none bg-transparent px-0 text-sm leading-loose text-gray-700 placeholder-red-600 transition-opacity focus:shadow-none focus:outline-none focus:ring-0 disabled:opacity-50 dark:text-gray-50 dark:placeholder-pink-200"
-              placeholder={session ? `Add a comment...` : "Fast Social Login"}
+              placeholder={session ? `Add a comment...` : 'Fast Social Login'}
               rows={1}
               value={text}
               onChange={handleChange}
@@ -98,9 +98,9 @@ export const CommentForm = ({
             <div className="h-full justify-between">
               <button
                 className={cn(
-                  "focus-ring h-full max-h-10 border border-transparent px-2 text-xs font-semibold text-indigo-500 hover:text-green-600 dark:text-indigo-400",
+                  'focus-ring h-full max-h-10 border border-transparent px-2 text-xs font-semibold text-indigo-500 hover:text-green-600 dark:text-indigo-400',
                   {
-                    "cursor-not-allowed opacity-30":
+                    'cursor-not-allowed opacity-30':
                       text.length < 1 || isLoading,
                   }
                 )}
@@ -112,7 +112,7 @@ export const CommentForm = ({
               </button>
               <button
                 className={cn(
-                  "focus-ring h-full max-h-10 border border-transparent text-xs font-semibold text-pink-400 hover:text-yellow-500 dark:text-pink-200"
+                  'focus-ring h-full max-h-10 border border-transparent text-xs font-semibold text-pink-400 hover:text-yellow-500 dark:text-pink-200'
                 )}
                 aria-label="Sign Out"
                 onClick={() => signOut()}
@@ -123,7 +123,7 @@ export const CommentForm = ({
           )}
           {!session && (
             <button
-              className="rounded bg-indigo-500 py-1 px-2 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-40"
+              className="rounded bg-indigo-500 px-2 py-1 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-40"
               onClick={() => signIn()}
               aria-label="log in!"
             >
@@ -136,8 +136,8 @@ export const CommentForm = ({
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 /* <form onSubmit={handleSubmit}>
    <div className="mt-4 flex flex-row">

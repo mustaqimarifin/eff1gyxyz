@@ -1,7 +1,7 @@
-import { type Block } from "notion-types";
-import { defaultMapImageUrl } from "react-notion-x";
+import { type Block } from 'notion-types'
+import { defaultMapImageUrl } from 'react-notion-x'
 //import { defaultPageCover, defaultPageIcon } from './config'
 
 export const mapImageUrl = (url: string, block: Block) => {
-  return defaultMapImageUrl(url, block);
-};
+  return defaultMapImageUrl(url, block)
+}

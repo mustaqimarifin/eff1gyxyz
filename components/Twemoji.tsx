@@ -1,16 +1,16 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image'
+import React from 'react'
 
-const TWEMOJI_CDN_BASE_URL = "https://twemoji.maxcdn.com/v/latest/svg";
+const TWEMOJI_CDN_BASE_URL = 'https://twemoji.maxcdn.com/v/latest/svg'
 
 type Props = {
-  emoji: string;
-  size?: number;
-};
+  emoji: string
+  size?: number
+}
 
 export const Twemoji: React.FC<Props> = ({ emoji, size = 24 }) => {
-  const emojiString = emoji.codePointAt(0)?.toString(16);
-  if (!emojiString) return null;
+  const emojiString = emoji.codePointAt(0)?.toString(16)
+  if (!emojiString) return null
   return (
     <Image
       className="flex min-w-max items-center"
@@ -19,5 +19,5 @@ export const Twemoji: React.FC<Props> = ({ emoji, size = 24 }) => {
       width={size}
       alt={emoji}
     />
-  );
-};
+  )
+}

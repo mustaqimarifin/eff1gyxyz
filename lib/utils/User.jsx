@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const User = (props) => {
   return (
@@ -14,7 +14,7 @@ const User = (props) => {
         clipRule="evenodd"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default User;
+export default User

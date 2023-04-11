@@ -1,16 +1,17 @@
-import { useCallback, useEffect, useRef } from "react";
-import Link from "next/link";
-import BLOG from "blog.config";
-import clsx from "clsx";
-import Image from "next/image";
-import SunMoon from "./Theme";
-const NavBar = () => {
+import BLOG from 'blog.config'
+import clsx from 'clsx'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useCallback, useEffect, useRef } from 'react'
+
+import SunMoon from './Theme'
+export const NavBar = () => {
   const links = [
-    { id: 0, name: "Posts", to: BLOG.path || "/posts", show: true },
-    { id: 1, name: "About", to: "/about", show: BLOG.showAbout },
-    { id: 2, name: "Feed", to: "/feed", show: true },
-    { id: 3, name: "Search", to: "/search", show: true },
-  ];
+    { id: 0, name: 'Posts', to: BLOG.path || '/posts', show: true },
+    { id: 1, name: 'About', to: '/about', show: BLOG.showAbout },
+    { id: 2, name: 'Feed', to: '/feed', show: true },
+    { id: 3, name: 'Search', to: '/search', show: true },
+  ]
 
   return (
     <div className="flex-shrink-0">
@@ -20,7 +21,7 @@ const NavBar = () => {
             link.show && (
               <li
                 key={link.id}
-                className="nav ml-4 block text-black dark:text-gray-50"
+                className="nav ml-4 block text-sm font-semibold uppercase text-popo  dark:text-gray-50"
               >
                 <Link href={link.to}>{link.name}</Link>
               </li>
@@ -28,45 +29,45 @@ const NavBar = () => {
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 
 type HeaderProps = {
-  navBarTitle: string | null;
-  fullWidth?: boolean;
-};
+  navBarTitle: string | null
+  fullWidth?: boolean
+}
 
 export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
-  const navRef = useRef<HTMLDivElement>(null);
-  const sentinalRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null)
+  const sentinalRef = useRef<HTMLDivElement>(null)
   const handler = useCallback(([entry]: IntersectionObserverEntry[]) => {
     if (navRef && navRef.current && !BLOG.autoCollapsedNavBar) {
       if (!entry?.isIntersecting && entry !== undefined) {
-        navRef.current.classList.add("sticky-nav-full");
+        navRef.current.classList.add('sticky-nav-full')
       } else {
-        navRef.current.classList.remove("sticky-nav-full");
+        navRef.current.classList.remove('sticky-nav-full')
       }
     } else {
-      navRef?.current?.classList.add("remove-sticky");
+      navRef?.current?.classList.add('remove-sticky')
     }
-  }, []);
+  }, [])
   useEffect(() => {
-    const obvserver = new window.IntersectionObserver(handler);
-    if (sentinalRef?.current) obvserver.observe(sentinalRef.current);
+    const obvserver = new window.IntersectionObserver(handler)
+    if (sentinalRef?.current) obvserver.observe(sentinalRef.current)
     // Don't touch this, I have no idea how it works XD
     // return () => {
     //   if (sentinalRef.current) obvserver.unobserve(sentinalRef.current);
     // };
-  }, [sentinalRef, handler]);
+  }, [sentinalRef, handler])
   return (
     <>
       <div className="h-4 md:h-12" ref={sentinalRef}></div>
       <div
         className={clsx(
-          "sticky-nav m-auto mb-2 flex h-6 w-full flex-row items-center justify-between bg-opacity-60 py-8 md:mb-12",
+          'sticky-nav m-auto mb-2 flex h-6 w-full flex-row items-center justify-between bg-opacity-60 py-8 md:mb-12',
           {
-            "px-4 md:px-24": fullWidth,
-            "max-w-2xl px-4": !fullWidth,
+            'px-4 md:px-24': fullWidth,
+            'max-w-2xl px-4': !fullWidth,
           }
         )}
         id="sticky-nav"
@@ -75,9 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
         <div className="flex items-center align-middle">
           <SunMoon />
           <div className="flex items-center">
-            <Link href="/" aria-label={BLOG.title}>
-
-            </Link>
+            <Link href="/" aria-label={BLOG.title}></Link>
             {navBarTitle ? (
               <p className="text-day dark:text-night header-name ml-2 font-medium">
                 {navBarTitle}
@@ -93,5 +92,5 @@ export const Header: React.FC<HeaderProps> = ({ navBarTitle, fullWidth }) => {
         <NavBar />
       </div>
     </>
-  );
-};
+  )
+}

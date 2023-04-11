@@ -1,11 +1,10 @@
-import { z } from "zod";
-import { TRPCError } from "@trpc/server";
-
+import { TRPCError } from '@trpc/server'
 import {
   createTRPCRouter,
-  publicProcedure,
   protectedProcedure,
-} from "server10/api/trpc";
+  publicProcedure,
+} from 'server10/api/trpc'
+import { z } from 'zod'
 
 export const postRouter = createTRPCRouter({
   getBySlug: publicProcedure
@@ -14,11 +13,15 @@ export const postRouter = createTRPCRouter({
       return await ctx.prisma.post
         .findUnique({
           where: { slug: input.slug },
+
           select: {
             id: true,
+            _count: {
+              select: { comments: true },
+            },
             comments: {
               orderBy: {
-                createdAt: "desc",
+                createdAt: 'desc',
               },
               select: {
                 id: true,
@@ -46,13 +49,14 @@ export const postRouter = createTRPCRouter({
                 in: post?.comments.map((comment: { id: any }) => comment?.id),
               },
             },
-          });
+
+          })
 
           return {
             ...post,
             comments: post?.comments.map(
               (comment: { [x: string]: any; id?: any; _count?: any }) => {
-                const { _count, ...commentFields } = comment;
+                const { _count, ...commentFields } = comment
                 return {
                   ...commentFields,
                   likedByMe: !!likes.find(
@@ -61,17 +65,19 @@ export const postRouter = createTRPCRouter({
                       like.userId === ctx.session?.user?.id
                   ),
                   likeCount: _count.likes,
-                };
+                }
               }
             ),
-          };
-        });
+          }
+        })
     }),
 
   getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.post.findMany();
+    return ctx.prisma.post.findMany()
   }),
-
+  commentCount: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.comment.count()
+  }),
   addComment: protectedProcedure
     .input(
       z.object({
@@ -95,8 +101,8 @@ export const postRouter = createTRPCRouter({
             ...comment,
             likeCount: 0,
             likedByMe: false,
-          };
-        });
+          }
+        })
     }),
   updateComment: protectedProcedure
     .input(
@@ -110,13 +116,13 @@ export const postRouter = createTRPCRouter({
       const res = await ctx.prisma.comment.findUnique({
         where: { id: input.commentId },
         select: { userId: true },
-      });
+      })
 
       if (res?.userId !== ctx.session.user.id) {
         throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You do not have permission to update this comment",
-        });
+          code: 'UNAUTHORIZED',
+          message: 'You do not have permission to update this comment',
+        })
       }
 
       return await ctx.prisma.comment.update({
@@ -126,7 +132,7 @@ export const postRouter = createTRPCRouter({
         data: {
           text: input.text,
         },
-      });
+      })
     }),
   deleteComment: protectedProcedure
     .input(
@@ -139,19 +145,19 @@ export const postRouter = createTRPCRouter({
       const res = await ctx.prisma.comment.findUnique({
         where: { id: input.commentId },
         select: { userId: true },
-      });
+      })
       if (res?.userId !== ctx.session.user.id) {
         throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You do not have permission to delete this comment",
-        });
+          code: 'UNAUTHORIZED',
+          message: 'You do not have permission to delete this comment',
+        })
       }
 
       return await ctx.prisma.comment.delete({
         where: {
           id: input.commentId,
         },
-      });
+      })
     }),
   toggleLike: protectedProcedure
     .input(
@@ -164,7 +170,7 @@ export const postRouter = createTRPCRouter({
       const res = await ctx.prisma.comment.findUnique({
         where: { id: input.commentId },
         select: { userId: true },
-      });
+      })
       const like = await ctx.prisma.like.findUnique({
         where: {
           userId_commentId: {
@@ -172,7 +178,7 @@ export const postRouter = createTRPCRouter({
             userId: ctx.session.user.id!,
           },
         },
-      });
+      })
 
       if (like === null) {
         return await ctx.prisma.like
@@ -183,8 +189,8 @@ export const postRouter = createTRPCRouter({
             },
           })
           .then(() => {
-            return { addLike: true };
-          });
+            return { addLike: true }
+          })
       } else {
         return await ctx.prisma.like
           .delete({
@@ -196,8 +202,8 @@ export const postRouter = createTRPCRouter({
             },
           })
           .then(() => {
-            return { addLike: false };
-          });
+            return { addLike: false }
+          })
       }
     }),
-});
+})

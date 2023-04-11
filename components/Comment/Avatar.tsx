@@ -1,19 +1,19 @@
-import clsx from "clsx";
-import Image from "next/image";
-import React, { type FC } from "react";
+import clsx from 'clsx'
+import Image from 'next/image'
+import React, { type FC } from 'react'
 
 export interface AvatarProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, "size"> {
-  src: string;
-  size?: "sm" | "lg";
-  isLoading?: boolean;
-  error?: any;
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'size'> {
+  src: string
+  size?: 'sm' | 'lg'
+  isLoading?: boolean
+  error?: any
 }
 
 const Avatar: FC<AvatarProps> = ({
   src,
   className,
-  size = "sm",
+  size = 'sm',
   isLoading,
   error,
 
@@ -25,8 +25,8 @@ const Avatar: FC<AvatarProps> = ({
     <div
       {...otherProps}
       className={clsx(
-        size === "sm" ? "h-6 w-6" : "h-10 w-10",
-        "bg-alpha-10 relative inline-block overflow-hidden rounded-full",
+        size === 'sm' ? 'h-6 w-6' : 'h-10 w-10',
+        'bg-alpha-10 relative inline-block overflow-hidden rounded-full',
         className
       )}
     >
@@ -61,7 +61,7 @@ const Avatar: FC<AvatarProps> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Avatar;
+export default Avatar

@@ -1,101 +1,101 @@
-export type ValueOf<T> = T[keyof T];
+export type ValueOf<T> = T[keyof T]
 
 const TAG_SLUGS = {
-  All: "all",
-  Tech: "tech",
-  Update: "update",
-  Playlist: "playlist",
-  Ikigomi: "ikigomi",
-  Sento: "sento",
-  Link: "link",
-  ProductDev: "product-dev",
-  Sauna: "sauna",
-  Items: "items",
-  Notion: "notion",
-  Solana: "solana",
-  Polygon: "polygon",
-  Solidity: "solidity",
-} as const;
+  All: 'all',
+  Tech: 'tech',
+  Update: 'update',
+  Playlist: 'playlist',
+  Ikigomi: 'ikigomi',
+  Sento: 'sento',
+  Link: 'link',
+  ProductDev: 'product-dev',
+  Sauna: 'sauna',
+  Items: 'items',
+  Notion: 'notion',
+  Solana: 'solana',
+  Polygon: 'polygon',
+  Solidity: 'solidity',
+} as const
 
-export type TagSlug = ValueOf<typeof TAG_SLUGS>;
+export type TagSlug = ValueOf<typeof TAG_SLUGS>
 
 type TagData = {
-  slug: string;
-  name: string;
-  emoji: string;
-};
+  slug: string
+  name: string
+  emoji: string
+}
 
 const TAG_DATA: Record<TagSlug, TagData> = {
   [TAG_SLUGS.Tech]: {
-    name: "技術",
-    emoji: "💻",
+    name: '技術',
+    emoji: '💻',
     slug: TAG_SLUGS.Tech,
   },
   [TAG_SLUGS.Update]: {
-    name: "アップデート",
-    emoji: "📝",
+    name: 'アップデート',
+    emoji: '📝',
     slug: TAG_SLUGS.Update,
   },
   [TAG_SLUGS.Playlist]: {
-    name: "プレイリスト",
-    emoji: "🎧",
+    name: 'プレイリスト',
+    emoji: '🎧',
     slug: TAG_SLUGS.Playlist,
   },
   [TAG_SLUGS.Ikigomi]: {
-    name: "意気込み",
-    emoji: "✊",
+    name: '意気込み',
+    emoji: '✊',
     slug: TAG_SLUGS.Ikigomi,
   },
   [TAG_SLUGS.Sento]: {
-    name: "銭湯",
-    emoji: "♨️",
+    name: '銭湯',
+    emoji: '♨️',
     slug: TAG_SLUGS.Sento,
   },
   [TAG_SLUGS.Sauna]: {
-    name: "サウナ",
-    emoji: "🧖‍♂️",
+    name: 'サウナ',
+    emoji: '🧖‍♂️',
     slug: TAG_SLUGS.Sauna,
   },
   [TAG_SLUGS.Link]: {
-    name: "外部リンク",
-    emoji: "🔗",
+    name: '外部リンク',
+    emoji: '🔗',
     slug: TAG_SLUGS.Link,
   },
   [TAG_SLUGS.ProductDev]: {
-    name: "プロダクト開発",
-    emoji: "🛠",
+    name: 'プロダクト開発',
+    emoji: '🛠',
     slug: TAG_SLUGS.ProductDev,
   },
   [TAG_SLUGS.Items]: {
-    name: "アイテム",
-    emoji: "✨",
+    name: 'アイテム',
+    emoji: '✨',
     slug: TAG_SLUGS.Items,
   },
   [TAG_SLUGS.Notion]: {
-    name: "Notion",
-    emoji: "📓",
+    name: 'Notion',
+    emoji: '📓',
     slug: TAG_SLUGS.Notion,
   },
   [TAG_SLUGS.Solidity]: {
-    name: "Solidity",
-    emoji: "💠",
+    name: 'Solidity',
+    emoji: '💠',
     slug: TAG_SLUGS.Solidity,
   },
   [TAG_SLUGS.Polygon]: {
-    name: "Polygon",
-    emoji: "♋️",
+    name: 'Polygon',
+    emoji: '♋️',
     slug: TAG_SLUGS.Polygon,
   },
   [TAG_SLUGS.Solana]: {
-    name: "Solana",
-    emoji: "👾",
+    name: 'Solana',
+    emoji: '👾',
     slug: TAG_SLUGS.Solana,
   },
   [TAG_SLUGS.All]: {
-    name: "All",
-    emoji: "🌴",
+    name: 'All',
+    emoji: '🌴',
     slug: TAG_SLUGS.All,
   },
-} as const;
+} as const
 
-export const getTagDataBySlug = (slug: TagSlug): TagData => TAG_DATA[slug];
+export const getTagDataBySlug = (slug: TagSlug): TagData => TAG_DATA[slug]

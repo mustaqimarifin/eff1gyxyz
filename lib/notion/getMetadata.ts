@@ -1,4 +1,4 @@
-import { type BasePageBlock } from "notion-types";
+import { type BasePageBlock } from 'notion-types'
 
 export const getMetadata = (rawMetadata: BasePageBlock) => {
   const metadata = {
@@ -9,6 +9,6 @@ export const getMetadata = (rawMetadata: BasePageBlock) => {
     page_small_text: rawMetadata?.format?.page_small_text,
     created_time: rawMetadata.created_time,
     last_edited_time: rawMetadata.last_edited_time,
-  };
-  return metadata;
-};
+  }
+  return metadata
+}

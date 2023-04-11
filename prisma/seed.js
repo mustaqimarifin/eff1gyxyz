@@ -1,57 +1,57 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 async function seed() {
-  await prisma.post.deleteMany();
-  await prisma.user.deleteMany();
-  const kyle = await prisma.user.create({ data: { name: "Kyle" } });
-  const sally = await prisma.user.create({ data: { name: "Sally" } });
+  await prisma.post.deleteMany()
+  await prisma.user.deleteMany()
+  const kyle = await prisma.user.create({ data: { name: 'Kyle' } })
+  const sally = await prisma.user.create({ data: { name: 'Sally' } })
 
   const post1 = await prisma.post.create({
     data: {
-      slug: "what-make-vs-code",
+      slug: 'what-make-vs-code',
     },
-  });
+  })
   const post2 = await prisma.post.create({
     data: {
-      slug: "react-notion-is-better",
+      slug: 'react-notion-is-better',
     },
-  });
+  })
 
   const comment1 = await prisma.comment.create({
     data: {
-      text: "I am a root comment",
+      text: 'I am a root comment',
       userId: kyle.id,
       slug: post2.slug,
     },
-  });
+  })
 
   const comment2 = await prisma.comment.create({
     data: {
       parentId: comment1.id,
-      text: "I am a nested comment",
+      text: 'I am a nested comment',
       userId: sally.id,
       slug: post1.slug,
     },
-  });
+  })
 
   const comment3 = await prisma.comment.create({
     data: {
-      text: "I am another root comment",
+      text: 'I am another root comment',
       userId: sally.id,
       slug: post1.slug,
     },
-  });
+  })
 
   const like1 = await prisma.like.create({
     data: {
       commentId: comment1.id,
       userId: sally.id,
     },
-  });
+  })
 }
 
-seed();
+seed()
 
 /*   const post2 = await prisma.post.create({
     data: {

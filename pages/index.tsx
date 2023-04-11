@@ -1,7 +1,7 @@
 // import Image from 'next/image';
-import Link from "next/link";
+import Link from 'next/link'
 
-import Container from "../components/Container";
+import Container from '../components/Container'
 export default function Home() {
   return (
     <Container>
@@ -10,7 +10,7 @@ export default function Home() {
           <div>
             <div className="text-primary prose">
               <p>
-                Hey, I&apos;m Mus. I&apos;m a{" "}
+                Hey, I&apos;m Mus. I&apos;m a{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -18,11 +18,11 @@ export default function Home() {
                 >
                   music producer
                 </a>
-                ,{" "}
+                ,{' '}
                 <Link href="/writing" passHref>
                   audio engineer
                 </Link>
-                , and{" "}
+                , and{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -30,7 +30,7 @@ export default function Home() {
                 >
                   sorta terrible at code :D
                 </a>
-                . I&apos;m currently the marketing manager & creative lead at{" "}
+                . I&apos;m currently the marketing manager & creative lead at{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -41,7 +41,7 @@ export default function Home() {
                 .
               </p>
               <p>
-                Before musegroupasia, I co-founded{" "}
+                Before musegroupasia, I co-founded{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -55,7 +55,7 @@ export default function Home() {
               <p>
                 During those years I was also Music Director at Infinity Games
                 where I worked alongside some amazing talent helping shape the
-                sound and music of{" "}
+                sound and music of{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -121,5 +121,5 @@ export default function Home() {
         <span className="h-16" />
       </div>
     </Container>
-  );
+  )
 }

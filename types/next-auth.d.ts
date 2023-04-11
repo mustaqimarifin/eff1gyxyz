@@ -1,16 +1,16 @@
-import type { User as PrismaUser, UserRole } from "@prisma/client";
+import type { User as PrismaUser, UserRole } from '@prisma/client'
 
-declare module "next-auth" {
+declare module 'next-auth' {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   interface Session {
     user: {
-      id: string;
-      role: UserRole;
-    } & Session["user"];
-    isAdmin: boolean;
-    userId: string;
+      id: string
+      role: UserRole
+    } & Session['user']
+    isAdmin: boolean
+    userId: string
   }
 
   interface User extends PrismaUser {}

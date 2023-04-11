@@ -1,37 +1,37 @@
 /* eslint-disable react/prop-types */
-import { Header } from "components/Header";
-import Footer from "components/Footer";
-import BLOG from "blog.config";
-import Head from "next/head";
-import clsx from "clsx";
+import BLOG from 'blog.config'
+import clsx from 'clsx'
+import Footer from 'components/Footer'
+import { Header } from 'components/Header'
+import Head from 'next/head'
 // import BlogPost from './BlogPost'
 //type NextHeadSeoProps = Parameters<typeof NextHeadSeo>[0];
 
 type Props = {
-  children: React.ReactNode;
-  layout?: "blog";
-  type?: "article" | "website";
-  title?: string;
-  description?: string;
-  fullWidth?: boolean;
-  date?: string;
-  slug?: string | null;
-  createdTime?: string;
+  children: React.ReactNode
+  layout?: 'blog'
+  type?: 'article' | 'website'
+  title?: string
+  description?: string
+  fullWidth?: boolean
+  date?: string
+  slug?: string | null
+  createdTime?: string
   //from: 'posts' | 'projects';
-  isTagPage?: boolean;
-};
+  isTagPage?: boolean
+}
 export const Container: React.FC<Props> = ({
   children,
   layout,
   fullWidth,
   ...customMeta
 }) => {
-  const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link;
+  const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link
   const meta = {
     title: BLOG.title,
-    type: "website",
+    type: 'website',
     ...customMeta,
-  };
+  }
   return (
     <div>
       <Head>
@@ -46,7 +46,7 @@ export const Container: React.FC<Props> = ({
           />
         )}
         {BLOG.seo.keywords && (
-          <meta name="keywords" content={BLOG.seo.keywords.join(", ")} />
+          <meta name="keywords" content={BLOG.seo.keywords.join(', ')} />
         )}
         <meta name="description" content={meta.description} />
         <meta property="og:locale" content={BLOG.lang} />
@@ -72,7 +72,7 @@ export const Container: React.FC<Props> = ({
             meta.title
           )}.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fnobelium.vercel.app%2Flogo-for-dark-bg.svg`}
         />
-        {meta.type === "article" && (
+        {meta.type === 'article' && (
           <>
             <meta
               property="article:published_time"
@@ -84,17 +84,17 @@ export const Container: React.FC<Props> = ({
       </Head>
       <div
         className={`wrapper ${
-          BLOG.font === "serif" ? "font-serif" : "font-sans"
+          BLOG.font === 'serif' ? 'font-serif' : 'font-sans'
         }`}
       >
         <Header
-          navBarTitle={layout === "blog" ? meta.title : null}
+          navBarTitle={layout === 'blog' ? meta.title : null}
           fullWidth={fullWidth}
         />
         <main
-          className={clsx("m-auto w-full flex-grow transition-all", {
-            "px-4 md:px-24": fullWidth,
-            "max-w-2xl px-4": !fullWidth,
+          className={clsx('m-auto w-full flex-grow transition-all', {
+            'px-4 md:px-24': fullWidth,
+            'max-w-2xl px-4': !fullWidth,
           })}
         >
           {children}
@@ -102,7 +102,7 @@ export const Container: React.FC<Props> = ({
         <Footer fullWidth={fullWidth} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Container;
+export default Container

@@ -1,9 +1,9 @@
-import BLOG from "blog.config";
-import BlogPost from "components/BlogPost";
-import Container from "components/Container";
-import Pagination from "components/Pagination";
-import { getAllPosts } from "lib/notion";
-import React from "react";
+import BLOG from 'blog.config'
+import BlogPost from 'components/BlogPost'
+import Container from 'components/Container'
+import Pagination from 'components/Pagination'
+import { getAllPosts } from 'lib/notion'
+import React from 'react'
 
 const Page = ({ postsToShow, page, showNext }) => {
   return (
@@ -12,18 +12,18 @@ const Page = ({ postsToShow, page, showNext }) => {
         postsToShow.map((post) => <BlogPost key={post.id} post={post} />)}
       <Pagination page={page} showNext={showNext} />
     </Container>
-  );
-};
+  )
+}
 
 export async function getStaticProps(context: { params: { page: any } }) {
-  const { page } = context.params; // Get Current Page No.
-  const posts = await getAllPosts({ includedPages: false });
+  const { page } = context.params // Get Current Page No.
+  const posts = await getAllPosts({ includedPages: false })
   const postsToShow = posts.slice(
     BLOG.postsPerPage * (page - 1),
     BLOG.postsPerPage * page
-  );
-  const totalPosts = posts.length;
-  const showNext = page * BLOG.postsPerPage < totalPosts;
+  )
+  const totalPosts = posts.length
+  const showNext = page * BLOG.postsPerPage < totalPosts
   return {
     props: {
       page, // Current Page
@@ -31,20 +31,20 @@ export async function getStaticProps(context: { params: { page: any } }) {
       showNext,
     },
     revalidate: 60,
-  };
+  }
 }
 
 export async function getStaticPaths() {
-  const posts = await getAllPosts({ includedPages: false });
-  const totalPosts = posts.length;
-  const totalPages = Math.ceil(totalPosts / BLOG.postsPerPage);
+  const posts = await getAllPosts({ includedPages: false })
+  const totalPosts = posts.length
+  const totalPages = Math.ceil(totalPosts / BLOG.postsPerPage)
   return {
     // remove first page, we 're not gonna handle that.
     paths: Array.from({ length: totalPages - 1 }, (_, i) => ({
-      params: { page: "" + (i + 2) },
+      params: { page: '' + (i + 2) },
     })),
     fallback: true,
-  };
+  }
 }
 
-export default Page;
+export default Page

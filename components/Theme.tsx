@@ -1,17 +1,17 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes'
+import React, { useContext, useEffect, useState } from 'react'
 
 export default function SunMoon() {
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
   // After mounting, we have access to the theme
-  useEffect(() => setMounted(true), []);
+  useEffect(() => setMounted(true), [])
   return (
     <button
       aria-label="Toggle Dark Mode"
       type="button"
       className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 ring-gray-300  transition-all duration-1000 ease-in-out hover:ring-2 dark:bg-gray-600 "
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       {mounted && (
         <svg
@@ -21,7 +21,7 @@ export default function SunMoon() {
           stroke="currentColor"
           className="h-5 w-5 text-gray-800 dark:text-gray-200"
         >
-          {resolvedTheme === "dark" ? (
+          {resolvedTheme === 'dark' ? (
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -39,5 +39,5 @@ export default function SunMoon() {
         </svg>
       )}
     </button>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import Container from "components/Container";
-import BlogPost from "components/BlogPost";
-import Pagination from "components/Pagination";
-import { getAllPosts } from "lib/notion";
-import BLOG from "blog.config";
-import { type Post } from "types";
+import BLOG from 'blog.config'
+import BlogPost from 'components/BlogPost'
+import Container from 'components/Container'
+import Pagination from 'components/Pagination'
+import { getAllPosts } from 'lib/notion'
+import { type Post } from 'types'
 
 export async function getStaticProps() {
-  const posts: Post[] = await getAllPosts({ includedPages: false });
-  const postsToShow = posts.slice(0, BLOG.postsPerPage);
-  const totalPosts = posts.length;
-  const showNext = totalPosts > BLOG.postsPerPage;
+  const posts: Post[] = await getAllPosts({ includedPages: false })
+  const postsToShow = posts.slice(0, BLOG.postsPerPage)
+  const totalPosts = posts.length
+  const showNext = totalPosts > BLOG.postsPerPage
   return {
     props: {
       page: 1, // current page is 1
@@ -17,7 +17,7 @@ export async function getStaticProps() {
       showNext,
     },
     revalidate: 30,
-  };
+  }
 }
 
 const blog = ({ postsToShow, page, showNext }) => {
@@ -28,7 +28,7 @@ const blog = ({ postsToShow, page, showNext }) => {
       ))}
       {showNext && <Pagination page={page} showNext={showNext} />}
     </Container>
-  );
-};
+  )
+}
 
-export default blog;
+export default blog

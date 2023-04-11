@@ -1,14 +1,14 @@
-import Link from "next/link";
-import BLOG from "blog.config";
+import BLOG from 'blog.config'
+import Link from 'next/link'
 type Props = {
-  page: number;
-  showNext: boolean;
-};
+  page: number
+  showNext: boolean
+}
 export const Pagination: React.FC<Props> = ({ page, showNext }) => {
-  const currentPage = +page;
-  let additionalClassName = "justify-between";
-  if (currentPage === 1 && showNext) additionalClassName = "justify-end";
-  if (currentPage !== 1 && !showNext) additionalClassName = "justify-start";
+  const currentPage = +page
+  let additionalClassName = 'justify-between'
+  if (currentPage === 1 && showNext) additionalClassName = 'justify-end'
+  if (currentPage !== 1 && !showNext) additionalClassName = 'justify-start'
   return (
     <div
       className={`flex font-medium text-black dark:text-gray-100 ${additionalClassName}`}
@@ -19,7 +19,7 @@ export const Pagination: React.FC<Props> = ({ page, showNext }) => {
           className="block cursor-pointer"
           href={
             currentPage - 1 === 1
-              ? `${BLOG.path || "/posts"}`
+              ? `${BLOG.path || '/posts'}`
               : `/page/${currentPage - 1}`
           }
         >
@@ -36,7 +36,7 @@ export const Pagination: React.FC<Props> = ({ page, showNext }) => {
         </Link>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

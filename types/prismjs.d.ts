@@ -8,9 +8,9 @@
 //                 Michał Miszczyszyn <https://github.com/mmiszy>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-export as namespace Prism;
-export const languages: Languages;
-export const plugins: Record<string, any>;
+export as namespace Prism
+export const languages: Languages
+export const plugins: Record<string, any>
 
 /**
  * By default, if Prism is in a web worker, it assumes that it is in a worker it created itself, so it uses
@@ -24,7 +24,7 @@ export const plugins: Record<string, any>;
  *
  * @default false
  */
-export let disableWorkerMessageHandler: boolean | undefined;
+export let disableWorkerMessageHandler: boolean | undefined
 
 /**
  * By default, Prism will attempt to highlight all code elements (by calling {@link Prism.highlightAll}) on the
@@ -38,14 +38,14 @@ export let disableWorkerMessageHandler: boolean | undefined;
  *
  * @default false
  */
-export let manual: boolean | undefined;
+export let manual: boolean | undefined
 
 /**
  * A function which will be invoked after an element was successfully highlighted.
  *
  * @param element The element successfully highlighted.
  */
-export type HighlightCallback = (element: Element) => void;
+export type HighlightCallback = (element: Element) => void
 
 /**
  * This is the most high-level function in Prism’s API.
@@ -60,7 +60,7 @@ export type HighlightCallback = (element: Element) => void;
 export function highlightAll(
   async?: boolean,
   callback?: HighlightCallback
-): void;
+): void
 
 /**
  * Fetches all the descendants of `container` that have a `.language-xxxx` class and then calls
@@ -78,7 +78,7 @@ export function highlightAllUnder(
   container: ParentNode,
   async?: boolean,
   callback?: HighlightCallback
-): void;
+): void
 
 /**
  * Highlights the code inside a single element.
@@ -107,7 +107,7 @@ export function highlightElement(
   element: Element,
   async?: boolean,
   callback?: HighlightCallback
-): void;
+): void
 
 /**
  * Low-level function, only use if you know what you’re doing. It accepts a string of text as input
@@ -132,7 +132,7 @@ export function highlight(
   text: string,
   grammar: Grammar,
   language: string
-): string;
+): string
 
 /**
  * This is the heart of Prism, and the most low-level function you can use. It accepts a string of text as input
@@ -148,74 +148,74 @@ export function highlight(
  * Usually a language definition like `Prism.languages.markup`.
  * @returns An array of strings, tokens and other arrays.
  */
-export function tokenize(text: string, grammar: Grammar): Array<string | Token>;
+export function tokenize(text: string, grammar: Grammar): Array<string | Token>
 
 export interface Environment extends Record<string, any> {
-  selector?: string | undefined;
-  element?: Element | undefined;
-  language?: string | undefined;
-  grammar?: Grammar | undefined;
-  code?: string | undefined;
-  highlightedCode?: string | undefined;
-  type?: string | undefined;
-  content?: string | undefined;
-  tag?: string | undefined;
-  classes?: string[] | undefined;
-  attributes?: Record<string, string> | undefined;
-  parent?: Array<string | Token> | undefined;
+  selector?: string | undefined
+  element?: Element | undefined
+  language?: string | undefined
+  grammar?: Grammar | undefined
+  code?: string | undefined
+  highlightedCode?: string | undefined
+  type?: string | undefined
+  content?: string | undefined
+  tag?: string | undefined
+  classes?: string[] | undefined
+  attributes?: Record<string, string> | undefined
+  parent?: Array<string | Token> | undefined
 }
 
 export namespace util {
   interface Identifier {
-    value: number;
+    value: number
   }
 
   /** Encode raw strings in tokens in preparation to display as HTML */
-  function encode(tokens: TokenStream): TokenStream;
+  function encode(tokens: TokenStream): TokenStream
 
   /** Determine the type of the object */
-  function type(o: null): "Null";
-  function type(o: undefined): "Undefined";
+  function type(o: null): 'Null'
+  function type(o: undefined): 'Undefined'
   // tslint:disable:ban-types
-  function type(o: boolean | boolean): "Boolean";
-  function type(o: number | number): "Number";
-  function type(o: string | string): "String";
-  function type(o: Function): "Function";
+  function type(o: boolean | boolean): 'Boolean'
+  function type(o: number | number): 'Number'
+  function type(o: string | string): 'String'
+  function type(o: Function): 'Function'
   // tslint:enable:ban-types
-  function type(o: RegExp): "RegExp";
-  function type(o: Array[]): "Array";
-  function type(o): string;
+  function type(o: RegExp): 'RegExp'
+  function type(o: Array[]): 'Array'
+  function type(o): string
 
   /** Get the unique id of this object or give it one if it does not have one */
-  function objId(obj): Identifier;
+  function objId(obj): Identifier
 
   /** Deep clone a language definition (e.g. to extend it) */
-  function clone<T>(o: T): T;
+  function clone<T>(o: T): T
 }
 
-export type GrammarValue = RegExp | TokenObject | Array<RegExp | TokenObject>;
-export type Grammar = GrammarRest | Record<string, GrammarValue>;
+export type GrammarValue = RegExp | TokenObject | Array<RegExp | TokenObject>
+export type Grammar = GrammarRest | Record<string, GrammarValue>
 export interface GrammarRest {
-  keyword?: GrammarValue | undefined;
-  number?: GrammarValue | undefined;
-  function?: GrammarValue | undefined;
-  string?: GrammarValue | undefined;
-  boolean?: GrammarValue | undefined;
-  operator?: GrammarValue | undefined;
-  punctuation?: GrammarValue | undefined;
-  atrule?: GrammarValue | undefined;
-  url?: GrammarValue | undefined;
-  selector?: GrammarValue | undefined;
-  property?: GrammarValue | undefined;
-  important?: GrammarValue | undefined;
-  style?: GrammarValue | undefined;
-  comment?: GrammarValue | undefined;
-  "class-name"?: GrammarValue | undefined;
+  keyword?: GrammarValue | undefined
+  number?: GrammarValue | undefined
+  function?: GrammarValue | undefined
+  string?: GrammarValue | undefined
+  boolean?: GrammarValue | undefined
+  operator?: GrammarValue | undefined
+  punctuation?: GrammarValue | undefined
+  atrule?: GrammarValue | undefined
+  url?: GrammarValue | undefined
+  selector?: GrammarValue | undefined
+  property?: GrammarValue | undefined
+  important?: GrammarValue | undefined
+  style?: GrammarValue | undefined
+  comment?: GrammarValue | undefined
+  'class-name'?: GrammarValue | undefined
 
   /**
    * An optional grammar object that will appended to this grammar.
    */
-  rest?: Grammar | undefined;
+  rest?: Grammar | undefined
 }
 
 /**
@@ -225,25 +225,25 @@ export interface TokenObject {
   /**
    * The regular expression of the token.
    */
-  pattern: RegExp;
+  pattern: RegExp
 
   /**
    * If `true`, then the first capturing group of `pattern` will (effectively) behave as a lookbehind
    * group meaning that the captured text will not be part of the matched text of the new token.
    */
-  lookbehind?: boolean | undefined;
+  lookbehind?: boolean | undefined
 
   /**
    * Whether the token is greedy.
    *
    * @default false
    */
-  greedy?: boolean | undefined;
+  greedy?: boolean | undefined
 
   /**
    * An optional alias or list of aliases.
    */
-  alias?: string | string[] | undefined;
+  alias?: string | string[] | undefined
 
   /**
    * The nested tokens of this token.
@@ -252,14 +252,14 @@ export interface TokenObject {
    *
    * Note that this can cause infinite recursion.
    */
-  inside?: Grammar | undefined;
+  inside?: Grammar | undefined
 }
-export type Languages = LanguageMapProtocol & LanguageMap;
+export type Languages = LanguageMapProtocol & LanguageMap
 export interface LanguageMap {
   /**
    * Get a defined language's definition.
    */
-  [language: string]: Grammar;
+  [language: string]: Grammar
 }
 export interface LanguageMapProtocol {
   /**
@@ -276,7 +276,7 @@ export interface LanguageMapProtocol {
    *     'color': /\b(?:red|green|blue)\b/
    * });
    */
-  extend(id: string, redef: Grammar): Grammar;
+  extend(id: string, redef: Grammar): Grammar
 
   /**
    * Inserts tokens _before_ another token in a language definition or any other grammar.
@@ -307,54 +307,54 @@ export interface LanguageMapProtocol {
     before: string,
     insert: Grammar,
     root?: LanguageMap
-  ): Grammar;
+  ): Grammar
 }
 
 export namespace hooks {
   /**
    * @param env The environment variables of the hook.
    */
-  type HookCallback = (env: Environment) => void;
-  type HookTypes = keyof HookEnvironmentMap;
+  type HookCallback = (env: Environment) => void
+  type HookTypes = keyof HookEnvironmentMap
 
   interface HookEnvironmentMap {
-    "before-highlightall": RequiredEnvironment<"selector">;
+    'before-highlightall': RequiredEnvironment<'selector'>
 
-    "before-sanity-check": ElementEnvironment;
-    "before-highlight": ElementEnvironment;
+    'before-sanity-check': ElementEnvironment
+    'before-highlight': ElementEnvironment
 
-    "before-insert": ElementHighlightedEnvironment;
-    "after-highlight": ElementHighlightedEnvironment;
-    complete: ElementHighlightedEnvironment;
+    'before-insert': ElementHighlightedEnvironment
+    'after-highlight': ElementHighlightedEnvironment
+    complete: ElementHighlightedEnvironment
 
-    "before-tokenize": TokenizeEnvironment;
-    "after-tokenize": TokenizeEnvironment;
+    'before-tokenize': TokenizeEnvironment
+    'after-tokenize': TokenizeEnvironment
 
     wrap: RequiredEnvironment<
-      "type" | "content" | "tag" | "classes" | "attributes" | "language"
-    >;
+      'type' | 'content' | 'tag' | 'classes' | 'attributes' | 'language'
+    >
   }
 
   type RequiredEnvironment<
     T extends keyof Environment,
     U extends Environment = Environment
-  > = U & Required<Pick<U, T>>;
+  > = U & Required<Pick<U, T>>
   type ElementEnvironment = RequiredEnvironment<
-    "element" | "language" | "grammar" | "code"
-  >;
+    'element' | 'language' | 'grammar' | 'code'
+  >
   type ElementHighlightedEnvironment = RequiredEnvironment<
-    "highlightedCode",
+    'highlightedCode',
     ElementEnvironment
-  >;
+  >
   type TokenizeEnvironment = RequiredEnvironment<
-    "code" | "grammar" | "language"
-  >;
+    'code' | 'grammar' | 'language'
+  >
 
   interface RegisteredHooks {
-    [hook: string]: HookCallback[];
+    [hook: string]: HookCallback[]
   }
 
-  const all: RegisteredHooks;
+  const all: RegisteredHooks
 
   /**
    * Adds the given callback to the list of callbacks for the given hook.
@@ -370,8 +370,8 @@ export namespace hooks {
   function add<K extends keyof HookEnvironmentMap>(
     name: K,
     callback: (env: HookEnvironmentMap[K]) => void
-  ): void;
-  function add(name: string, callback: HookCallback): void;
+  ): void
+  function add(name: string, callback: HookCallback): void
 
   /**
    * Runs a hook invoking all registered callbacks with the given environment variables.
@@ -384,11 +384,11 @@ export namespace hooks {
   function run<K extends keyof HookEnvironmentMap>(
     name: K,
     env: HookEnvironmentMap[K]
-  ): void;
-  function run(name: string, env: Environment): void;
+  ): void
+  function run(name: string, env: Environment): void
 }
 
-export type TokenStream = string | Token | Array<string | Token>;
+export type TokenStream = string | Token | Array<string | Token>
 
 export class Token {
   /**
@@ -406,40 +406,40 @@ export class Token {
     alias?: string | string[],
     matchedStr?: string,
     greedy?: boolean
-  );
+  )
 
   /**
    * The type of the token.
    *
    * This is usually the key of a pattern in a {@link Grammar}.
    */
-  type: string;
+  type: string
 
   /**
    * The strings or tokens contained by this token.
    *
    * This will be a token stream if the pattern matched also defined an `inside` grammar.
    */
-  content: TokenStream;
+  content: TokenStream
 
   /**
    * The alias(es) of the token.
    *
    * @see TokenObject
    */
-  alias: string | string[];
+  alias: string | string[]
 
   /**
    * The length of the matched string or 0.
    */
-  length: number;
+  length: number
 
   /**
    * Whether the pattern that created this token is greedy or not.
    *
    * @see TokenObject
    */
-  greedy: boolean;
+  greedy: boolean
 
   /**
    * Converts the given token or token stream to an HTML representation.
@@ -456,5 +456,5 @@ export class Token {
     token: TokenStream,
     language: string,
     parent?: Array<string | Token>
-  ): string;
+  ): string
 }
